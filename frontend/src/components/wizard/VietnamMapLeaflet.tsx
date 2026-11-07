@@ -243,22 +243,22 @@ export default function VietnamMapLeaflet({
         : '';
 
       const badgeBg = isSelected
-        ? 'linear-gradient(135deg, #059669, #047857)'
+        ? 'linear-gradient(135deg, #e11d48, #be123c)'
         : isActive
-        ? 'linear-gradient(135deg, #0284c7, #0369a1)'
+        ? 'linear-gradient(135deg, #ec4899, #db2777)'
         : isCity
-        ? 'linear-gradient(135deg, #d97706, #b45309)'
-        : 'linear-gradient(135deg, #0f172a, #1e293b)';
+        ? 'linear-gradient(135deg, #f43f5e, #e11d48)'
+        : 'linear-gradient(135deg, #ffffff, #fff1f2)';
 
-      const badgeColor = '#ffffff';
-      const borderColor = isSelected ? '#34d399' : isActive ? '#38bdf8' : isCity ? '#fde047' : '#94a3b8';
+      const badgeColor = isSelected || isActive || isCity ? '#ffffff' : '#9f1239';
+      const borderColor = isSelected ? '#fda4af' : isActive ? '#fbcfe8' : isCity ? '#fecdd3' : '#f43f5e';
       const glowEffect = isSelected
-        ? '0 0 20px rgba(16, 185, 129, 0.75), 0 4px 14px rgba(0,0,0,0.4)'
+        ? '0 0 20px rgba(225, 29, 72, 0.75), 0 4px 14px rgba(0,0,0,0.35)'
         : isActive
-        ? '0 0 18px rgba(14, 165, 233, 0.7), 0 4px 14px rgba(0,0,0,0.4)'
+        ? '0 0 18px rgba(236, 72, 153, 0.7), 0 4px 14px rgba(0,0,0,0.3)'
         : isCity
-        ? '0 0 14px rgba(245, 158, 11, 0.5), 0 3px 10px rgba(0,0,0,0.3)'
-        : '0 3px 12px rgba(0,0,0,0.35)';
+        ? '0 0 14px rgba(244, 63, 94, 0.5), 0 3px 10px rgba(0,0,0,0.25)'
+        : '0 3px 12px rgba(244, 63, 94, 0.2)';
 
       const scale = isActive ? 'scale(1.15)' : isSelected ? 'scale(1.08)' : 'scale(1)';
 
@@ -318,13 +318,13 @@ export default function VietnamMapLeaflet({
 
       // Bind rich popup with compact weather and clusters overview
       const clustersSummary = (dest.touristSpots || [])
-        .map(s => `<span style="display:inline-block; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: bold; margin: 2px 2px;">${s.icon} ${s.name}</span>`)
+        .map(s => `<span style="display:inline-block; background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: bold; margin: 2px 2px;">${s.icon} ${s.name}</span>`)
         .join('');
 
       marker.bindPopup(`
         <div style="font-family: sans-serif; padding: 4px; min-width: 240px; max-width: 290px;">
           <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-            <span style="background: #059669; color: white; padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: bold;">
+            <span style="background: linear-gradient(135deg, #f43f5e, #ec4899); color: white; padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: bold;">
               ${dest.regionName}
             </span>
             <span style="font-size: 10px; color: #64748b; font-weight: 600;">${dest.mergedFrom}</span>
@@ -334,9 +334,9 @@ export default function VietnamMapLeaflet({
           ${
             w?.forecastAvailable
               ? `
-            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 4px 8px; border-radius: 8px; font-size: 11px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 4px 8px; border-radius: 8px; font-size: 11px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
               <span><strong>Thời tiết:</strong> ${w.conditionIcon} ${w.tempMin}° - ${w.tempMax}°C</span>
-              <span style="color: #0284c7;">🌧️ ${w.rainProbability}%</span>
+              <span style="color: #be123c;">🌧️ ${w.rainProbability}%</span>
             </div>
             `
               : ''
@@ -345,7 +345,7 @@ export default function VietnamMapLeaflet({
             <div style="font-size: 10px; font-weight: bold; color: #475569; margin-bottom: 3px;">TỤ ĐIỂM DU LỊCH & ĂN CHƠI:</div>
             ${clustersSummary}
           </div>
-          <div style="font-size: 11px; font-weight: bold; color: ${isSelected ? '#e11d48' : '#059669'}; cursor: pointer;">
+          <div style="font-size: 11px; font-weight: bold; color: ${isSelected ? '#e11d48' : '#e11d48'}; cursor: pointer;">
             ${isSelected ? '✓ Đã chọn trong hành trình (Bấm để xem các tụ điểm)' : '+ Bấm để chọn tỉnh này'}
           </div>
         </div>
@@ -474,8 +474,8 @@ export default function VietnamMapLeaflet({
             ${
               spot.activities && spot.activities.length > 0
                 ? `
-              <div style="margin-top: 6px; padding: 6px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
-                <div style="font-size: 10.5px; font-weight: 800; color: #166534; margin-bottom: 4px;">🎯 HOẠT ĐỘNG ĂN CHƠI & TRẢI NGHIỆM:</div>
+              <div style="margin-top: 6px; padding: 6px; background: #fff1f2; border-radius: 8px; border: 1px solid #fecdd3;">
+                <div style="font-size: 10.5px; font-weight: 800; color: #be123c; margin-bottom: 4px;">🎯 HOẠT ĐỘNG ĂN CHƠI & TRẢI NGHIỆM:</div>
                 <ul style="margin: 0; padding-left: 8px; font-size: 10.5px; list-style: none;">
                   ${activitiesHtml}
                 </ul>
@@ -505,7 +505,7 @@ export default function VietnamMapLeaflet({
     if (selectedDestinations.length >= 2) {
       const latlngs = selectedDestinations.map(d => [d.lat, d.lng] as [number, number]);
       polylineRef.current = L.polyline(latlngs, {
-        color: '#059669',
+        color: '#e11d48',
         weight: 3.5,
         opacity: 0.85,
         dashArray: '6, 8',
@@ -530,7 +530,7 @@ export default function VietnamMapLeaflet({
             onClick={() => switchTileLayer('opentopo')}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
               activeTileType === 'opentopo'
-                ? 'bg-emerald-600 text-white shadow-xs'
+                ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
                 : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
             title="Bản đồ Địa hình 3D (OpenTopoMap - Đường đồng mức & độ cao)"
@@ -544,7 +544,7 @@ export default function VietnamMapLeaflet({
             onClick={() => switchTileLayer('cyclosm')}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
               activeTileType === 'cyclosm'
-                ? 'bg-emerald-600 text-white shadow-xs'
+                ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
                 : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
             title="Địa hình dã ngoại & cảnh quan thiên nhiên"
@@ -558,7 +558,7 @@ export default function VietnamMapLeaflet({
             onClick={() => switchTileLayer('standard')}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
               activeTileType === 'standard'
-                ? 'bg-emerald-600 text-white shadow-xs'
+                ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
                 : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
             title="Bản đồ đường phố & địa lý chuẩn"
@@ -573,17 +573,17 @@ export default function VietnamMapLeaflet({
           <button
             type="button"
             onClick={onToggleFullscreen}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur-md text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-gray-800/80 shadow-md text-xs font-bold hover:bg-emerald-50 dark:hover:bg-emerald-950/60 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur-md text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-gray-800/80 shadow-md text-xs font-bold hover:bg-pink-50 dark:hover:bg-pink-950/60 transition-all cursor-pointer"
             title={isFullscreen ? 'Thu nhỏ bản đồ' : 'Phóng to bản đồ toàn màn hình'}
           >
             {isFullscreen ? (
               <>
-                <ArrowsPointingInIcon className="w-4 h-4 text-emerald-600" />
+                <ArrowsPointingInIcon className="w-4 h-4 text-pink-600" />
                 <span className="hidden sm:inline">Thu nhỏ</span>
               </>
             ) : (
               <>
-                <ArrowsPointingOutIcon className="w-4 h-4 text-emerald-600" />
+                <ArrowsPointingOutIcon className="w-4 h-4 text-pink-600" />
                 <span>Toàn màn hình</span>
               </>
             )}
@@ -596,9 +596,9 @@ export default function VietnamMapLeaflet({
         <button
           type="button"
           onClick={handleResetView}
-          className="absolute top-3 left-14 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur-md text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-gray-800/80 shadow-md text-xs font-bold hover:bg-emerald-50 dark:hover:bg-emerald-950/60 transition-all cursor-pointer animate-fadeIn"
+          className="absolute top-3 left-14 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur-md text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-gray-800/80 shadow-md text-xs font-bold hover:bg-pink-50 dark:hover:bg-pink-950/60 transition-all cursor-pointer animate-fadeIn"
         >
-          <ArrowsPointingOutIcon className="w-3.5 h-3.5 text-emerald-600" />
+          <ArrowsPointingOutIcon className="w-3.5 h-3.5 text-pink-600" />
           <span>Toàn cảnh (34 Tỉnh thành)</span>
         </button>
       )}
@@ -606,11 +606,11 @@ export default function VietnamMapLeaflet({
       {/* Bottom Map Legend */}
       <div className="absolute bottom-3 left-3 z-20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-gray-200/80 dark:border-gray-800/80 shadow-md text-[11px] space-y-1">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
+          <span className="w-3 h-3 rounded-full bg-pink-500 inline-block" />
           <span className="text-gray-800 dark:text-gray-200 font-bold">6 TP Trực thuộc TW</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-emerald-600 inline-block" />
+          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 inline-block" />
           <span className="text-gray-800 dark:text-gray-200 font-bold">28 Tỉnh sau sáp nhập</span>
         </div>
         <div className="flex items-center gap-2">

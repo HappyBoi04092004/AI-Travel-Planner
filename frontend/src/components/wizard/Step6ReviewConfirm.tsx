@@ -19,6 +19,7 @@ import {
   CloudIcon
 } from '@heroicons/react/24/outline';
 import { AuthModal } from '@/components/auth';
+import { formatVietnameseDate } from '@/utils/dateUtils';
 
 export default function Step6ReviewConfirm() {
   const {
@@ -173,8 +174,8 @@ export default function Step6ReviewConfirm() {
     <div className="space-y-8 animate-fadeIn">
       {/* Header */}
       <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-3">
-          <DocumentCheckIcon className="w-4 h-4 text-emerald-600" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
+          <DocumentCheckIcon className="w-4 h-4 text-pink-600" />
           <span>Bước 6 trên 6 • Xác nhận & Sinh lịch trình</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
@@ -190,21 +191,21 @@ export default function Step6ReviewConfirm() {
         {/* Card 1: Dates & Pace */}
         <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 flex items-center gap-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-pink-600 flex items-center gap-1.5">
               <CalendarDaysIcon className="w-4 h-4" />
               <span>Thời gian chuyến đi</span>
             </span>
             <button
               type="button"
               onClick={() => goToStep(1)}
-              className="text-xs text-emerald-600 hover:underline"
+              className="text-xs text-pink-600 hover:underline"
             >
               Sửa
             </button>
           </div>
           <div>
-            <div className="text-base font-bold text-gray-900 dark:text-white">
-              {new Date(startDate).toLocaleDateString('vi-VN')} → {new Date(returnDate).toLocaleDateString('vi-VN')}
+            <div className="text-base font-bold text-gray-900 dark:text-white" suppressHydrationWarning>
+              {formatVietnameseDate(startDate)} → {formatVietnameseDate(returnDate)}
             </div>
             <div className="text-xs text-gray-500 mt-1">
               Thời lượng: <strong>{totalDays} ngày {totalDays - 1} đêm</strong>
@@ -218,14 +219,14 @@ export default function Step6ReviewConfirm() {
         {/* Card 2: Destinations */}
         <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 flex items-center gap-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-pink-600 flex items-center gap-1.5">
               <MapPinIcon className="w-4 h-4" />
               <span>Điểm đến ({selectedDestinations.length})</span>
             </span>
             <button
               type="button"
               onClick={() => goToStep(2)}
-              className="text-xs text-emerald-600 hover:underline"
+              className="text-xs text-pink-600 hover:underline"
             >
               Sửa
             </button>
@@ -234,7 +235,7 @@ export default function Step6ReviewConfirm() {
             {selectedDestinations.map((d, i) => (
               <span
                 key={d.id}
-                className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 text-xs font-bold"
+                className="px-2.5 py-1 rounded-lg bg-pink-50 dark:bg-pink-950/60 text-pink-800 dark:text-pink-200 text-xs font-bold"
               >
                 {i + 1}. {d.name} ({d.regionName})
               </span>
@@ -245,14 +246,14 @@ export default function Step6ReviewConfirm() {
         {/* Card 3: Transportation */}
         <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 flex items-center gap-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-pink-600 flex items-center gap-1.5">
               <TruckIcon className="w-4 h-4" />
               <span>Phương tiện chính</span>
             </span>
             <button
               type="button"
               onClick={() => goToStep(4)}
-              className="text-xs text-emerald-600 hover:underline"
+              className="text-xs text-pink-600 hover:underline"
             >
               Sửa
             </button>
@@ -270,14 +271,14 @@ export default function Step6ReviewConfirm() {
         {/* Card 4: Attractions */}
         <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 flex items-center gap-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-pink-600 flex items-center gap-1.5">
               <SparklesIcon className="w-4 h-4" />
               <span>Điểm tham quan ưu tiên ({selectedAttractions.length})</span>
             </span>
             <button
               type="button"
               onClick={() => goToStep(3)}
-              className="text-xs text-emerald-600 hover:underline"
+              className="text-xs text-pink-600 hover:underline"
             >
               Sửa
             </button>
@@ -329,20 +330,20 @@ export default function Step6ReviewConfirm() {
         </div>
 
         {/* Card 6: Estimated Budget */}
-        <div className="bg-gradient-to-br from-emerald-600 to-teal-700 p-5 rounded-2xl text-white shadow-md space-y-3 flex flex-col justify-between">
+        <div className="bg-gradient-to-br from-pink-500 via-rose-500 to-rose-600 p-5 rounded-2xl text-white shadow-md shadow-pink-500/20 space-y-3 flex flex-col justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-200 flex items-center gap-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-pink-100 flex items-center gap-1.5">
               <CurrencyDollarIcon className="w-4 h-4" />
               <span>Dự toán kinh phí ước tính</span>
             </span>
             <div className="text-2xl font-extrabold mt-1">
               ~{estimatedCostVND.toLocaleString('vi-VN')} đ
             </div>
-            <div className="text-[11px] text-emerald-100 mt-1">
+            <div className="text-[11px] text-pink-100 mt-1">
               Bao gồm khách sạn, ăn uống, vé tham quan và phương tiện di chuyển.
             </div>
           </div>
-          <div className="text-[10px] text-emerald-200/80">
+          <div className="text-[10px] text-pink-100/90">
             * Chi phí thực tế có thể thay đổi tùy theo mùa vụ và tiêu chuẩn phòng bạn chọn.
           </div>
         </div>
@@ -354,7 +355,7 @@ export default function Step6ReviewConfirm() {
           type="button"
           disabled={isGeneratingItinerary}
           onClick={handleGenerateItinerary}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-4 rounded-xl text-base font-extrabold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all cursor-pointer"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-4 rounded-xl text-base font-extrabold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-xl shadow-pink-500/30 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer"
         >
           {isGeneratingItinerary ? (
             <>
@@ -375,14 +376,14 @@ export default function Step6ReviewConfirm() {
           onClick={handleSaveTrip}
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-bold bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm transition-all"
         >
-          <BookmarkIcon className="w-4 h-4 text-emerald-600" />
+          <BookmarkIcon className="w-4 h-4 text-pink-600" />
           <span>{isSaving ? 'Đang lưu...' : 'Lưu chuyến đi'}</span>
         </button>
       </div>
 
       {saveSuccess && (
-        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-sm font-semibold flex items-center justify-center gap-2">
-          <CheckCircleIcon className="w-5 h-5 text-emerald-600" />
+        <div className="p-4 rounded-xl bg-pink-50 dark:bg-pink-950/60 border border-pink-200 dark:border-pink-800 text-pink-800 dark:text-pink-200 text-sm font-semibold flex items-center justify-center gap-2">
+          <CheckCircleIcon className="w-5 h-5 text-pink-600" />
           <span>Chuyến đi đã được lưu thành công vào tài khoản của bạn!</span>
         </div>
       )}
@@ -398,14 +399,14 @@ export default function Step6ReviewConfirm() {
         <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm space-y-6">
           <div className="border-b border-gray-200 dark:border-gray-800 pb-4 flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-pink-600">
                 Kế hoạch được tối ưu hóa
               </span>
               <h3 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white mt-1">
                 Lịch trình chi tiết ngày theo ngày
               </h3>
             </div>
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-200">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-pink-100 text-pink-800 dark:bg-pink-950/80 dark:text-pink-200">
               Đã tối ưu lộ trình TSP
             </span>
           </div>
@@ -421,7 +422,7 @@ export default function Step6ReviewConfirm() {
                 >
                   <div className="flex items-center justify-between border-b border-gray-200/60 dark:border-gray-700/60 pb-2.5">
                     <div className="flex items-center gap-2">
-                      <span className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
+                      <span className="w-7 h-7 rounded-lg bg-gradient-to-r from-pink-500 to-rose-600 text-white flex items-center justify-center font-bold text-xs">
                         N{idx + 1}
                       </span>
                       <h4 className="text-base font-bold text-gray-900 dark:text-white">

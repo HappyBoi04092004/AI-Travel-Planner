@@ -10,13 +10,16 @@ import Step4Transportation from './Step4Transportation';
 import Step5POIMap from './Step5POIMap';
 import Step6ReviewConfirm from './Step6ReviewConfirm';
 import WizardAIChatbot from './WizardAIChatbot';
-import { UserMenu } from '@/components/auth';
-import { ThemeToggle } from '@/components/ui';
 import Link from 'next/link';
 import { SparklesIcon, BookmarkIcon } from '@heroicons/react/24/outline';
+import { initGlobalErrorLogging } from '@/utils/logger';
 
 function WizardContent() {
   const { currentStep } = useTripWizard();
+
+  React.useEffect(() => {
+    initGlobalErrorLogging();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50/50 dark:bg-gray-950 flex flex-col justify-between">
@@ -25,30 +28,28 @@ function WizardContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-md shadow-pink-500/20 group-hover:scale-105 transition-transform">
                 <SparklesIcon className="w-6 h-6 text-white" />
               </div>
               <div>
                 <span className="text-base font-extrabold tracking-tight text-gray-900 dark:text-white block leading-tight">
                   AI Vietnam Travel Planner
                 </span>
-                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider block">
+                <span className="text-[10px] text-pink-600 dark:text-pink-400 font-semibold uppercase tracking-wider block">
                   Trợ lý lập kế hoạch du lịch Việt Nam
                 </span>
               </div>
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 pr-28 sm:pr-32">
             <Link
               href="/saved-trips"
               className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
-              <BookmarkIcon className="w-4 h-4 text-emerald-600" />
+              <BookmarkIcon className="w-4 h-4 text-pink-600" />
               <span>Chuyến đi đã lưu</span>
             </Link>
-            <ThemeToggle />
-            <UserMenu />
           </div>
         </div>
       </header>

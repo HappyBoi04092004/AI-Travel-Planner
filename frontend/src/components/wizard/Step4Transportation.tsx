@@ -111,7 +111,7 @@ export default function Step4Transportation() {
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
       <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
           <TruckIcon className="w-4 h-4" />
           <span>Bước 4 trên 6 • Lựa chọn di chuyển</span>
         </div>
@@ -127,7 +127,7 @@ export default function Step4Transportation() {
       {transportSegments.length > 0 && (
         <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs space-y-4">
           <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <MapPinIcon className="w-4 h-4 text-emerald-600" />
+            <MapPinIcon className="w-4 h-4 text-pink-600" />
             <span>Chi tiết từng chặng di chuyển ({transportSegments.length} chặng)</span>
           </h3>
 
@@ -143,9 +143,9 @@ export default function Step4Transportation() {
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white">
                       <span>Chặng {index + 1}:</span>
-                      <span className="text-emerald-600 dark:text-emerald-400">{segment.from}</span>
+                      <span className="text-pink-600 dark:text-pink-400">{segment.from}</span>
                       <span>→</span>
-                      <span className="text-emerald-600 dark:text-emerald-400">{segment.to}</span>
+                      <span className="text-pink-600 dark:text-pink-400">{segment.to}</span>
                     </div>
 
                     <div className="flex items-center gap-4 text-xs text-gray-500">
@@ -164,7 +164,7 @@ export default function Step4Transportation() {
                         onClick={() => updateSegmentMode(index, opt.id)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${
                           segment.selectedMode === opt.id
-                            ? 'bg-emerald-600 text-white shadow-xs'
+                            ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
                             : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-400'
                         }`}
                       >
@@ -196,7 +196,7 @@ export default function Step4Transportation() {
                 onClick={() => setOverallTransportMode(opt.id)}
                 className={`p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between space-y-4 ${
                   isSelected
-                    ? 'border-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/30 ring-2 ring-emerald-500/20 shadow-sm'
+                    ? 'border-pink-500 bg-pink-50/40 dark:bg-pink-950/30 ring-2 ring-pink-500/20 shadow-sm'
                     : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
                 }`}
               >
@@ -206,7 +206,7 @@ export default function Step4Transportation() {
                     <div
                       className={`w-6 h-6 rounded-full flex items-center justify-center border transition-all ${
                         isSelected
-                          ? 'bg-emerald-600 border-emerald-600 text-white'
+                          ? 'bg-gradient-to-r from-pink-500 to-rose-600 border-pink-500 text-white'
                           : 'border-gray-300 dark:border-gray-600'
                       }`}
                     >
@@ -225,12 +225,12 @@ export default function Step4Transportation() {
                 {/* Pros and Cons */}
                 <div className="space-y-2 text-xs pt-3 border-t border-gray-100 dark:border-gray-800">
                   <div className="space-y-1">
-                    <span className="font-semibold text-emerald-700 dark:text-emerald-400 text-[11px] block">
+                    <span className="font-semibold text-pink-700 dark:text-pink-400 text-[11px] block">
                       Ưu điểm:
                     </span>
                     {opt.advantages.map((adv, i) => (
                       <div key={i} className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 text-[11px]">
-                        <CheckCircleIcon className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                        <CheckCircleIcon className="w-3.5 h-3.5 text-pink-600 flex-shrink-0" />
                         <span>{adv}</span>
                       </div>
                     ))}
@@ -259,9 +259,9 @@ export default function Step4Transportation() {
       </div>
 
       {/* Confirmation Summary */}
-      <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-between text-xs">
-        <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-200">
-          <CheckCircleIcon className="w-5 h-5 text-emerald-600" />
+      <div className="p-4 rounded-2xl bg-pink-50 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 flex items-center justify-between text-xs">
+        <div className="flex items-center gap-2 text-pink-800 dark:text-pink-200">
+          <CheckCircleIcon className="w-5 h-5 text-pink-600" />
           <span>
             Phương tiện ưu tiên chính đã chọn: <strong>{TRANSPORT_OPTIONS.find(o => o.id === overallTransportMode)?.name}</strong>
           </span>
@@ -285,7 +285,7 @@ export default function Step4Transportation() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all shadow-md cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white transition-all shadow-md shadow-pink-500/25 cursor-pointer"
         >
           <span>Tiếp tục: Bản đồ tiện ích & Nhà thuốc gần nhất</span>
           <ArrowRightIcon className="w-5 h-5" />

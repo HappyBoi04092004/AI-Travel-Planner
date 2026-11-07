@@ -29,7 +29,7 @@ const VietnamMapLeaflet = dynamic(() => import('./VietnamMapLeaflet'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-[580px] bg-gray-100 dark:bg-gray-800 rounded-2xl flex flex-col items-center justify-center text-gray-500 animate-pulse border border-gray-200 dark:border-gray-700">
-      <MapPinIcon className="w-12 h-12 text-emerald-500 mb-2 animate-bounce" />
+      <MapPinIcon className="w-12 h-12 text-pink-500 mb-2 animate-bounce" />
       <span className="font-semibold text-sm">Đang tải bản đồ địa hình tương tác Việt Nam...</span>
     </div>
   )
@@ -132,7 +132,7 @@ export default function Step2VietnamMap() {
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
       <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
           <MapPinIcon className="w-4 h-4" />
           <span>Bước 2 trên 6 • Bản đồ số Địa hình & 34 Tỉnh thành mới</span>
         </div>
@@ -149,7 +149,7 @@ export default function Step2VietnamMap() {
           <button
             type="button"
             onClick={() => setIsFullscreen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold text-xs shadow-md transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
           >
             <ArrowsPointingOutIcon className="w-4 h-4" />
             <span>Phóng to Toàn Màn hình</span>
@@ -167,7 +167,7 @@ export default function Step2VietnamMap() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Tìm 34 tỉnh thành, tụ điểm du lịch hoặc hoạt động (Hoa Lư, đi thuyền, ăn thịt dê, Sa Pa, Pác Bó...)"
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
           />
         </div>
 
@@ -185,7 +185,7 @@ export default function Step2VietnamMap() {
               onClick={() => setSelectedRegion(r.id as any)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 selectedRegion === r.id
-                  ? 'bg-emerald-600 text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
@@ -203,7 +203,7 @@ export default function Step2VietnamMap() {
           <div className="bg-white dark:bg-gray-900 p-4 sm:p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <CheckCircleIcon className="w-5 h-5 text-emerald-600" />
+                <CheckCircleIcon className="w-5 h-5 text-pink-600" />
                 <span>Điểm đến đã chọn ({selectedDestinations.length})</span>
               </h3>
               <span className="text-[11px] text-gray-500">
@@ -223,12 +223,12 @@ export default function Step2VietnamMap() {
                     onClick={() => setActiveDestination(dest)}
                     className={`flex items-center justify-between p-2.5 rounded-xl border text-xs cursor-pointer transition-all ${
                       activeDestination.id === dest.id
-                        ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/30 font-semibold'
+                        ? 'border-pink-500 bg-pink-50/50 dark:bg-pink-950/30 font-semibold'
                         : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 bg-gray-50/50 dark:bg-gray-800/40'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">
+                      <span className="w-5 h-5 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 text-white flex items-center justify-center text-[10px] font-bold">
                         {idx + 1}
                       </span>
                       <div>
@@ -239,7 +239,7 @@ export default function Step2VietnamMap() {
 
                     <div className="flex items-center gap-2">
                       {compareWeatherMap[dest.id]?.forecastAvailable && (
-                        <span className="text-xs font-semibold text-emerald-600" title={compareWeatherMap[dest.id].condition}>
+                        <span className="text-xs font-semibold text-pink-600" title={compareWeatherMap[dest.id].condition}>
                           {compareWeatherMap[dest.id].conditionIcon} {compareWeatherMap[dest.id].tempMax}°C
                         </span>
                       )}
@@ -274,7 +274,7 @@ export default function Step2VietnamMap() {
               <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between text-white">
                 <div>
                   <div className="flex items-center gap-1.5 mb-1">
-                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-emerald-600/90">
+                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-gradient-to-r from-pink-500 to-rose-600">
                       {activeDestination.regionName}
                     </span>
                     <span className="text-[10px] px-2 py-0.5 rounded-md bg-white/20 backdrop-blur-md">
@@ -291,7 +291,7 @@ export default function Step2VietnamMap() {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm ${
                     selectedDestinations.some(d => d.id === activeDestination.id)
                       ? 'bg-rose-500 hover:bg-rose-600 text-white'
-                      : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                      : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white'
                   }`}
                 >
                   {selectedDestinations.some(d => d.id === activeDestination.id) ? (
@@ -315,10 +315,10 @@ export default function Step2VietnamMap() {
               </p>
 
               {/* COMPACT WEATHER PILL (Streamlined & Minimalist) */}
-              <div className="px-3 py-2 rounded-xl bg-sky-50/70 dark:bg-sky-950/40 border border-sky-100 dark:border-sky-900/50 flex items-center justify-between text-xs">
+              <div className="px-3 py-2 rounded-xl bg-pink-50/70 dark:bg-pink-950/40 border border-pink-100 dark:border-pink-900/50 flex items-center justify-between text-xs">
                 {loadingWeather ? (
                   <div className="text-xs text-gray-400 py-0.5 flex items-center gap-1.5 animate-pulse">
-                    <SparklesIcon className="w-3.5 h-3.5 text-emerald-500 animate-spin" />
+                    <SparklesIcon className="w-3.5 h-3.5 text-pink-500 animate-spin" />
                     <span>Đang cập nhật dự báo...</span>
                   </div>
                 ) : activeWeather?.forecastAvailable ? (
@@ -361,7 +361,7 @@ export default function Step2VietnamMap() {
                           key={spot.id}
                           className={`rounded-xl border transition-all overflow-hidden ${
                             isExpanded
-                              ? 'border-emerald-500 bg-emerald-50/20 dark:bg-emerald-950/20 shadow-xs'
+                              ? 'border-pink-500 bg-pink-50/30 dark:bg-pink-950/20 shadow-xs'
                               : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/40 hover:border-gray-300'
                           }`}
                         >
@@ -390,7 +390,7 @@ export default function Step2VietnamMap() {
                               className="text-gray-400 hover:text-gray-600 p-1"
                             >
                               {isExpanded ? (
-                                <ChevronUpIcon className="w-4 h-4 text-emerald-600" />
+                                <ChevronUpIcon className="w-4 h-4 text-pink-600" />
                               ) : (
                                 <ChevronDownIcon className="w-4 h-4" />
                               )}
@@ -414,7 +414,7 @@ export default function Step2VietnamMap() {
                                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 pl-1">
                                     {spot.subLocations.map((loc, i) => (
                                       <div key={i} className="text-[11px] text-gray-700 dark:text-gray-300 flex items-start gap-1">
-                                        <span className="text-emerald-500 font-bold">•</span>
+                                        <span className="text-pink-500 font-bold">•</span>
                                         <span className="font-medium">{loc}</span>
                                       </div>
                                     ))}
@@ -504,7 +504,7 @@ export default function Step2VietnamMap() {
                       <div className="font-bold text-gray-900 dark:text-white truncate">{dest.name}</div>
                       {w?.forecastAvailable ? (
                         <div className="mt-1 space-y-0.5">
-                          <div className="flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400">
+                          <div className="flex items-center gap-1 font-semibold text-pink-600 dark:text-pink-400">
                             <span>{w.conditionIcon}</span>
                             <span>{w.tempMin}° - {w.tempMax}°C</span>
                           </div>
@@ -540,7 +540,7 @@ export default function Step2VietnamMap() {
               </button>
 
               <div className="hidden md:flex items-center gap-2 text-xs font-bold text-gray-900 dark:text-white">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse" />
                 <span>Bản đồ Địa hình 3D Toàn cảnh Việt Nam (34 Tỉnh thành)</span>
               </div>
             </div>
@@ -553,7 +553,7 @@ export default function Step2VietnamMap() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Tìm tỉnh, tụ điểm, hoạt động..."
-                className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
             </div>
 
@@ -571,7 +571,7 @@ export default function Step2VietnamMap() {
                   onClick={() => setSelectedRegion(r.id as any)}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
                     selectedRegion === r.id
-                      ? 'bg-emerald-600 text-white shadow-xs'
+                      ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
                   }`}
                 >
@@ -604,7 +604,7 @@ export default function Step2VietnamMap() {
           <div className="absolute bottom-5 left-5 right-5 sm:left-auto sm:right-5 sm:w-[420px] max-h-[360px] z-30 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md p-4 rounded-2xl border border-gray-200/90 dark:border-gray-800/90 shadow-2xl overflow-y-auto space-y-3">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-pink-600 dark:text-pink-400">
                   {activeDestination.regionName} • {activeDestination.provinceType === 'city' ? '⭐ TP Trực thuộc TW' : '📍 Tỉnh mới'}
                 </span>
                 <h3 className="text-base font-extrabold text-gray-900 dark:text-white">
@@ -618,7 +618,7 @@ export default function Step2VietnamMap() {
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xs ${
                   selectedDestinations.some(d => d.id === activeDestination.id)
                     ? 'bg-rose-500 hover:bg-rose-600 text-white'
-                    : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                    : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-pink-500/25'
                 }`}
               >
                 {selectedDestinations.some(d => d.id === activeDestination.id) ? 'Bỏ chọn' : '+ Chọn tỉnh này'}
@@ -646,7 +646,7 @@ export default function Step2VietnamMap() {
                     onClick={() => handleSelectCluster(spot, activeDestination)}
                     className={`p-2 rounded-xl border text-xs cursor-pointer transition-all ${
                       activeSpot?.id === spot.id
-                        ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/50'
+                        ? 'border-pink-500 bg-pink-50/50 dark:bg-pink-950/50'
                         : 'border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/40 hover:border-gray-300'
                     }`}
                   >
@@ -692,7 +692,7 @@ export default function Step2VietnamMap() {
             disabled={!canProceedStep2}
             className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all ${
               canProceedStep2
-                ? 'bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer'
+                ? 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white cursor-pointer shadow-pink-500/25'
                 : 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
             }`}
           >

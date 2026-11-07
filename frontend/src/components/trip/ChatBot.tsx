@@ -21,7 +21,7 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hi! I'm your AI travel assistant. Tell me what you'd like to change about your trip plan - add activities, adjust the budget, change locations, or anything else!",
+      content: "Xin chào! Tôi là Trợ lý AI Du lịch Việt Nam. Hãy cho tôi biết bạn muốn điều chỉnh gì về lịch trình (thêm điểm tham quan, tối ưu ngân sách, gợi ý quán ăn, đổi phương tiện...)?",
       timestamp: new Date()
     }
   ]);
@@ -98,7 +98,7 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
       console.error('Chat error:', error);
       const errorMessage: Message = {
         role: 'assistant',
-        content: "Sorry, I'm having trouble processing your request right now. Please try again.",
+        content: "Xin lỗi, hiện tại tôi gặp gián đoạn kết nối. Vui lòng thử lại sau giây lát!",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -134,7 +134,7 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
           <div className="bg-gradient-to-br from-primary to-accent text-primary-foreground px-4 py-3 flex items-center justify-between rounded-t-2xl">
             <div className="flex items-center gap-2">
               <ChatBubbleLeftRightIcon className="w-5 h-5" />
-              <span className="font-semibold">AI Travel Assistant</span>
+              <span className="font-semibold">Trợ lý AI Du lịch Việt Nam</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -190,8 +190,8 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask me to modify your trip..."
-                className="flex-1 px-4 py-2 border border-border-subtle rounded-xl bg-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="Hỏi về thời tiết, ẩm thực, đổi điểm..."
+                className="flex-1 px-4 py-2 border border-border-subtle rounded-xl bg-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-xs"
                 disabled={isLoading}
               />
               <button

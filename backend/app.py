@@ -25,6 +25,22 @@ from models import db
 from optimization import ItineraryOptimizer
 from performance import TripCache, QueryOptimizer
 from utils.location_autocorrect import autocorrect_location, validate_cities_in_country
+import logging
+from datetime import datetime
+
+# Setup persistent runtime log files in logs/
+LOGS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'logs'))
+os.makedirs(LOGS_DIR, exist_ok=True)
+BACKEND_LOG_FILE = os.path.join(LOGS_DIR, 'backend_runtime.log')
+CLIENT_LOG_FILE = os.path.join(LOGS_DIR, 'frontend_client.log')
+
+backend_logger = logging.getLogger('BackendApp')
+backend_logger.setLevel(logging.INFO)
+if not backend_logger.handlers:
+    _rfh = logging.FileHandler(BACKEND_LOG_FILE, mode='a', encoding='utf-8')
+    _rfh.setFormatter(logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S'))
+    backend_logger.addHandler(_rfh)
+backend_logger.info("Backend service initialized with runtime logging active")
 
 load_dotenv()
 
@@ -152,6 +168,27 @@ def root():
             'optimization_info': '/analytics/optimization'
         }
     }), 200
+
+
+@app.route('/api/client-logs', methods=['POST'])
+def receive_client_log():
+    """Receives frontend errors and logs them to logs/frontend_client.log"""
+    try:
+        data = request.get_json(silent=True) or {}
+        level = str(data.get('level', 'ERROR')).upper()
+        message = data.get('message', 'No message provided')
+        source = data.get('source', 'browser')
+        stack = data.get('stack', '')
+
+        with open(CLIENT_LOG_FILE, 'a', encoding='utf-8') as f:
+            ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            f.write(f"[{ts}] [{level}] [{source}] {message}\n")
+            if stack:
+                f.write(f"  Stack: {stack}\n")
+        return jsonify({'status': 'logged'}), 200
+    except Exception as e:
+        backend_logger.error(f"Failed to record client log: {e}")
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/health', methods=['GET'])
@@ -321,6 +358,7 @@ def plan_trip():
             return jsonify(response)
 
     except Exception as err:
+        backend_logger.error(f'Error planning trip: {err}\n{traceback.format_exc()}')
         print(f'Error planning trip: {err}')
         traceback.print_exc()
         return jsonify({'error': 'Failed to plan trip', 'details': str(err)}), 500
@@ -348,6 +386,7 @@ def chat():
         return jsonify(chat_response)
 
     except Exception as err:
+        backend_logger.error(f'Error in chat: {err}\n{traceback.format_exc()}')
         print(f'Error in chat: {err}')
         traceback.print_exc()
         return jsonify({'error': 'Failed to process chat message', 'details': str(err)}), 500

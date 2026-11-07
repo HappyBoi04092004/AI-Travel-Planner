@@ -71,7 +71,7 @@ export default function Step3LocalDiscovery() {
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
       <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
           <SparklesIcon className="w-4 h-4" />
           <span>Bước 3 trên 6 • Khám phá tinh hoa địa phương</span>
         </div>
@@ -94,8 +94,8 @@ export default function Step3LocalDiscovery() {
               onClick={() => setActiveDestId(dest.id)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 activeDestId === dest.id
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-emerald-500'
+                  ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-sm'
+                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-pink-500'
               }`}
             >
               {dest.name} ({dest.regionName})
@@ -120,7 +120,7 @@ export default function Step3LocalDiscovery() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all ${
                 isActive
-                  ? 'border-emerald-600 text-emerald-600 dark:text-emerald-400'
+                  ? 'border-pink-600 text-pink-600 dark:text-pink-400'
                   : 'border-transparent text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
               }`}
             >
@@ -146,7 +146,7 @@ export default function Step3LocalDiscovery() {
                   key={attraction.id}
                   className={`flex flex-col bg-white dark:bg-gray-900 rounded-2xl border overflow-hidden shadow-xs transition-all ${
                     isSelected
-                      ? 'border-emerald-500 ring-2 ring-emerald-500/20'
+                      ? 'border-pink-500 ring-2 ring-pink-500/20'
                       : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
                   }`}
                 >
@@ -174,7 +174,7 @@ export default function Step3LocalDiscovery() {
 
                     <div className="space-y-1.5 pt-2 border-t border-gray-100 dark:border-gray-800 text-[11px] text-gray-500">
                       <div className="flex items-center gap-1.5">
-                        <ClockIcon className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                        <ClockIcon className="w-3.5 h-3.5 text-pink-600 flex-shrink-0" />
                         <span>Thời lượng: <strong>{attraction.estimatedDuration}</strong></span>
                       </div>
                       <div className="flex items-center gap-1.5">
@@ -188,13 +188,13 @@ export default function Step3LocalDiscovery() {
                       onClick={() => toggleAttraction(attraction)}
                       className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                         isSelected
-                          ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
-                          : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
+                          ? 'bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-300 dark:border-pink-700'
+                          : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-xs shadow-pink-500/25'
                       }`}
                     >
                       {isSelected ? (
                         <>
-                          <CheckCircleIcon className="w-4 h-4 text-emerald-600" />
+                          <CheckCircleIcon className="w-4 h-4 text-pink-600" />
                           <span>Đã thêm vào lịch trình</span>
                         </>
                       ) : (
@@ -227,7 +227,7 @@ export default function Step3LocalDiscovery() {
                   key={spec.id}
                   className={`flex flex-col bg-white dark:bg-gray-900 rounded-2xl border overflow-hidden shadow-xs transition-all ${
                     isSelected
-                      ? 'border-emerald-500 ring-2 ring-emerald-500/20'
+                      ? 'border-pink-500 ring-2 ring-pink-500/20'
                       : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
                   }`}
                 >
@@ -238,7 +238,7 @@ export default function Step3LocalDiscovery() {
                       alt={spec.name}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-amber-500/90 text-white text-[10px] font-bold">
+                    <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-rose-500/90 text-white text-[10px] font-bold">
                       {spec.categoryName}
                     </div>
                   </div>
@@ -269,13 +269,13 @@ export default function Step3LocalDiscovery() {
                       onClick={() => toggleSpecialty(spec)}
                       className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                         isSelected
-                          ? 'bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-200 border border-amber-300 dark:border-amber-700'
-                          : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
+                          ? 'bg-rose-50 text-rose-800 dark:bg-rose-950/60 dark:text-rose-200 border border-rose-300 dark:border-rose-700'
+                          : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-xs shadow-pink-500/25'
                       }`}
                     >
                       {isSelected ? (
                         <>
-                          <CheckCircleIcon className="w-4 h-4 text-amber-600" />
+                          <CheckCircleIcon className="w-4 h-4 text-rose-600" />
                           <span>Đã lưu vào danh mục ẩm thực</span>
                         </>
                       ) : (
@@ -308,7 +308,7 @@ export default function Step3LocalDiscovery() {
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-pink-600 dark:text-pink-400">
                       {culture.typeName}
                     </span>
                     <h4 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">
@@ -322,8 +322,8 @@ export default function Step3LocalDiscovery() {
                 </p>
 
                 {culture.periodOrTime && (
-                  <div className="p-2.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-800 text-[11px] text-emerald-900 dark:text-emerald-200 font-medium flex items-center gap-2">
-                    <ClockIcon className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <div className="p-2.5 rounded-xl bg-pink-50/60 dark:bg-pink-950/40 border border-pink-100 dark:border-pink-800 text-[11px] text-pink-900 dark:text-pink-200 font-medium flex items-center gap-2">
+                    <ClockIcon className="w-4 h-4 text-pink-600 flex-shrink-0" />
                     <span>Thời gian diễn ra: <strong>{culture.periodOrTime}</strong></span>
                   </div>
                 )}
@@ -343,7 +343,7 @@ export default function Step3LocalDiscovery() {
             • <strong>{selectedAttractions.length}</strong> điểm tham quan đã chọn &nbsp;|&nbsp; • <strong>{selectedSpecialties.length}</strong> món ăn đặc sản đã lưu
           </div>
         </div>
-        <div className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">
+        <div className="text-[11px] text-pink-700 dark:text-pink-400 font-semibold">
           AI sẽ tự động sắp xếp thời gian biểu phù hợp cho các điểm bạn đã chọn.
         </div>
       </div>
@@ -362,7 +362,7 @@ export default function Step3LocalDiscovery() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all shadow-md cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white transition-all shadow-md shadow-pink-500/25 cursor-pointer"
         >
           <span>Tiếp tục: Chọn phương tiện di chuyển</span>
           <ArrowRightIcon className="w-5 h-5" />

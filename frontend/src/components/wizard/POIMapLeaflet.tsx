@@ -123,12 +123,12 @@ export default function POIMapLeaflet({
       className: 'dest-center-marker',
       html: `
         <div style="
-          background: linear-gradient(135deg, #059669, #047857);
+          background: linear-gradient(135deg, #ec4899, #db2777);
           color: white;
           padding: 6px 12px;
           border-radius: 20px;
           border: 2px solid white;
-          box-shadow: 0 4px 14px rgba(5,150,105,0.4);
+          box-shadow: 0 4px 14px rgba(236,72,153,0.4);
           font-size: 12px;
           font-weight: 800;
           white-space: nowrap;
@@ -254,7 +254,7 @@ export default function POIMapLeaflet({
           </div>
           <h4 style="margin: 0 0 4px; font-size: 13px; font-weight: bold; color: #111827;">${poi.name}</h4>
           <p style="margin: 0 0 6px; font-size: 11px; color: #4b5563; line-height: 1.4;">📍 ${poi.address}</p>
-          ${poi.phone ? `<p style="margin: 0 0 6px; font-size: 11px; color: #059669; font-weight: 600;">📞 ${poi.phone}</p>` : ''}
+          ${poi.phone ? `<p style="margin: 0 0 6px; font-size: 11px; color: #be123c; font-weight: 600;">📞 ${poi.phone}</p>` : ''}
           <div style="margin-top: 6px;">
             <a
               href="https://www.google.com/maps/dir/?api=1&destination=${poi.lat},${poi.lng}"
@@ -325,7 +325,7 @@ export default function POIMapLeaflet({
       {/* Map Legend */}
       <div className="absolute bottom-3 left-3 z-20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-gray-200/80 dark:border-gray-800/80 shadow-md text-[11px] space-y-1">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-emerald-600 inline-block" />
+          <span className="w-3 h-3 rounded-full bg-pink-500 inline-block" />
           <span className="text-gray-700 dark:text-gray-300 font-medium">Trung tâm khu vực ({destination.name})</span>
         </div>
         <div className="flex items-center gap-2">

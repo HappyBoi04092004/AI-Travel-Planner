@@ -1,95 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  /* Base colors */
-  --background: oklch(0.98 0.004 264);
-  --foreground: oklch(0.13 0.016 264);
+  /* Base colors - Clean White with soft warm undertone */
+  --background: oklch(0.99 0.004 350);
+  --foreground: oklch(0.16 0.02 350);
 
-  /* Primary - vibrant electric blue */
-  --primary: oklch(0.58 0.22 252);
-  --primary-foreground: oklch(0.99 0 0);
-  --primary-hover: oklch(0.52 0.24 252);
+  /* Primary - Vibrant Modern Rose Pink */
+  --primary: oklch(0.63 0.23 355);
+  --primary-foreground: oklch(1 0 0);
+  --primary-hover: oklch(0.57 0.25 355);
 
-  /* Secondary - purple accent */
-  --secondary: oklch(0.88 0.04 280);
-  --secondary-foreground: oklch(0.20 0.02 264);
+  /* Secondary - Soft Pastel Pink */
+  --secondary: oklch(0.95 0.03 350);
+  --secondary-foreground: oklch(0.35 0.15 355);
 
   /* Muted backgrounds */
-  --muted: oklch(0.96 0.006 264);
-  --muted-foreground: oklch(0.48 0.015 264);
+  --muted: oklch(0.97 0.008 350);
+  --muted-foreground: oklch(0.50 0.02 350);
 
-  /* Accent - cyan/teal */
-  --accent: oklch(0.92 0.04 200);
-  --accent-foreground: oklch(0.20 0.02 200);
+  /* Accent - Tender Blossom Pink */
+  --accent: oklch(0.93 0.05 350);
+  --accent-foreground: oklch(0.38 0.18 355);
 
-  /* Card backgrounds with subtle tint */
-  --card: oklch(0.99 0.002 264);
-  --card-foreground: oklch(0.13 0.016 264);
+  /* Card backgrounds - Pure Crisp White */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.02 350);
 
-  /* Borders */
-  --border: oklch(0.90 0.008 264);
-  --border-subtle: oklch(0.94 0.004 264);
+  /* Borders - Soft Pinkish White */
+  --border: oklch(0.92 0.015 350);
+  --border-subtle: oklch(0.96 0.008 350);
 
   /* Input */
-  --input: oklch(0.94 0.006 264);
-  --ring: oklch(0.58 0.22 252);
+  --input: oklch(0.96 0.01 350);
+  --ring: oklch(0.63 0.23 355);
 
-  /* Success, warning, destructive */
+  /* Status */
   --success: oklch(0.65 0.18 150);
   --warning: oklch(0.75 0.16 70);
   --destructive: oklch(0.58 0.22 20);
   --destructive-foreground: oklch(0.99 0 0);
 
   /* Glassmorphism */
-  --glass-bg: oklch(0.99 0.002 264 / 0.7);
-  --glass-border: oklch(0.92 0.006 264 / 0.2);
+  --glass-bg: oklch(1 0 0 / 0.75);
+  --glass-border: oklch(0.92 0.02 350 / 0.3);
 
   --radius: 0.75rem;
 }
 
 .dark {
-  /* Base colors - deep blue-black */
-  --background: oklch(0.10 0.02 264);
-  --foreground: oklch(0.96 0.008 264);
+  /* Base colors - Elegant deep rose-tinted dark */
+  --background: oklch(0.12 0.025 345);
+  --foreground: oklch(0.97 0.01 350);
 
-  /* Primary - bright electric blue */
-  --primary: oklch(0.65 0.24 252);
-  --primary-foreground: oklch(0.10 0.02 264);
-  --primary-hover: oklch(0.70 0.26 252);
+  /* Primary - Bright glowing rose pink */
+  --primary: oklch(0.68 0.22 355);
+  --primary-foreground: oklch(0.12 0.02 345);
+  --primary-hover: oklch(0.74 0.24 355);
 
-  /* Secondary - rich purple */
-  --secondary: oklch(0.22 0.04 280);
-  --secondary-foreground: oklch(0.96 0.008 264);
+  /* Secondary - Deep berry */
+  --secondary: oklch(0.22 0.05 345);
+  --secondary-foreground: oklch(0.97 0.01 350);
 
   /* Muted backgrounds */
-  --muted: oklch(0.16 0.02 264);
-  --muted-foreground: oklch(0.62 0.015 264);
+  --muted: oklch(0.18 0.025 345);
+  --muted-foreground: oklch(0.68 0.03 350);
 
-  /* Accent - bright cyan */
-  --accent: oklch(0.24 0.04 200);
-  --accent-foreground: oklch(0.96 0.008 200);
+  /* Accent - Luminous rose */
+  --accent: oklch(0.26 0.06 345);
+  --accent-foreground: oklch(0.97 0.01 350);
 
   /* Card backgrounds */
-  --card: oklch(0.14 0.024 264);
-  --card-foreground: oklch(0.96 0.008 264);
+  --card: oklch(0.16 0.03 345);
+  --card-foreground: oklch(0.97 0.01 350);
 
-  /* Borders with glow effect */
-  --border: oklch(0.26 0.03 264);
-  --border-subtle: oklch(0.18 0.02 264);
+  /* Borders with subtle rose glow */
+  --border: oklch(0.28 0.04 345);
+  --border-subtle: oklch(0.20 0.03 345);
 
   /* Input */
-  --input: oklch(0.18 0.024 264);
-  --ring: oklch(0.65 0.24 252);
+  --input: oklch(0.20 0.03 345);
+  --ring: oklch(0.68 0.22 355);
 
-  /* Success, warning, destructive */
+  /* Status */
   --success: oklch(0.70 0.20 150);
   --warning: oklch(0.78 0.18 70);
   --destructive: oklch(0.62 0.24 20);
-  --destructive-foreground: oklch(0.96 0.008 264);
+  --destructive-foreground: oklch(0.97 0.01 350);
 
   /* Glassmorphism */
-  --glass-bg: oklch(0.14 0.024 264 / 0.6);
-  --glass-border: oklch(0.30 0.04 264 / 0.2);
+  --glass-bg: oklch(0.16 0.03 345 / 0.65);
+  --glass-border: oklch(0.35 0.06 345 / 0.3);
 }
 
 @theme inline {
@@ -137,22 +137,22 @@ body {
   border: 1px solid var(--glass-border);
 }
 
-/* Gradient backgrounds */
+/* Gradient backgrounds - White & Pink Theme */
 .gradient-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
 }
 
 .gradient-secondary {
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
 }
 
 /* Glow effects */
 .glow-primary {
-  box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.35), 0 0 40px rgba(236, 72, 153, 0.2);
 }
 
 .glow-accent {
-  box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+  box-shadow: 0 0 15px rgba(251, 113, 133, 0.3);
 }
 
 /* Custom scrollbar styles */
@@ -166,38 +166,38 @@ body {
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgb(209 213 219);
+  background: rgb(244 114 182 / 0.4);
   border-radius: 10px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgb(156 163 175);
+  background: rgb(244 63 94 / 0.6);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 .dark .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgb(55 65 81);
+  background: rgb(159 18 57 / 0.5);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 .dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgb(75 85 99);
+  background: rgb(225 29 72 / 0.7);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 /* Hide scrollbar but keep functionality */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
+  display: none;
 }
 
 /* Fade in animation */

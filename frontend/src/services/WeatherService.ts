@@ -1,4 +1,5 @@
 import { DestinationWeather } from '@/types/wizard';
+import { logClientEvent } from '@/utils/logger';
 
 // Weather code to Vietnamese condition mapping for Open-Meteo
 const WEATHER_CODES: Record<number, { text: string; icon: string }> = {
@@ -30,7 +31,91 @@ const WEATHER_CODES: Record<number, { text: string; icon: string }> = {
 
 // In-memory weather cache
 const _weatherCache: Map<string, { data: DestinationWeather; timestamp: number }> = new Map();
-const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
+const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes for successful responses
+
+// Helper: Estimate seasonal climate in Vietnam when API is unavailable (503/timeout) or outside 16 days
+function getSeasonalClimateFallback(
+  destinationName: string,
+  lat: number,
+  lng: number,
+  targetDateStr?: string,
+  noteMessage?: string
+): DestinationWeather {
+  let tempMin = 22;
+  let tempMax = 29;
+  let rainProbability = 15;
+  let rainfallMm = 0;
+  let windSpeed = 10;
+  let condition = 'Thời tiết thuận lợi (Theo mùa)';
+  let icon = '⛅';
+
+  if (lat >= 20.0) {
+    // Northern Vietnam (Hà Nội, Sa Pa, Hạ Long, Ninh Bình)
+    if (lat > 22.0) {
+      tempMin = 14;
+      tempMax = 22;
+      condition = 'Mát mẻ vùng cao';
+      icon = '🌤️';
+    } else {
+      tempMin = 20;
+      tempMax = 28;
+      condition = 'Nắng ráo dịu mát';
+      icon = '⛅';
+    }
+  } else if (lat >= 14.0) {
+    // Central Vietnam (Huế, Đà Nẵng, Quảng Nam, Bình Định)
+    tempMin = 23;
+    tempMax = 30;
+    condition = 'Nắng ấm, gió biển';
+    icon = '🌤️';
+  } else if (lat >= 11.5 && lng < 108.6) {
+    // Central Highlands (Đà Lạt, Gia Lai)
+    tempMin = 16;
+    tempMax = 24;
+    condition = 'Se lạnh, trong lành';
+    icon = '⛅';
+  } else {
+    // Southern Vietnam (TP. Hồ Chí Minh, Cần Thơ, Phú Quốc)
+    tempMin = 25;
+    tempMax = 33;
+    condition = 'Nắng ấm nhiệt đới';
+    icon = '☀️';
+  }
+
+  // Generate 7-day realistic fallback forecast
+  const baseDate = targetDateStr ? new Date(targetDateStr) : new Date();
+  const dailyForecast = Array.from({ length: 7 }).map((_, i) => {
+    const d = new Date(baseDate);
+    d.setDate(d.getDate() + i);
+    const dateStr = d.toISOString().split('T')[0];
+    return {
+      date: dateStr,
+      condition,
+      conditionIcon: icon,
+      tempMin,
+      tempMax,
+      rainProbability,
+      rainfallMm
+    };
+  });
+
+  return {
+    location: destinationName,
+    forecastAvailable: false,
+    date: targetDateStr || new Date().toISOString().split('T')[0],
+    condition,
+    conditionIcon: icon,
+    tempMin,
+    tempMax,
+    rainProbability,
+    rainfallMm,
+    windSpeed,
+    dailyForecast,
+    note:
+      noteMessage ||
+      'Dữ liệu vệ tinh thời tiết thực tế chỉ khả dụng trong vòng 16 ngày tới. Đang hiển thị nhiệt độ tham khảo theo mùa.'
+  };
+}
 
 export async function fetchDestinationWeather(
   destinationName: string,
@@ -61,20 +146,13 @@ export async function fetchDestinationWeather(
   }
 
   if (!isWithin16Days) {
-    const fallbackResult: DestinationWeather = {
-      location: destinationName,
-      forecastAvailable: false,
-      date: targetDateStr,
-      condition: 'Chưa có dự báo thời gian thực',
-      conditionIcon: '📅',
-      tempMin: 20,
-      tempMax: 28,
-      rainProbability: 0,
-      rainfallMm: 0,
-      windSpeed: 0,
-      note: 'Dự báo thời tiết chi tiết thực tế từ vệ tinh Open-Meteo chỉ khả dụng trong vòng 16 ngày tới. Ngày bạn chọn nằm ngoài phạm vi dự báo.'
-    };
-    return fallbackResult;
+    return getSeasonalClimateFallback(
+      destinationName,
+      lat,
+      lng,
+      targetDateStr,
+      'Dự báo thời tiết thực tế từ vệ tinh Open-Meteo khả dụng trong vòng 16 ngày tới. Ngày bạn chọn đang hiển thị nhiệt độ tham khảo mùa.'
+    );
   }
 
   try {
@@ -88,15 +166,36 @@ export async function fetchDestinationWeather(
     url.searchParams.set('timezone', 'Asia/Bangkok');
     url.searchParams.set('forecast_days', '16');
 
-    const res = await fetch(url.toString());
+    // Add a reasonable timeout (6 seconds) to avoid freezing requests
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+    const res = await fetch(url.toString(), { signal: controller.signal });
+    clearTimeout(timeoutId);
+
     if (!res.ok) {
-      throw new Error(`Open-Meteo returned status ${res.status}`);
+      logClientEvent('warn', `Open-Meteo returned status ${res.status} for ${destinationName}`);
+      const fallback = getSeasonalClimateFallback(
+        destinationName,
+        lat,
+        lng,
+        targetDateStr,
+        `Máy chủ thời tiết Open-Meteo đang bận hoặc bảo trì (${res.status}). Hệ thống tự động dùng dữ liệu nhiệt độ tham khảo mùa.`
+      );
+      _weatherCache.set(cacheKey, { data: fallback, timestamp: Date.now() });
+      return fallback;
     }
 
     const data = await res.json();
     const daily = data.daily;
     if (!daily || !daily.time || daily.time.length === 0) {
-      throw new Error('No daily forecast found in response');
+      return getSeasonalClimateFallback(
+        destinationName,
+        lat,
+        lng,
+        targetDateStr,
+        'Dữ liệu dự báo thời tiết tạm thời chưa có sẵn cho toạ độ này.'
+      );
     }
 
     // Find the day matching targetDate or default to day 0
@@ -141,21 +240,16 @@ export async function fetchDestinationWeather(
 
     _weatherCache.set(cacheKey, { data: weatherResult, timestamp: Date.now() });
     return weatherResult;
-  } catch (error) {
-    console.error(`Failed to fetch weather for ${destinationName}:`, error);
-    return {
-      location: destinationName,
-      forecastAvailable: false,
-      date: targetDateStr,
-      condition: 'Không thể kết nối dịch vụ thời tiết',
-      conditionIcon: '⚠️',
-      tempMin: 0,
-      tempMax: 0,
-      rainProbability: 0,
-      rainfallMm: 0,
-      windSpeed: 0,
-      note: 'Vui lòng kiểm tra lại kết nối mạng hoặc thử lại sau.'
-    };
+  } catch (error: any) {
+    logClientEvent('warn', `Notice for ${destinationName}`, error?.message || error);
+    const fallback = getSeasonalClimateFallback(
+      destinationName,
+      lat,
+      lng,
+      targetDateStr,
+      'Kết nối đến máy chủ thời tiết Open-Meteo tạm gián đoạn. Đang hiển thị nhiệt độ tham khảo mùa.'
+    );
+    _weatherCache.set(cacheKey, { data: fallback, timestamp: Date.now() });
+    return fallback;
   }
 }
-

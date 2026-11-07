@@ -92,7 +92,7 @@ export default function Step5POIMap() {
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
       <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
           <HeartIcon className="w-4 h-4 text-rose-500" />
           <span>Bước 5 trên 6 • Bản đồ tiện ích & An toàn sức khỏe</span>
         </div>
@@ -115,8 +115,8 @@ export default function Step5POIMap() {
               onClick={() => setActiveDestId(dest.id)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 currentDestination.id === dest.id
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-emerald-500'
+                  ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-sm'
+                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-pink-500'
               }`}
             >
               {dest.name}
@@ -154,7 +154,7 @@ export default function Step5POIMap() {
                 <span>Danh sách kết quả ({pois.length})</span>
               </h3>
               {loadingPOIs && (
-                <div className="flex items-center gap-1 text-[11px] text-emerald-600">
+                <div className="flex items-center gap-1 text-[11px] text-pink-600">
                   <SparklesIcon className="w-3.5 h-3.5 animate-spin" />
                   <span>Đang dò toạ độ...</span>
                 </div>
@@ -198,7 +198,7 @@ export default function Step5POIMap() {
                         </div>
 
                         {poi.distanceFromCenter && (
-                          <span className="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold text-[10px] whitespace-nowrap">
+                          <span className="px-2 py-0.5 rounded-md bg-pink-100 dark:bg-pink-950/60 text-pink-800 dark:text-pink-300 font-bold text-[10px] whitespace-nowrap">
                             {poi.distanceFromCenter}
                           </span>
                         )}
@@ -206,7 +206,7 @@ export default function Step5POIMap() {
 
                       <div className="flex items-center justify-between gap-2 mt-2 pt-2 border-t border-gray-100 dark:border-gray-800/80 text-[11px] text-gray-500">
                         {poi.phone ? (
-                          <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
+                          <span className="flex items-center gap-1 text-pink-600 dark:text-pink-400 font-semibold">
                             <PhoneIcon className="w-3.5 h-3.5" />
                             <span>{poi.phone}</span>
                           </span>
@@ -262,7 +262,7 @@ export default function Step5POIMap() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all shadow-md cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white transition-all shadow-md shadow-pink-500/25 cursor-pointer"
         >
           <span>Tiếp tục: Xác nhận chuyến đi & Sinh lịch trình</span>
           <ArrowRightIcon className="w-5 h-5" />
