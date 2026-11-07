@@ -1,95 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  /* Base colors - Clean White with soft warm undertone */
-  --background: oklch(0.99 0.004 350);
-  --foreground: oklch(0.16 0.02 350);
+  /* Base colors - Clean modern neutral canvas for high contrast */
+  --background: #f8fafc;
+  --foreground: #0f172a;
 
-  /* Primary - Deep Vibrant Rose Pink */
-  --primary: oklch(0.55 0.28 355);
-  --primary-foreground: oklch(1 0 0);
-  --primary-hover: oklch(0.48 0.28 355);
+  /* Primary - Bold Hot Pink / Deep Magenta-Rose */
+  --primary: #db2777;
+  --primary-foreground: #ffffff;
+  --primary-hover: #be123c;
 
-  /* Secondary - Soft Rose Tint */
-  --secondary: oklch(0.95 0.04 350);
-  --secondary-foreground: oklch(0.35 0.20 355);
+  /* Secondary - Crisp Neutral Slate Tint */
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
 
   /* Muted backgrounds */
-  --muted: oklch(0.97 0.01 350);
-  --muted-foreground: oklch(0.45 0.03 350);
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
 
-  /* Accent - Rich Deep Raspberry Rose */
-  --accent: oklch(0.50 0.28 15);
-  --accent-foreground: oklch(1 0 0);
+  /* Accent - Electric Vibrant Hot Pink */
+  --accent: #ec4899;
+  --accent-foreground: #ffffff;
 
   /* Card backgrounds - Pure Crisp White */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0.02 350);
+  --card: #ffffff;
+  --card-foreground: #0f172a;
 
-  /* Borders - Soft Rose Border */
-  --border: oklch(0.90 0.03 350);
-  --border-subtle: oklch(0.95 0.015 350);
+  /* Borders - Crisp Slate Border with High Contrast */
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
 
   /* Input */
-  --input: oklch(0.96 0.015 350);
-  --ring: oklch(0.55 0.28 355);
+  --input: #ffffff;
+  --ring: #db2777;
 
   /* Status */
-  --success: oklch(0.65 0.18 150);
-  --warning: oklch(0.75 0.16 70);
-  --destructive: oklch(0.58 0.22 20);
-  --destructive-foreground: oklch(0.99 0 0);
+  --success: #10b981;
+  --warning: #f59e0b;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
 
   /* Glassmorphism */
-  --glass-bg: oklch(1 0 0 / 0.75);
-  --glass-border: oklch(0.92 0.02 350 / 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(226, 232, 240, 0.8);
 
   --radius: 0.75rem;
 }
 
 .dark {
-  /* Base colors - Elegant deep rose-tinted dark */
-  --background: oklch(0.12 0.025 345);
-  --foreground: oklch(0.97 0.01 350);
+  /* Base colors - Deep Obsidian Slate with High Contrast */
+  --background: #090d16;
+  --foreground: #f8fafc;
 
-  /* Primary - Deep glowing rose pink */
-  --primary: oklch(0.62 0.27 355);
-  --primary-foreground: oklch(0.12 0.02 345);
-  --primary-hover: oklch(0.68 0.28 355);
+  /* Primary - Deep Glowing Carmine Rose */
+  --primary: #f43f5e;
+  --primary-foreground: #ffffff;
+  --primary-hover: #fb7185;
 
-  /* Secondary - Deep berry */
-  --secondary: oklch(0.22 0.06 345);
-  --secondary-foreground: oklch(0.97 0.01 350);
+  /* Secondary - Dark Slate */
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
 
   /* Muted backgrounds */
-  --muted: oklch(0.18 0.03 345);
-  --muted-foreground: oklch(0.72 0.04 350);
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
 
-  /* Accent - Warm Glowing Deep Rose */
-  --accent: oklch(0.56 0.27 15);
-  --accent-foreground: oklch(1 0 0);
+  /* Accent - Glowing Vibrant Rose */
+  --accent: #fb7185;
+  --accent-foreground: #090d16;
 
   /* Card backgrounds */
-  --card: oklch(0.16 0.03 345);
-  --card-foreground: oklch(0.97 0.01 350);
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
 
-  /* Borders with subtle rose glow */
-  --border: oklch(0.28 0.04 345);
-  --border-subtle: oklch(0.20 0.03 345);
+  /* Borders */
+  --border: #1e293b;
+  --border-subtle: #162032;
 
   /* Input */
-  --input: oklch(0.20 0.03 345);
-  --ring: oklch(0.68 0.22 355);
+  --input: #0f172a;
+  --ring: #f43f5e;
 
   /* Status */
-  --success: oklch(0.70 0.20 150);
-  --warning: oklch(0.78 0.18 70);
-  --destructive: oklch(0.62 0.24 20);
-  --destructive-foreground: oklch(0.97 0.01 350);
+  --success: #34d399;
+  --warning: #fbbf24;
+  --destructive: #f87171;
+  --destructive-foreground: #ffffff;
 
   /* Glassmorphism */
-  --glass-bg: oklch(0.16 0.03 345 / 0.65);
-  --glass-border: oklch(0.35 0.06 345 / 0.3);
+  --glass-bg: rgba(15, 23, 42, 0.85);
+  --glass-border: rgba(30, 41, 59, 0.8);
 }
 
 @theme inline {
@@ -137,13 +137,52 @@ body {
   border: 1px solid var(--glass-border);
 }
 
+/* Deep Bold Pink Highlight & Accent System */
+.bg-deep-rose {
+  background-color: #db2777 !important;
+  color: #ffffff !important;
+}
+
+.deep-rose-header {
+  background-color: #db2777 !important;
+  background-image: linear-gradient(135deg, #be123c 0%, #db2777 50%, #e11d48 100%) !important;
+  color: #ffffff !important;
+}
+
+.btn-deep-rose {
+  background-color: #db2777 !important;
+  background-image: linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 15px 0 rgba(219, 39, 119, 0.35) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+.btn-deep-rose:hover {
+  background-color: #be123c !important;
+  background-image: linear-gradient(135deg, #be123c 0%, #db2777 60%, #e11d48 100%) !important;
+  box-shadow: 0 6px 22px 0 rgba(219, 39, 119, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+/* Fallback for Tailwind v4 gradient compatibility so no button or header ever has transparent/white bg */
+.bg-gradient-to-r,
+[class*="from-rose-600"][class*="to-pink-600"],
+[class*="from-rose-600"][class*="to-rose-700"] {
+  background-color: #db2777;
+  background-image: linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%);
+}
+
 /* Gradient backgrounds - White & Pink Theme */
 .gradient-primary {
-  background: linear-gradient(135deg, #e11d48 0%, #db2777 100%);
+  background-color: #db2777;
+  background-image: linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%);
+  color: #ffffff;
 }
 
 .gradient-secondary {
-  background: linear-gradient(135deg, #be123c 0%, #e11d48 100%);
+  background-color: #be123c;
+  background-image: linear-gradient(135deg, #be123c 0%, #db2777 50%, #e11d48 100%);
+  color: #ffffff;
 }
 
 /* Glow effects */

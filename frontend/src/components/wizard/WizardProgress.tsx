@@ -40,7 +40,7 @@ export default function WizardProgress() {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-30 shadow-xs">
+    <div className="w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-16 z-30 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
         <div className="flex items-center justify-between overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-1">
           {STEPS.map((step) => {
@@ -55,35 +55,44 @@ export default function WizardProgress() {
                 type="button"
                 disabled={!isAccessible}
                 onClick={() => isAccessible && goToStep(step.number)}
-                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all flex-shrink-0 text-left ${
+                className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl transition-all flex-shrink-0 text-left ${
                   isCurrent
-                    ? 'bg-rose-50 dark:bg-rose-950/70 text-rose-950 dark:text-rose-100 border-2 border-rose-500 dark:border-rose-600 shadow-sm'
+                    ? 'bg-white dark:bg-slate-800 text-slate-950 dark:text-white border-2 border-pink-600 shadow-md shadow-pink-900/10'
                     : isCompleted
-                    ? 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer'
+                    ? 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer border border-transparent'
                     : isAccessible
-                    ? 'text-gray-500 hover:text-gray-800 dark:text-gray-400'
-                    : 'text-gray-300 dark:text-gray-700 cursor-not-allowed opacity-50'
+                    ? 'text-slate-600 hover:text-slate-900 dark:text-slate-400 border border-transparent'
+                    : 'text-slate-300 dark:text-slate-700 cursor-not-allowed opacity-50 border border-transparent'
                 }`}
               >
                 {/* Step badge */}
                 <div
-                  className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold transition-all ${
+                  style={
                     isCurrent
-                      ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm shadow-rose-600/30'
+                      ? {
+                          backgroundColor: '#db2777',
+                          backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                          color: '#ffffff'
+                        }
+                      : {}
+                  }
+                  className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black transition-all ${
+                    isCurrent
+                      ? 'text-white shadow-sm shadow-pink-900/30'
                       : isCompleted
-                      ? 'bg-rose-100 dark:bg-rose-900/70 text-rose-800 dark:text-rose-200'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+                      ? 'bg-pink-100 dark:bg-pink-950 text-pink-800 dark:text-pink-200 font-extrabold'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
                   }`}
                 >
-                  {isCompleted ? <CheckIcon className="w-4 h-4" /> : step.number}
+                  {isCompleted ? <CheckIcon className="w-4 h-4 text-pink-600" /> : step.number}
                 </div>
 
                 {/* Step details */}
                 <div className="hidden md:block">
-                  <div className="text-xs font-bold leading-tight flex items-center gap-1.5">
+                  <div className={`text-xs leading-tight flex items-center gap-1.5 ${isCurrent ? 'font-black text-slate-950 dark:text-white' : 'font-bold text-slate-800 dark:text-slate-200'}`}>
                     <span>{step.title}</span>
                   </div>
-                  <div className="text-[11px] text-gray-500 dark:text-gray-400 truncate max-w-[130px]">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate max-w-[130px]">
                     {step.shortDesc}
                   </div>
                 </div>

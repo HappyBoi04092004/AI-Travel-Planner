@@ -113,10 +113,19 @@ export default function Step5POIMap() {
               key={dest.id}
               type="button"
               onClick={() => setActiveDestId(dest.id)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+              style={
                 currentDestination.id === dest.id
-                  ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm'
-                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-pink-500'
+                  ? {
+                      backgroundColor: '#db2777',
+                      backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                      color: '#ffffff'
+                    }
+                  : {}
+              }
+              className={`px-4 py-2 rounded-xl text-xs font-black transition-all whitespace-nowrap cursor-pointer ${
+                currentDestination.id === dest.id
+                  ? 'text-white shadow-sm shadow-rose-900/30'
+                  : 'bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-rose-500'
               }`}
             >
               {dest.name}
@@ -132,10 +141,19 @@ export default function Step5POIMap() {
             key={cat.id}
             type="button"
             onClick={() => setSelectedPOICategory(cat.id)}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+            style={
               selectedPOICategory === cat.id
-                ? 'bg-rose-600 text-white shadow-xs ring-2 ring-rose-500/20'
-                : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-400'
+                ? {
+                    backgroundColor: '#db2777',
+                    backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                    color: '#ffffff'
+                  }
+                : {}
+            }
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+              selectedPOICategory === cat.id
+                ? 'text-white shadow-xs'
+                : 'bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-400'
             }`}
           >
             <span>{cat.icon}</span>
@@ -262,10 +280,15 @@ export default function Step5POIMap() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white transition-all shadow-lg shadow-rose-600/35 cursor-pointer"
+          style={{
+            backgroundColor: '#db2777',
+            backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+            color: '#ffffff'
+          }}
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-black text-white transition-all shadow-lg shadow-pink-900/35 hover:shadow-xl hover:scale-[1.02] cursor-pointer"
         >
           <span>Tiếp tục: Xác nhận chuyến đi & Sinh lịch trình</span>
-          <ArrowRightIcon className="w-5 h-5" />
+          <ArrowRightIcon className="w-5 h-5 text-white" />
         </button>
       </div>
     </div>

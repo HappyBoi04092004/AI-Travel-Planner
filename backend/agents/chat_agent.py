@@ -6,9 +6,10 @@ import re
 from google import genai
 from google.genai import types
 
+from agents.model_manager import get_gemini_client, get_configured_models
+
 def _get_client():
-    api_key = os.getenv('GEMINI_API_KEY', '').strip()
-    return genai.Client(api_key=api_key) if api_key else None
+    return get_gemini_client()
 
 
 # Local Vietnam Knowledge Base for Smart Fallback
@@ -408,8 +409,8 @@ Trả về DUY NHẤT một chuỗi JSON hợp lệ (không chứa markdown back
   ]
 }}"""
 
-    # Model fallback list: prioritize gemini-2.5-flash, then 2.0, then 1.5
-    models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash']
+    # Dynamic Multi-Model Fallback & Rotation sequence
+    models_to_try = get_configured_models()
 
     for model_name in models_to_try:
         try:

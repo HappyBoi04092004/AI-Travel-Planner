@@ -162,10 +162,19 @@ export default function Step4Transportation() {
                         key={opt.id}
                         type="button"
                         onClick={() => updateSegmentMode(index, opt.id)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${
+                        style={
                           segment.selectedMode === opt.id
-                            ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
-                            : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-400'
+                            ? {
+                                backgroundColor: '#db2777',
+                                backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                                color: '#ffffff'
+                              }
+                            : {}
+                        }
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all cursor-pointer ${
+                          segment.selectedMode === opt.id
+                            ? 'text-white shadow-xs'
+                            : 'bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-400'
                         }`}
                       >
                         <span>{opt.icon}</span>
@@ -285,10 +294,15 @@ export default function Step4Transportation() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white transition-all shadow-lg shadow-rose-600/35 cursor-pointer"
+          style={{
+            backgroundColor: '#db2777',
+            backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+            color: '#ffffff'
+          }}
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-black text-white transition-all shadow-lg shadow-pink-900/35 hover:shadow-xl hover:scale-[1.02] cursor-pointer"
         >
           <span>Tiếp tục: Bản đồ tiện ích & Nhà thuốc gần nhất</span>
-          <ArrowRightIcon className="w-5 h-5" />
+          <ArrowRightIcon className="w-5 h-5 text-white" />
         </button>
       </div>
     </div>

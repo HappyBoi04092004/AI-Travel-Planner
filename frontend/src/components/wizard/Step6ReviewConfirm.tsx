@@ -355,11 +355,16 @@ export default function Step6ReviewConfirm() {
           type="button"
           disabled={isGeneratingItinerary}
           onClick={handleGenerateItinerary}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-4 rounded-xl text-base font-extrabold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white shadow-xl shadow-rose-600/35 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer"
+          style={{
+            backgroundColor: '#db2777',
+            backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+            color: '#ffffff'
+          }}
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-4 rounded-xl text-base font-black text-white shadow-xl shadow-pink-900/35 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer"
         >
           {isGeneratingItinerary ? (
             <>
-              <ArrowPathIcon className="w-5 h-5 animate-spin" />
+              <ArrowPathIcon className="w-5 h-5 animate-spin text-white" />
               <span>Đang phân tích & tạo lịch trình chi tiết...</span>
             </>
           ) : (

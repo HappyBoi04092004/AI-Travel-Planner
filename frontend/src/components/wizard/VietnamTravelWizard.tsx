@@ -26,22 +26,28 @@ function WizardContent() {
   return (
     <div className="min-h-screen bg-gray-50/50 dark:bg-gray-950 flex flex-col justify-between">
       {/* Top Header Navbar */}
-      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/80 dark:border-gray-800/80 sticky top-0 z-40">
+      <header className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-rose-600 via-pink-600 to-rose-700 shadow-md shadow-rose-600/35 group-hover:scale-105 transition-transform flex-shrink-0">
+              <div
+                style={{
+                  backgroundColor: '#db2777',
+                  backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)'
+                }}
+                className="relative w-11 h-11 rounded-full p-[2.5px] shadow-md shadow-pink-900/30 group-hover:scale-105 transition-transform flex-shrink-0"
+              >
                 <img
                   src="/logo.jpg"
                   alt="Logo AI Vietnam Travel Planner"
-                  className="w-full h-full object-cover object-top rounded-full"
+                  className="w-full h-full object-cover object-top rounded-full bg-slate-900"
                 />
               </div>
               <div>
-                <span className="text-base font-extrabold tracking-tight text-gray-900 dark:text-white block leading-tight">
+                <span className="text-base font-black tracking-tight text-slate-900 dark:text-white block leading-tight">
                   AI Vietnam Travel Planner
                 </span>
-                <span className="text-[10.5px] text-rose-600 dark:text-rose-400 font-extrabold uppercase tracking-wider block">
+                <span className="text-[10.5px] text-rose-700 dark:text-rose-400 font-black uppercase tracking-wider block">
                   Trợ lý lập kế hoạch du lịch Việt Nam
                 </span>
               </div>
@@ -51,7 +57,7 @@ function WizardContent() {
           <div className="flex items-center gap-2.5 sm:gap-3">
             <Link
               href="/saved-trips"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-rose-700 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               <BookmarkIcon className="w-4 h-4 text-rose-600" />
               <span>Chuyến đi đã lưu</span>

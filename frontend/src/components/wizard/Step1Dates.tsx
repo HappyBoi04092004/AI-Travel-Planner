@@ -157,10 +157,19 @@ export default function Step1Dates() {
                 key={p.days}
                 type="button"
                 onClick={() => applyPreset(p.days)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                style={
                   totalDays === p.days
-                    ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white border-pink-500 shadow-sm'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-pink-400'
+                    ? {
+                        backgroundColor: '#db2777',
+                        backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                        color: '#ffffff'
+                      }
+                    : {}
+                }
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold border transition-colors ${
+                  totalDays === p.days
+                    ? 'text-white border-pink-600 shadow-sm'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-pink-400 cursor-pointer'
                 }`}
               >
                 {p.label}
@@ -223,14 +232,22 @@ export default function Step1Dates() {
                 key={p.id}
                 type="button"
                 onClick={() => setTripPace(p.id as any)}
-                className={`p-3 rounded-xl border text-center transition-all ${
+                style={
                   tripPace === p.id
-                    ? 'border-pink-500 bg-pink-50/70 dark:bg-pink-950/40 text-pink-900 dark:text-pink-200 font-semibold shadow-xs'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 text-gray-600 dark:text-gray-400'
+                    ? {
+                        borderColor: '#db2777',
+                        backgroundColor: '#fdf2f8'
+                      }
+                    : {}
+                }
+                className={`p-3 rounded-xl border-2 text-center transition-all cursor-pointer ${
+                  tripPace === p.id
+                    ? 'text-pink-950 font-black shadow-xs'
+                    : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 text-slate-700 dark:text-slate-300'
                 }`}
               >
-                <div className="text-xs font-bold">{p.title}</div>
-                <div className="text-[11px] opacity-75 mt-0.5">{p.desc}</div>
+                <div className="text-xs font-black">{p.title}</div>
+                <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-0.5">{p.desc}</div>
               </button>
             ))}
           </div>
@@ -239,31 +256,31 @@ export default function Step1Dates() {
 
       {/* Summary Card & Weather Notification */}
       {startDate && returnDate && totalDays > 0 && (
-        <div className="p-6 rounded-2xl bg-gradient-to-r from-pink-500/15 via-rose-500/10 to-pink-50/30 dark:to-gray-900 border border-pink-500/25">
+        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border-2 border-rose-300 dark:border-rose-800 shadow-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <div className="flex items-center gap-2 text-pink-700 dark:text-pink-400 font-semibold text-sm">
-                <CheckCircleIcon className="w-5 h-5 text-pink-500" />
+              <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-extrabold text-sm">
+                <CheckCircleIcon className="w-5 h-5 text-rose-600" />
                 <span>Thời gian chuyến đi đã chọn:</span>
               </div>
-              <p className="text-lg font-bold text-gray-900 dark:text-white" suppressHydrationWarning>
+              <p className="text-lg font-black text-slate-950 dark:text-white" suppressHydrationWarning>
                 {formatVietnameseDate(startDate)} → {formatVietnameseDate(returnDate)} ({totalDays} ngày {totalDays - 1} đêm)
               </p>
-              <div className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1.5 pt-1">
-                <ClockIcon className="w-4 h-4 text-pink-600" />
-                <span>Xuất phát từ <strong>{originCity || 'Việt Nam'}</strong> • Nhịp độ: <strong>{tripPace === 'relaxed' ? 'Thư thả' : tripPace === 'fast' ? 'Năng động' : 'Cân bằng'}</strong></span>
+              <div className="text-xs text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1.5 pt-1">
+                <ClockIcon className="w-4 h-4 text-rose-600" />
+                <span>Xuất phát từ <strong className="font-bold text-slate-900 dark:text-white">{originCity || 'Việt Nam'}</strong> • Nhịp độ: <strong className="font-bold text-rose-700 dark:text-rose-400">{tripPace === 'relaxed' ? 'Thư thả' : tripPace === 'fast' ? 'Năng động' : 'Cân bằng'}</strong></span>
               </div>
             </div>
 
             {/* Weather status indicator */}
             <div className="text-xs sm:text-right">
               {isWithinWeatherWindow ? (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-pink-100 text-pink-800 dark:bg-pink-900/60 dark:text-pink-200 font-medium">
-                  <SparklesIcon className="w-4 h-4 text-pink-600 dark:text-pink-400" />
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rose-100 text-rose-900 dark:bg-rose-950/70 dark:text-rose-200 font-bold border border-rose-200 dark:border-rose-800">
+                  <SparklesIcon className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                   Dự báo thời tiết chi tiết khả dụng (Open-Meteo)
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200 font-medium">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-900 dark:bg-amber-950/70 dark:text-amber-200 font-bold border border-amber-200 dark:border-amber-800">
                   <InformationCircleIcon className="w-4 h-4 text-amber-600" />
                   Ngày đi xa hơn 16 ngày (khí hậu trung bình)
                 </span>
@@ -279,10 +296,19 @@ export default function Step1Dates() {
           type="button"
           disabled={!canProceedStep1}
           onClick={nextStep}
-          className={`inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-base font-bold transition-all shadow-md ${
+          style={
             canProceedStep1
-              ? 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white hover:shadow-lg hover:shadow-rose-600/35 cursor-pointer'
-              : 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+              ? {
+                  backgroundColor: '#db2777',
+                  backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                  color: '#ffffff'
+                }
+              : {}
+          }
+          className={`inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-base font-black transition-all shadow-lg ${
+            canProceedStep1
+              ? 'text-white shadow-pink-900/35 hover:shadow-xl hover:scale-[1.02] cursor-pointer'
+              : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'
           }`}
         >
           <span>Tiếp tục: Khám phá bản đồ Việt Nam</span>

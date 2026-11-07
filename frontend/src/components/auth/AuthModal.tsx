@@ -157,7 +157,12 @@ export default function AuthModal({ isOpen, onClose, defaultMode = 'signin' }: A
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-rose-600/35 hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            style={{
+              backgroundColor: '#be123c',
+              backgroundImage: 'linear-gradient(135deg, #be123c 0%, #e11d48 100%)',
+              color: '#ffffff'
+            }}
+            className="w-full text-white font-black py-3 px-6 rounded-xl transition-all shadow-lg shadow-rose-900/35 hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {isLoading ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
           </button>

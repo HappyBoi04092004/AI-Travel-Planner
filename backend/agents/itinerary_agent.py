@@ -6,9 +6,10 @@ import re
 from google import genai
 from google.genai import types
 
+from agents.model_manager import get_gemini_client, get_configured_models
+
 def _get_client():
-    api_key = os.getenv('GEMINI_API_KEY', '').strip()
-    return genai.Client(api_key=api_key) if api_key else None
+    return get_gemini_client()
 
 
 async def itinerary_agent(country: str, locations: str = None, days: int = 3, origin: str = '', additional_details: str = None, detail_level: str = 'standard') -> dict:
@@ -308,23 +309,36 @@ Return ONLY valid JSON with keys 'day1', 'day2', etc. Example:
     if not client:
         return {'error': 'GEMINI_API_KEY is not configured. Please add GEMINI_API_KEY to your .env file.'}
 
-    try:
-        response = await asyncio.wait_for(
-            client.aio.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=0.7,
-                    max_output_tokens=max_tokens,
-                    thinking_config=types.ThinkingConfig(thinking_budget=0),
+    models_to_try = get_configured_models()
+    text = None
+    last_err = None
+
+    for model_name in models_to_try:
+        try:
+            print(f"Generating itinerary using model '{model_name}'...")
+            response = await asyncio.wait_for(
+                client.aio.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.7,
+                        max_output_tokens=max_tokens,
+                        thinking_config=types.ThinkingConfig(thinking_budget=0),
+                    ),
                 ),
-            ),
-            timeout=90.0
-        )
-    except asyncio.TimeoutError:
-        print("WARNING: Gemini itinerary request timed out after 90s")
-        return {'error': 'Itinerary generation timed out. Please try again.'}
-    text = response.text
+                timeout=75.0
+            )
+            if response and response.text:
+                text = response.text
+                print(f"✓ Itinerary generated successfully with model '{model_name}'")
+                break
+        except Exception as e:
+            print(f"⚠️ Model '{model_name}' failed for itinerary: {e}. Rotating to next...")
+            last_err = str(e)
+            continue
+
+    if not text:
+        return {'error': f'All Gemini models failed. Last error: {last_err}'}
 
     # Remove markdown code blocks if present
     text = re.sub(r'```json\n?', '', text)

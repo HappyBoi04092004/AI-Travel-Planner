@@ -149,9 +149,14 @@ export default function Step2VietnamMap() {
           <button
             type="button"
             onClick={() => setIsFullscreen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xs shadow-md transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
+            style={{
+              backgroundColor: '#db2777',
+              backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+              color: '#ffffff'
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white font-extrabold text-xs shadow-md shadow-pink-900/25 transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
           >
-            <ArrowsPointingOutIcon className="w-4 h-4" />
+            <ArrowsPointingOutIcon className="w-4 h-4 text-white" />
             <span>Phóng to Toàn Màn hình</span>
           </button>
         </div>
@@ -183,10 +188,19 @@ export default function Step2VietnamMap() {
               key={r.id}
               type="button"
               onClick={() => setSelectedRegion(r.id as any)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              style={
                 selectedRegion === r.id
-                  ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  ? {
+                      backgroundColor: '#db2777',
+                      backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                      color: '#ffffff'
+                    }
+                  : {}
+              }
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                selectedRegion === r.id
+                  ? 'text-white shadow-xs'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}
             >
               {r.label}
@@ -683,21 +697,30 @@ export default function Step2VietnamMap() {
         </button>
 
         <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-500 hidden sm:inline">
-            Đã chọn {selectedDestinations.length} điểm đến
+          <span className="text-xs font-bold text-slate-700 dark:text-slate-300 hidden sm:inline">
+            Đã chọn <strong className="text-rose-700 dark:text-rose-400 font-black">{selectedDestinations.length}</strong> điểm đến
           </span>
           <button
             type="button"
             onClick={nextStep}
             disabled={!canProceedStep2}
-            className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all ${
+            style={
               canProceedStep2
-                ? 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white cursor-pointer shadow-rose-600/35'
-                : 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                ? {
+                    backgroundColor: '#db2777',
+                    backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+                    color: '#ffffff'
+                  }
+                : {}
+            }
+            className={`flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-black shadow-lg transition-all ${
+              canProceedStep2
+                ? 'text-white shadow-pink-900/35 hover:shadow-xl hover:scale-[1.02] cursor-pointer'
+                : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'
             }`}
           >
             <span>Bước 3: Khám phá ẩm thực & văn hóa</span>
-            <ArrowRightIcon className="w-4 h-4" />
+            <ArrowRightIcon className="w-4 h-4 text-white" />
           </button>
         </div>
       </div>

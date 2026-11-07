@@ -37,7 +37,12 @@ export default function UserMenu() {
               setAuthMode('signup');
               setShowAuthModal(true);
             }}
-            className="px-3.5 sm:px-4 py-1.5 text-xs font-bold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white rounded-xl shadow-md shadow-rose-600/30 transition-all cursor-pointer"
+            style={{
+              backgroundColor: '#db2777',
+              backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+              color: '#ffffff'
+            }}
+            className="px-4 py-1.5 text-xs font-black text-white rounded-xl shadow-md shadow-pink-900/25 hover:shadow-lg transition-all cursor-pointer"
           >
             Sign Up
           </button>
@@ -65,7 +70,14 @@ export default function UserMenu() {
             className="w-8 h-8 rounded-full ring-2 ring-rose-600/40"
           />
         ) : (
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 flex items-center justify-center text-white font-bold text-sm shadow-xs shadow-rose-600/25">
+          <div
+            style={{
+              backgroundColor: '#be123c',
+              backgroundImage: 'linear-gradient(135deg, #be123c 0%, #e11d48 100%)',
+              color: '#ffffff'
+            }}
+            className="w-8 h-8 rounded-full flex items-center justify-center text-white font-black text-sm shadow-xs shadow-rose-900/30"
+          >
             {user.username.charAt(0).toUpperCase()}
           </div>
         )}

@@ -57,7 +57,7 @@ export default function WizardAIChatbot() {
     goToStep
   } = useTripWizard();
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -387,7 +387,7 @@ export default function WizardAIChatbot() {
 
   return (
     <div
-      className={`fixed right-3 sm:right-5 bottom-3 sm:bottom-5 z-40 transition-all duration-300 flex flex-col ${
+      className={`fixed right-3 sm:right-5 bottom-3 sm:bottom-5 z-50 transition-all duration-300 flex flex-col ${
         isOpen
           ? isMinimized
             ? 'w-80 h-14'
@@ -407,70 +407,82 @@ export default function WizardAIChatbot() {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold shadow-xl shadow-rose-600/35 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border border-white/25"
+          style={{
+            backgroundColor: '#db2777',
+            backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+            color: '#ffffff'
+          }}
+          className="flex items-center gap-2.5 px-5 py-3 rounded-full text-white font-extrabold shadow-xl shadow-pink-900/35 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white/50"
           title="Mở Trợ lý AI Du lịch Việt Nam"
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/80 flex-shrink-0 shadow-xs">
+          <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/90 flex-shrink-0 shadow-xs bg-rose-950">
             <img
               src="/logo.jpg"
               alt="Avatar Trợ lý AI"
               className="w-full h-full object-cover object-top rounded-full"
             />
           </div>
-          <span className="text-sm">Hỏi Trợ lý AI Du lịch</span>
+          <span className="text-sm tracking-wide drop-shadow-xs font-black">Hỏi Trợ lý AI Du lịch</span>
         </button>
       ) : (
-        <div className="flex flex-col h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
-          {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 text-white flex-shrink-0 shadow-md">
+        <div className="flex flex-col h-full bg-white dark:bg-slate-900 border-2 border-pink-300 dark:border-pink-800 rounded-2xl shadow-2xl overflow-hidden">
+          {/* Header - High Contrast Bold Deep Hot Pink */}
+          <div
+            style={{
+              backgroundColor: '#db2777',
+              backgroundImage: 'linear-gradient(135deg, #be123c 0%, #db2777 50%, #e11d48 100%)',
+              color: '#ffffff'
+            }}
+            className="flex items-center justify-between px-4 py-3.5 text-white flex-shrink-0 shadow-md border-b border-pink-900"
+          >
             <div className="flex items-center gap-2.5">
-              <div className="relative w-9 h-9 rounded-full ring-2 ring-white/80 shadow-xs flex-shrink-0 overflow-hidden">
+              <div className="relative w-9 h-9 rounded-full ring-2 ring-white/90 shadow-sm flex-shrink-0 overflow-hidden bg-rose-950">
                 <img
                   src="/logo.jpg"
                   alt="Logo Trợ lý AI"
                   className="w-full h-full object-cover object-top rounded-full"
                 />
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-rose-600" />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-rose-900" />
               </div>
               <div>
-                <h4 className="text-sm font-extrabold leading-tight flex items-center gap-1.5">
+                <h4 className="text-sm font-black leading-tight text-white drop-shadow-sm flex items-center gap-1.5">
                   <span>Trợ lý AI Du lịch Việt Nam</span>
                 </h4>
-                <div className="text-[10.5px] text-pink-100 flex items-center gap-1 font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-200 animate-pulse" />
+                <div className="text-[11px] text-rose-100 flex items-center gap-1 font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                   <span>Trực tuyến • Am hiểu 34 tỉnh thành</span>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-0.5">
+            <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={handleClearChat}
-                className="p-1.5 hover:bg-white/20 rounded-lg transition-colors text-white"
+                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white"
                 title="Làm mới cuộc trò chuyện"
               >
-                <TrashIcon className="w-4 h-4" />
+                <TrashIcon className="w-4 h-4 text-white" />
               </button>
               <button
                 type="button"
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="p-1.5 hover:bg-white/20 rounded-lg transition-colors text-white"
+                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white"
                 title={isMinimized ? 'Mở rộng' : 'Thu nhỏ'}
               >
                 {isMinimized ? (
-                  <ArrowsPointingOutIcon className="w-4 h-4" />
+                  <ArrowsPointingOutIcon className="w-4 h-4 text-white" />
                 ) : (
-                  <ArrowsPointingInIcon className="w-4 h-4" />
+                  <ArrowsPointingInIcon className="w-4 h-4 text-white" />
                 )}
               </button>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 hover:bg-white/20 rounded-lg transition-colors text-white"
+                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white"
                 title="Đóng chatbox"
               >
-                <XMarkIcon className="w-4 h-4" />
+                <XMarkIcon className="w-4 h-4 text-white" />
               </button>
             </div>
           </div>
@@ -488,10 +500,19 @@ export default function WizardAIChatbot() {
                       className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
                     >
                       <div
-                        className={`group relative max-w-[90%] p-3.5 rounded-2xl leading-relaxed ${
+                        style={
                           isUser
-                            ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white rounded-br-xs shadow-xs'
-                            : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/80 text-gray-800 dark:text-gray-100 rounded-bl-xs shadow-xs'
+                            ? {
+                                backgroundColor: '#db2777',
+                                backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 100%)',
+                                color: '#ffffff'
+                              }
+                            : {}
+                        }
+                        className={`group relative max-w-[90%] p-3.5 rounded-2xl leading-relaxed text-xs ${
+                          isUser
+                            ? 'text-white font-medium rounded-br-xs shadow-md'
+                            : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-bl-xs shadow-sm'
                         }`}
                       >
                         {/* Copy button for assistant message */}
@@ -499,11 +520,11 @@ export default function WizardAIChatbot() {
                           <button
                             type="button"
                             onClick={() => handleCopyMessage(msg.id, msg.content)}
-                            className="absolute top-2 right-2 p-1 rounded-md bg-gray-100 dark:bg-gray-700/70 text-gray-500 dark:text-gray-300 hover:text-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute top-2 right-2 p-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-rose-600 opacity-0 group-hover:opacity-100 transition-opacity"
                             title="Sao chép nội dung"
                           >
                             {copiedMsgId === msg.id ? (
-                              <ClipboardDocumentCheckIcon className="w-3.5 h-3.5 text-pink-600" />
+                              <ClipboardDocumentCheckIcon className="w-3.5 h-3.5 text-rose-600" />
                             ) : (
                               <ClipboardDocumentIcon className="w-3.5 h-3.5" />
                             )}
@@ -518,7 +539,7 @@ export default function WizardAIChatbot() {
                             const boldFormatted = line.split(/(\*\*.*?\*\*)/g).map((part, pIdx) => {
                               if (part.startsWith('**') && part.endsWith('**')) {
                                 return (
-                                  <strong key={pIdx} className="font-extrabold">
+                                  <strong key={pIdx} className="font-black text-slate-950 dark:text-white">
                                     {part.slice(2, -2)}
                                   </strong>
                                 );
@@ -536,7 +557,7 @@ export default function WizardAIChatbot() {
 
                         {/* Interactive Smart Action Buttons */}
                         {msg.actions && msg.actions.length > 0 && (
-                          <div className="mt-3 pt-2.5 border-t border-gray-100 dark:border-gray-700/80 flex flex-wrap gap-1.5">
+                          <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-700 flex flex-wrap gap-1.5">
                             {msg.actions.map((act, actIdx) => {
                               const actionKey = `${msg.id}_${act.type}_${actIdx}`;
                               const isApplied = appliedActionKeys.includes(actionKey);
@@ -544,9 +565,9 @@ export default function WizardAIChatbot() {
                               return isApplied ? (
                                 <div
                                   key={actionKey}
-                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-pink-100 dark:bg-pink-950/80 text-pink-700 dark:text-pink-300 font-bold text-[10.5px]"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-200 font-extrabold text-[11px]"
                                 >
-                                  <CheckIcon className="w-3.5 h-3.5 text-pink-600" />
+                                  <CheckIcon className="w-3.5 h-3.5 text-rose-600" />
                                   <span>Đã áp dụng</span>
                                 </div>
                               ) : (
@@ -554,9 +575,9 @@ export default function WizardAIChatbot() {
                                   key={actionKey}
                                   type="button"
                                   onClick={() => handleApplyAction(actionKey, act)}
-                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pink-50 hover:bg-pink-100 dark:bg-pink-950/80 dark:hover:bg-pink-900 border border-pink-300 dark:border-pink-700 text-pink-800 dark:text-pink-200 text-[11px] font-bold transition-all shadow-xs cursor-pointer active:scale-95"
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/80 dark:hover:bg-rose-900 border-2 border-rose-400 dark:border-rose-600 text-rose-900 dark:text-rose-100 text-[11px] font-extrabold transition-all shadow-xs cursor-pointer active:scale-95"
                                 >
-                                  <BoltIcon className="w-3.5 h-3.5 text-pink-600 flex-shrink-0" />
+                                  <BoltIcon className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
                                   <span>{act.label || 'Thực hiện ngay'}</span>
                                 </button>
                               );
@@ -566,7 +587,7 @@ export default function WizardAIChatbot() {
                       </div>
 
                       <span
-                        className="text-[10px] text-gray-400 mt-1 px-1 flex items-center gap-1"
+                        className="text-[10px] text-slate-500 font-semibold mt-1 px-1 flex items-center gap-1"
                         suppressHydrationWarning
                       >
                         {isMounted ? msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Vừa xong'}
@@ -576,9 +597,9 @@ export default function WizardAIChatbot() {
                 })}
 
                 {isLoading && (
-                  <div className="flex items-center gap-2.5 p-3.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl max-w-[80%] shadow-xs">
-                    <ArrowPathIcon className="w-4 h-4 text-pink-600 animate-spin flex-shrink-0" />
-                    <span className="text-gray-600 dark:text-gray-300 text-xs font-semibold">
+                  <div className="flex items-center gap-2.5 p-3.5 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl max-w-[85%] shadow-sm">
+                    <ArrowPathIcon className="w-4 h-4 text-rose-600 animate-spin flex-shrink-0" />
+                    <span className="text-slate-800 dark:text-slate-200 text-xs font-bold">
                       AI đang tra cứu dữ liệu địa lý & phân tích...
                     </span>
                   </div>
@@ -587,13 +608,13 @@ export default function WizardAIChatbot() {
               </div>
 
               {/* Dynamic Suggested Prompts */}
-              <div className="p-2 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 flex gap-1.5 overflow-x-auto no-scrollbar">
+              <div className="p-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 flex gap-1.5 overflow-x-auto no-scrollbar">
                 {(messages[messages.length - 1]?.suggestions || samplePrompts).map((promptText, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => handleSendMessage(promptText)}
-                    className="flex-shrink-0 px-2.5 py-1 rounded-full bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 text-[11px] font-bold hover:bg-rose-100 dark:hover:bg-rose-900/80 transition-colors whitespace-nowrap cursor-pointer"
+                    className="flex-shrink-0 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 text-rose-800 dark:text-rose-200 border-2 border-rose-300 dark:border-rose-700 text-[11px] font-bold hover:bg-rose-50 dark:hover:bg-rose-950/50 shadow-xs transition-colors whitespace-nowrap cursor-pointer"
                   >
                     💡 {promptText}
                   </button>
@@ -606,7 +627,7 @@ export default function WizardAIChatbot() {
                   e.preventDefault();
                   handleSendMessage();
                 }}
-                className="p-2.5 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 flex items-center gap-1.5"
+                className="p-2.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-1.5"
               >
                 {/* Voice Input Button */}
                 <button
@@ -614,8 +635,8 @@ export default function WizardAIChatbot() {
                   onClick={handleToggleVoiceInput}
                   className={`p-2.5 rounded-xl transition-all cursor-pointer ${
                     isListening
-                      ? 'bg-rose-600 text-white animate-pulse ring-4 ring-rose-400/30'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50'
+                      ? 'bg-rose-600 text-white animate-pulse ring-4 ring-rose-400/40'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-rose-700 hover:bg-rose-50 border border-slate-200 dark:border-slate-700'
                   }`}
                   title={isListening ? 'Đang nghe... Bấm để dừng' : 'Nói để nhập tin nhắn tiếng Việt'}
                 >
@@ -631,16 +652,21 @@ export default function WizardAIChatbot() {
                       ? 'Đang lắng nghe giọng nói của bạn...'
                       : 'Hỏi về thời tiết, ẩm thực, nhà thuốc, đổi xe...'
                   }
-                  className="flex-1 px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500"
+                  className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
 
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="p-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white hover:from-rose-700 hover:to-pink-700 disabled:opacity-40 transition-colors shadow-md shadow-rose-600/30 cursor-pointer"
+                  style={{
+                    backgroundColor: '#db2777',
+                    backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 100%)',
+                    color: '#ffffff'
+                  }}
+                  className="p-2.5 rounded-xl text-white hover:opacity-90 disabled:opacity-40 transition-all shadow-md shadow-pink-900/30 cursor-pointer"
                   title="Gửi câu hỏi"
                 >
-                  <PaperAirplaneIcon className="w-4 h-4" />
+                  <PaperAirplaneIcon className="w-4 h-4 text-white" />
                 </button>
               </form>
             </>
