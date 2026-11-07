@@ -85,7 +85,7 @@ export default function BookingsCard({ bookings, origin, destination, startDate,
                   href={buildHotelUrl(h.link, h.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-all shadow-sm shadow-pink-500/20 ml-4"
+                  className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-all shadow-sm shadow-rose-600/30 ml-4"
                 >
                   Search Hotels →
                 </a>
@@ -118,7 +118,7 @@ export default function BookingsCard({ bookings, origin, destination, startDate,
                   href={buildFlightUrl(f.link, f.airline || 'Google Flights')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-all shadow-sm shadow-pink-500/20 ml-4"
+                  className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-all shadow-sm shadow-rose-600/30 ml-4"
                 >
                   Search Flights →
                 </a>

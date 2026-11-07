@@ -407,27 +407,37 @@ export default function WizardAIChatbot() {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold shadow-xl shadow-pink-500/30 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border border-white/20"
+          className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold shadow-xl shadow-rose-600/35 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border border-white/25"
           title="Mở Trợ lý AI Du lịch Việt Nam"
         >
-          <div className="w-2.5 h-2.5 rounded-full bg-pink-300 animate-pulse" />
-          <SparklesIcon className="w-5 h-5 text-white" />
+          <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/80 flex-shrink-0 shadow-xs">
+            <img
+              src="/logo.jpg"
+              alt="Avatar Trợ lý AI"
+              className="w-full h-full object-cover object-top rounded-full"
+            />
+          </div>
           <span className="text-sm">Hỏi Trợ lý AI Du lịch</span>
         </button>
       ) : (
         <div className="flex flex-col h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white flex-shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 text-white flex-shrink-0 shadow-md">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center shadow-xs">
-                <SparklesIcon className="w-5 h-5 text-white" />
+              <div className="relative w-9 h-9 rounded-full ring-2 ring-white/80 shadow-xs flex-shrink-0 overflow-hidden">
+                <img
+                  src="/logo.jpg"
+                  alt="Logo Trợ lý AI"
+                  className="w-full h-full object-cover object-top rounded-full"
+                />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-rose-600" />
               </div>
               <div>
                 <h4 className="text-sm font-extrabold leading-tight flex items-center gap-1.5">
                   <span>Trợ lý AI Du lịch Việt Nam</span>
                 </h4>
-                <div className="text-[10.5px] text-pink-100 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-pink-300 animate-pulse" />
+                <div className="text-[10.5px] text-pink-100 flex items-center gap-1 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-200 animate-pulse" />
                   <span>Trực tuyến • Am hiểu 34 tỉnh thành</span>
                 </div>
               </div>
@@ -480,7 +490,7 @@ export default function WizardAIChatbot() {
                       <div
                         className={`group relative max-w-[90%] p-3.5 rounded-2xl leading-relaxed ${
                           isUser
-                            ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-br-xs shadow-xs'
+                            ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white rounded-br-xs shadow-xs'
                             : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700/80 text-gray-800 dark:text-gray-100 rounded-bl-xs shadow-xs'
                         }`}
                       >
@@ -583,7 +593,7 @@ export default function WizardAIChatbot() {
                     key={i}
                     type="button"
                     onClick={() => handleSendMessage(promptText)}
-                    className="flex-shrink-0 px-2.5 py-1 rounded-full bg-pink-50 dark:bg-pink-950/60 text-pink-700 dark:text-pink-300 border border-pink-200 dark:border-pink-800 text-[11px] font-semibold hover:bg-pink-100 dark:hover:bg-pink-900 transition-colors whitespace-nowrap"
+                    className="flex-shrink-0 px-2.5 py-1 rounded-full bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 text-[11px] font-bold hover:bg-rose-100 dark:hover:bg-rose-900/80 transition-colors whitespace-nowrap cursor-pointer"
                   >
                     💡 {promptText}
                   </button>
@@ -605,7 +615,7 @@ export default function WizardAIChatbot() {
                   className={`p-2.5 rounded-xl transition-all cursor-pointer ${
                     isListening
                       ? 'bg-rose-600 text-white animate-pulse ring-4 ring-rose-400/30'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50'
                   }`}
                   title={isListening ? 'Đang nghe... Bấm để dừng' : 'Nói để nhập tin nhắn tiếng Việt'}
                 >
@@ -621,13 +631,13 @@ export default function WizardAIChatbot() {
                       ? 'Đang lắng nghe giọng nói của bạn...'
                       : 'Hỏi về thời tiết, ẩm thực, nhà thuốc, đổi xe...'
                   }
-                  className="flex-1 px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="flex-1 px-3.5 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500"
                 />
 
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="p-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 text-white hover:from-pink-600 hover:to-rose-700 disabled:opacity-40 transition-colors shadow-pink-500/20 cursor-pointer"
+                  className="p-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white hover:from-rose-700 hover:to-pink-700 disabled:opacity-40 transition-colors shadow-md shadow-rose-600/30 cursor-pointer"
                   title="Gửi câu hỏi"
                 >
                   <PaperAirplaneIcon className="w-4 h-4" />

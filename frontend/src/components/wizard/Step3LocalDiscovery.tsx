@@ -94,8 +94,8 @@ export default function Step3LocalDiscovery() {
               onClick={() => setActiveDestId(dest.id)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 activeDestId === dest.id
-                  ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-sm'
-                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-pink-500'
+                  ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm shadow-rose-600/30'
+                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-rose-500'
               }`}
             >
               {dest.name} ({dest.regionName})
@@ -118,9 +118,9 @@ export default function Step3LocalDiscovery() {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all ${
+              className={`flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-extrabold border-b-2 transition-all ${
                 isActive
-                  ? 'border-pink-600 text-pink-600 dark:text-pink-400'
+                  ? 'border-rose-600 text-rose-600 dark:text-rose-400'
                   : 'border-transparent text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
               }`}
             >
@@ -189,7 +189,7 @@ export default function Step3LocalDiscovery() {
                       className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                         isSelected
                           ? 'bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-300 dark:border-pink-700'
-                          : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-xs shadow-pink-500/25'
+                          : 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white shadow-xs shadow-rose-600/30'
                       }`}
                     >
                       {isSelected ? (
@@ -270,7 +270,7 @@ export default function Step3LocalDiscovery() {
                       className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                         isSelected
                           ? 'bg-rose-50 text-rose-800 dark:bg-rose-950/60 dark:text-rose-200 border border-rose-300 dark:border-rose-700'
-                          : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-xs shadow-pink-500/25'
+                          : 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white shadow-xs shadow-rose-600/30'
                       }`}
                     >
                       {isSelected ? (
@@ -362,7 +362,7 @@ export default function Step3LocalDiscovery() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white transition-all shadow-md shadow-pink-500/25 cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white transition-all shadow-lg shadow-rose-600/35 cursor-pointer"
         >
           <span>Tiếp tục: Chọn phương tiện di chuyển</span>
           <ArrowRightIcon className="w-5 h-5" />

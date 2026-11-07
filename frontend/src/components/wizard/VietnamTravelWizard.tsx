@@ -29,15 +29,19 @@ function WizardContent() {
       <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/80 dark:border-gray-800/80 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-md shadow-pink-500/20 group-hover:scale-105 transition-transform">
-                <SparklesIcon className="w-6 h-6 text-white" />
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-rose-600 via-pink-600 to-rose-700 shadow-md shadow-rose-600/35 group-hover:scale-105 transition-transform flex-shrink-0">
+                <img
+                  src="/logo.jpg"
+                  alt="Logo AI Vietnam Travel Planner"
+                  className="w-full h-full object-cover object-top rounded-full"
+                />
               </div>
               <div>
                 <span className="text-base font-extrabold tracking-tight text-gray-900 dark:text-white block leading-tight">
                   AI Vietnam Travel Planner
                 </span>
-                <span className="text-[10px] text-pink-600 dark:text-pink-400 font-semibold uppercase tracking-wider block">
+                <span className="text-[10.5px] text-rose-600 dark:text-rose-400 font-extrabold uppercase tracking-wider block">
                   Trợ lý lập kế hoạch du lịch Việt Nam
                 </span>
               </div>
@@ -47,9 +51,9 @@ function WizardContent() {
           <div className="flex items-center gap-2.5 sm:gap-3">
             <Link
               href="/saved-trips"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-950/40 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
             >
-              <BookmarkIcon className="w-4 h-4 text-pink-600" />
+              <BookmarkIcon className="w-4 h-4 text-rose-600" />
               <span>Chuyến đi đã lưu</span>
             </Link>
             <ThemeToggle />

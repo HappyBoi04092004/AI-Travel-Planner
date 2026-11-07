@@ -23,14 +23,14 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-950/40 border border-transparent hover:border-pink-200 dark:hover:border-pink-900 transition-all cursor-pointer group"
+      className="p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 border border-transparent hover:border-rose-200 dark:hover:border-rose-900 transition-all cursor-pointer group"
       aria-label="Toggle theme"
       title={theme === 'dark' ? 'Chuyển sang chế độ Sáng' : 'Chuyển sang chế độ Tối'}
     >
       {theme === 'dark' ? (
         <SunIcon className="w-5 h-5 text-amber-500 group-hover:rotate-90 transition-transform duration-500" />
       ) : (
-        <MoonIcon className="w-5 h-5 text-pink-600 dark:text-pink-400 group-hover:-rotate-12 transition-transform duration-500" />
+        <MoonIcon className="w-5 h-5 text-rose-600 dark:text-rose-400 group-hover:-rotate-12 transition-transform duration-500" />
       )}
     </button>
   );

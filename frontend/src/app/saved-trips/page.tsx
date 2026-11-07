@@ -167,7 +167,7 @@ export default function SavedTripsPage() {
 
             <button
               onClick={() => router.push('/')}
-              className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-xl shadow-md shadow-pink-500/25 transition-all hover:scale-[1.02] cursor-pointer"
+              className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white rounded-xl shadow-md shadow-rose-600/35 transition-all hover:scale-[1.02] cursor-pointer"
             >
               <PlusIcon className="w-5 h-5" />
               <span className="font-semibold">Plan New Trip</span>
@@ -196,7 +196,7 @@ export default function SavedTripsPage() {
             </p>
             <button
               onClick={() => router.push('/')}
-              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-xl shadow-md shadow-pink-500/25 transition-all font-semibold cursor-pointer"
+              className="px-6 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white rounded-xl shadow-md shadow-rose-600/35 transition-all font-semibold cursor-pointer"
             >
               Plan Your First Trip
             </button>

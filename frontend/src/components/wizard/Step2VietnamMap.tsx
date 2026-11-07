@@ -149,7 +149,7 @@ export default function Step2VietnamMap() {
           <button
             type="button"
             onClick={() => setIsFullscreen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold text-xs shadow-md transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-xs shadow-md transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
           >
             <ArrowsPointingOutIcon className="w-4 h-4" />
             <span>Phóng to Toàn Màn hình</span>
@@ -185,7 +185,7 @@ export default function Step2VietnamMap() {
               onClick={() => setSelectedRegion(r.id as any)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 selectedRegion === r.id
-                  ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
@@ -228,7 +228,7 @@ export default function Step2VietnamMap() {
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="w-5 h-5 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 text-white flex items-center justify-center text-[10px] font-bold">
+                      <span className="w-5 h-5 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
                         {idx + 1}
                       </span>
                       <div>
@@ -274,7 +274,7 @@ export default function Step2VietnamMap() {
               <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between text-white">
                 <div>
                   <div className="flex items-center gap-1.5 mb-1">
-                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-gradient-to-r from-pink-500 to-rose-600">
+                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-gradient-to-r from-rose-600 to-pink-600">
                       {activeDestination.regionName}
                     </span>
                     <span className="text-[10px] px-2 py-0.5 rounded-md bg-white/20 backdrop-blur-md">
@@ -291,7 +291,7 @@ export default function Step2VietnamMap() {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm ${
                     selectedDestinations.some(d => d.id === activeDestination.id)
                       ? 'bg-rose-500 hover:bg-rose-600 text-white'
-                      : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white'
+                      : 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white'
                   }`}
                 >
                   {selectedDestinations.some(d => d.id === activeDestination.id) ? (
@@ -571,7 +571,7 @@ export default function Step2VietnamMap() {
                   onClick={() => setSelectedRegion(r.id as any)}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
                     selectedRegion === r.id
-                      ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
+                      ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
                   }`}
                 >
@@ -618,7 +618,7 @@ export default function Step2VietnamMap() {
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xs ${
                   selectedDestinations.some(d => d.id === activeDestination.id)
                     ? 'bg-rose-500 hover:bg-rose-600 text-white'
-                    : 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-pink-500/25'
+                    : 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white shadow-rose-600/35'
                 }`}
               >
                 {selectedDestinations.some(d => d.id === activeDestination.id) ? 'Bỏ chọn' : '+ Chọn tỉnh này'}
@@ -692,7 +692,7 @@ export default function Step2VietnamMap() {
             disabled={!canProceedStep2}
             className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all ${
               canProceedStep2
-                ? 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white cursor-pointer shadow-pink-500/25'
+                ? 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white cursor-pointer shadow-rose-600/35'
                 : 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
             }`}
           >

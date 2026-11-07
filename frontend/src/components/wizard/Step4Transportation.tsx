@@ -164,7 +164,7 @@ export default function Step4Transportation() {
                         onClick={() => updateSegmentMode(index, opt.id)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all ${
                           segment.selectedMode === opt.id
-                            ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
+                            ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
                             : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-400'
                         }`}
                       >
@@ -206,7 +206,7 @@ export default function Step4Transportation() {
                     <div
                       className={`w-6 h-6 rounded-full flex items-center justify-center border transition-all ${
                         isSelected
-                          ? 'bg-gradient-to-r from-pink-500 to-rose-600 border-pink-500 text-white'
+                          ? 'bg-gradient-to-r from-rose-600 to-pink-600 border-rose-600 text-white shadow-xs'
                           : 'border-gray-300 dark:border-gray-600'
                       }`}
                     >
@@ -285,7 +285,7 @@ export default function Step4Transportation() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white transition-all shadow-md shadow-pink-500/25 cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white transition-all shadow-lg shadow-rose-600/35 cursor-pointer"
         >
           <span>Tiếp tục: Bản đồ tiện ích & Nhà thuốc gần nhất</span>
           <ArrowRightIcon className="w-5 h-5" />

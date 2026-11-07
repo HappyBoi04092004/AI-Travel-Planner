@@ -54,7 +54,7 @@ export default function ForgotPasswordPage() {
             </p>
             <button
               onClick={() => router.push('/')}
-              className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md shadow-pink-500/25 transition-all cursor-pointer"
+              className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md shadow-rose-600/35 transition-all cursor-pointer"
             >
               Back to Home
             </button>
@@ -112,7 +112,7 @@ export default function ForgotPasswordPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
+              className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-rose-600/35 hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
             >
               {isLoading ? 'Sending...' : 'Send Reset Link'}
             </button>

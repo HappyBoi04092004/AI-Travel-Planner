@@ -66,7 +66,7 @@ export default function ItineraryCard({ itinerary }: ItineraryCardProps) {
   return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-xs shadow-pink-500/20">
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 flex items-center justify-center text-white shadow-xs shadow-rose-600/30">
           <CalendarIcon className="w-5 h-5 text-white" />
         </div>
         <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">

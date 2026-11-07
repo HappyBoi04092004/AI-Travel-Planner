@@ -129,7 +129,7 @@ export default function TripPage() {
           </p>
           <button
             onClick={() => router.push('/')}
-            className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 hover:scale-105 cursor-pointer"
+            className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-rose-600/35 hover:scale-105 cursor-pointer"
           >
             Plan a Trip
           </button>
@@ -171,7 +171,7 @@ export default function TripPage() {
         <div className="max-w-[1400px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-4 pr-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-xs shadow-pink-500/20">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-rose-600 to-pink-600 flex items-center justify-center text-white shadow-xs shadow-rose-600/30">
                 <MapPinIcon className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -192,7 +192,7 @@ export default function TripPage() {
               )}
               <button
                 onClick={() => setShowSaveModal(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-lg text-sm font-semibold shadow-sm shadow-pink-500/25 transition-all cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white rounded-lg text-sm font-semibold shadow-sm shadow-rose-600/35 transition-all cursor-pointer"
               >
                 <BookmarkIcon className="w-4 h-4" />
                 <span className="hidden sm:inline">Save Trip</span>
@@ -217,7 +217,7 @@ export default function TripPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
                     activeTab === tab.id
-                      ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-sm shadow-pink-500/25 font-bold'
+                      ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm shadow-rose-600/35 font-bold'
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
                 >
@@ -328,7 +328,7 @@ export default function TripPage() {
               <button
                 onClick={handleSaveTrip}
                 disabled={isSaving}
-                className="flex-1 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 disabled:opacity-50 cursor-pointer"
+                className="flex-1 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-rose-600/35 disabled:opacity-50 cursor-pointer"
               >
                 {isSaving ? 'Saving...' : 'Save Trip'}
               </button>

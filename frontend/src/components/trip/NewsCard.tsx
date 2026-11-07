@@ -13,7 +13,7 @@ export default function NewsCard({ news, destination }: NewsCardProps) {
     return (
       <div className="glass-card rounded-2xl p-6 border border-border-subtle shadow-lg">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-xs shadow-pink-500/20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 flex items-center justify-center text-white shadow-xs shadow-rose-600/30">
             <NewspaperIcon className="w-5 h-5 text-white" />
           </div>
           <h3 className="text-xl font-bold text-card-foreground">Latest News</h3>
@@ -28,7 +28,7 @@ export default function NewsCard({ news, destination }: NewsCardProps) {
   return (
     <div className="glass-card rounded-2xl p-6 border border-border-subtle shadow-lg">
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-xs shadow-pink-500/20">
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 flex items-center justify-center text-white shadow-xs shadow-rose-600/30">
           <NewspaperIcon className="w-5 h-5 text-white" />
         </div>
         <h3 className="text-xl font-bold text-card-foreground">Latest News</h3>

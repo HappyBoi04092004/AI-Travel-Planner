@@ -531,7 +531,7 @@ export default function VietnamMapLeaflet({
             onClick={() => switchTileLayer('opentopo')}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
               activeTileType === 'opentopo'
-                ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
+                ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
                 : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
             title="Bản đồ Địa hình 3D (OpenTopoMap - Đường đồng mức & độ cao)"
@@ -545,7 +545,7 @@ export default function VietnamMapLeaflet({
             onClick={() => switchTileLayer('cyclosm')}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
               activeTileType === 'cyclosm'
-                ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
+                ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
                 : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
             title="Địa hình dã ngoại & cảnh quan thiên nhiên"
@@ -559,7 +559,7 @@ export default function VietnamMapLeaflet({
             onClick={() => switchTileLayer('standard')}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
               activeTileType === 'standard'
-                ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
+                ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-xs'
                 : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
             title="Bản đồ đường phố & địa lý chuẩn"
@@ -611,7 +611,7 @@ export default function VietnamMapLeaflet({
           <span className="text-gray-800 dark:text-gray-200 font-bold">6 TP Trực thuộc TW</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 inline-block" />
+          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 inline-block" />
           <span className="text-gray-800 dark:text-gray-200 font-bold">28 Tỉnh sau sáp nhập</span>
         </div>
         <div className="flex items-center gap-2">

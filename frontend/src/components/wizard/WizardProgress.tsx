@@ -57,7 +57,7 @@ export default function WizardProgress() {
                 onClick={() => isAccessible && goToStep(step.number)}
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all flex-shrink-0 text-left ${
                   isCurrent
-                    ? 'bg-pink-50 dark:bg-pink-950/60 text-pink-900 dark:text-pink-200 border border-pink-300 dark:border-pink-700 shadow-xs'
+                    ? 'bg-rose-50 dark:bg-rose-950/70 text-rose-950 dark:text-rose-100 border-2 border-rose-500 dark:border-rose-600 shadow-sm'
                     : isCompleted
                     ? 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer'
                     : isAccessible
@@ -69,9 +69,9 @@ export default function WizardProgress() {
                 <div
                   className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold transition-all ${
                     isCurrent
-                      ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-xs'
+                      ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm shadow-rose-600/30'
                       : isCompleted
-                      ? 'bg-pink-100 dark:bg-pink-900/60 text-pink-700 dark:text-pink-300'
+                      ? 'bg-rose-100 dark:bg-rose-900/70 text-rose-800 dark:text-rose-200'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
                   }`}
                 >

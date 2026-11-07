@@ -16,8 +16,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Travel Planner",
-  description: "Plan your perfect trip with AI-powered recommendations",
+  title: "AI Vietnam Travel Planner",
+  description: "Trợ lý lập kế hoạch du lịch thông minh Việt Nam",
+  icons: {
+    icon: '/logo.jpg',
+    apple: '/logo.jpg',
+  }
 };
 
 const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';

@@ -115,7 +115,7 @@ export default function Step5POIMap() {
               onClick={() => setActiveDestId(dest.id)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 currentDestination.id === dest.id
-                  ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-sm'
+                  ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm'
                   : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-pink-500'
               }`}
             >
@@ -262,7 +262,7 @@ export default function Step5POIMap() {
         <button
           type="button"
           onClick={nextStep}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white transition-all shadow-md shadow-pink-500/25 cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white transition-all shadow-lg shadow-rose-600/35 cursor-pointer"
         >
           <span>Tiếp tục: Xác nhận chuyến đi & Sinh lịch trình</span>
           <ArrowRightIcon className="w-5 h-5" />

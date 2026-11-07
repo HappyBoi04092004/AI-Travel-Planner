@@ -159,7 +159,7 @@ export default function Step1Dates() {
                 onClick={() => applyPreset(p.days)}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                   totalDays === p.days
-                    ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white border-pink-500 shadow-sm'
+                    ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white border-pink-500 shadow-sm'
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-pink-400'
                 }`}
               >
@@ -281,7 +281,7 @@ export default function Step1Dates() {
           onClick={nextStep}
           className={`inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-base font-bold transition-all shadow-md ${
             canProceedStep1
-              ? 'bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white hover:shadow-lg hover:shadow-pink-500/25 cursor-pointer'
+              ? 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white hover:shadow-lg hover:shadow-rose-600/35 cursor-pointer'
               : 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
           }`}
         >

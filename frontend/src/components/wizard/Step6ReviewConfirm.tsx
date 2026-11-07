@@ -330,7 +330,7 @@ export default function Step6ReviewConfirm() {
         </div>
 
         {/* Card 6: Estimated Budget */}
-        <div className="bg-gradient-to-br from-pink-500 via-rose-500 to-rose-600 p-5 rounded-2xl text-white shadow-md shadow-pink-500/20 space-y-3 flex flex-col justify-between">
+        <div className="bg-gradient-to-br from-pink-500 via-rose-500 to-rose-600 p-5 rounded-2xl text-white shadow-md shadow-rose-600/30 space-y-3 flex flex-col justify-between">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-pink-100 flex items-center gap-1.5">
               <CurrencyDollarIcon className="w-4 h-4" />
@@ -355,7 +355,7 @@ export default function Step6ReviewConfirm() {
           type="button"
           disabled={isGeneratingItinerary}
           onClick={handleGenerateItinerary}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-4 rounded-xl text-base font-extrabold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white shadow-xl shadow-pink-500/30 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-4 rounded-xl text-base font-extrabold bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white shadow-xl shadow-rose-600/35 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer"
         >
           {isGeneratingItinerary ? (
             <>
@@ -422,7 +422,7 @@ export default function Step6ReviewConfirm() {
                 >
                   <div className="flex items-center justify-between border-b border-gray-200/60 dark:border-gray-700/60 pb-2.5">
                     <div className="flex items-center gap-2">
-                      <span className="w-7 h-7 rounded-lg bg-gradient-to-r from-pink-500 to-rose-600 text-white flex items-center justify-center font-bold text-xs">
+                      <span className="w-7 h-7 rounded-lg bg-gradient-to-r from-rose-600 to-pink-600 text-white flex items-center justify-center font-bold text-xs shadow-xs shadow-rose-600/30">
                         N{idx + 1}
                       </span>
                       <h4 className="text-base font-bold text-gray-900 dark:text-white">
