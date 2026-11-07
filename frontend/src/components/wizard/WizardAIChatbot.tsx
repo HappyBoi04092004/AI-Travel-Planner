@@ -54,11 +54,11 @@ export default function WizardAIChatbot() {
     toggleAttraction,
     toggleSpecialty,
     setSelectedPOICategory,
-    goToStep
+    goToStep,
+    isMapFullscreen
   } = useTripWizard();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -71,6 +71,13 @@ export default function WizardAIChatbot() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // When opening full map, automatically collapse chatbox to circular logo
+  useEffect(() => {
+    if (isMapFullscreen) {
+      setIsOpen(false);
+    }
+  }, [isMapFullscreen]);
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -99,10 +106,10 @@ export default function WizardAIChatbot() {
   }, []);
 
   useEffect(() => {
-    if (isOpen && !isMinimized) {
+    if (isOpen) {
       scrollToBottom();
     }
-  }, [messages, isOpen, isMinimized, scrollToBottom]);
+  }, [messages, isOpen, scrollToBottom]);
 
   // Dynamic contextual prompt chips tailored to current wizard step & selected places
   const samplePrompts = useMemo(() => {
@@ -387,11 +394,9 @@ export default function WizardAIChatbot() {
 
   return (
     <div
-      className={`fixed right-3 sm:right-5 bottom-3 sm:bottom-5 z-50 transition-all duration-300 flex flex-col ${
+      className={`fixed right-3 sm:right-5 bottom-3 sm:bottom-5 z-[60] transition-all duration-300 flex flex-col ${
         isOpen
-          ? isMinimized
-            ? 'w-80 h-14'
-            : 'w-[calc(100vw-24px)] sm:w-96 md:w-[420px] h-[580px] max-h-[85vh]'
+          ? 'w-[calc(100vw-24px)] sm:w-96 md:w-[420px] h-[580px] max-h-[85vh]'
           : 'w-auto h-auto'
       }`}
     >
@@ -404,26 +409,51 @@ export default function WizardAIChatbot() {
       )}
 
       {!isOpen ? (
-        <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          style={{
-            backgroundColor: '#db2777',
-            backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
-            color: '#ffffff'
-          }}
-          className="flex items-center gap-3 px-5 py-3.5 rounded-full text-white font-black shadow-xl shadow-pink-600/40 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white ring-2 ring-pink-500/50"
-          title="Mở Trợ lý AI Du lịch Việt Nam"
-        >
-          <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white flex-shrink-0 shadow-xs bg-rose-950">
-            <img
-              src="/logo.jpg"
-              alt="Avatar Trợ lý AI"
-              className="w-full h-full object-cover object-top rounded-full"
-            />
-          </div>
-          <span className="text-sm tracking-wide drop-shadow-xs font-black">Hỏi Trợ lý AI Du lịch</span>
-        </button>
+        isMapFullscreen ? (
+          /* Khi mở full bản đồ: Chat box AI chỉ chuyển thành 1 hình tròn logo duy nhất */
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            style={{
+              backgroundColor: '#db2777',
+              backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+              color: '#ffffff'
+            }}
+            className="w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center p-1 text-white shadow-2xl shadow-pink-600/50 hover:scale-110 active:scale-95 transition-all cursor-pointer border-2 border-white ring-2 ring-pink-500/60 relative"
+            title="Mở Trợ lý AI Du lịch Việt Nam"
+          >
+            <div className="w-full h-full rounded-full overflow-hidden ring-1 ring-white/90 bg-rose-950">
+              <img
+                src="/logo.jpg"
+                alt="Avatar Trợ lý AI"
+                className="w-full h-full object-cover object-top rounded-full"
+              />
+            </div>
+            <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 ring-2 ring-white animate-pulse" />
+          </button>
+        ) : (
+          /* Chế độ thông thường: Nút nổi có kèm text và avatar con gái */
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            style={{
+              backgroundColor: '#db2777',
+              backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
+              color: '#ffffff'
+            }}
+            className="flex items-center gap-3 px-5 py-3.5 rounded-full text-white font-black shadow-xl shadow-pink-600/40 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white ring-2 ring-pink-500/50"
+            title="Mở Trợ lý AI Du lịch Việt Nam"
+          >
+            <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white flex-shrink-0 shadow-xs bg-rose-950">
+              <img
+                src="/logo.jpg"
+                alt="Avatar Trợ lý AI"
+                className="w-full h-full object-cover object-top rounded-full"
+              />
+            </div>
+            <span className="text-sm tracking-wide drop-shadow-xs font-black">Hỏi Trợ lý AI Du lịch</span>
+          </button>
+        )
       ) : (
         <div className="flex flex-col h-full bg-white dark:bg-slate-900 border-2 border-pink-400 dark:border-pink-700 rounded-3xl shadow-2xl overflow-hidden">
           {/* Header - High Contrast Bold Deep Hot Pink */}
@@ -459,27 +489,23 @@ export default function WizardAIChatbot() {
               <button
                 type="button"
                 onClick={handleClearChat}
-                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white"
+                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white cursor-pointer"
                 title="Làm mới cuộc trò chuyện"
               >
                 <TrashIcon className="w-4 h-4 text-white" />
               </button>
               <button
                 type="button"
-                onClick={() => setIsMinimized(!isMinimized)}
-                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white"
-                title={isMinimized ? 'Mở rộng' : 'Thu nhỏ'}
+                onClick={() => setIsOpen(false)}
+                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white cursor-pointer"
+                title="Thu nhỏ về biểu tượng logo"
               >
-                {isMinimized ? (
-                  <ArrowsPointingOutIcon className="w-4 h-4 text-white" />
-                ) : (
-                  <ArrowsPointingInIcon className="w-4 h-4 text-white" />
-                )}
+                <ArrowsPointingInIcon className="w-4 h-4 text-white" />
               </button>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white"
+                className="p-1.5 hover:bg-white/20 active:bg-white/30 rounded-lg transition-colors text-white cursor-pointer"
                 title="Đóng chatbox"
               >
                 <XMarkIcon className="w-4 h-4 text-white" />
@@ -487,10 +513,8 @@ export default function WizardAIChatbot() {
             </div>
           </div>
 
-          {!isMinimized && (
-            <>
-              {/* Messages Area */}
-              <div className="flex-1 p-3.5 overflow-y-auto space-y-3.5 bg-pink-50/20 dark:bg-gray-950/40 text-xs">
+          {/* Messages Area */}
+          <div className="flex-1 p-3.5 overflow-y-auto space-y-3.5 bg-pink-50/20 dark:bg-gray-950/40 text-xs">
                 {messages.map((msg) => {
                   const isUser = msg.role === 'user';
 
@@ -676,8 +700,6 @@ export default function WizardAIChatbot() {
                   <PaperAirplaneIcon className="w-4 h-4 text-white" />
                 </button>
               </form>
-            </>
-          )}
         </div>
       )}
     </div>

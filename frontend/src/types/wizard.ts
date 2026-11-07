@@ -150,5 +150,8 @@ export interface TripWizardState {
   isGeneratingItinerary: boolean;
   generatedItinerary: any | null;
   budgetEstimate: any | null;
+
+  // Fullscreen Map State
+  isMapFullscreen: boolean;
 }
 

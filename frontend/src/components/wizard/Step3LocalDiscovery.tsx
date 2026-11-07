@@ -60,14 +60,14 @@ export default function Step3LocalDiscovery() {
         destinationId: currentDestination.id,
         destinationName: currentDestination.name,
         name: spot.name,
-        category: (spot.category || 'nature') as any,
+        category: 'heritage' as const,
         categoryName: spot.highlightTag || spot.category || 'Điểm nổi bật',
         description: spot.description,
         estimatedDuration: '2 - 3 giờ',
         recommendedTime: 'Buổi sáng hoặc chiều mát',
-        entryFeeVND: 50000,
-        tips: spot.activities ? spot.activities.join(' • ') : undefined,
-        imageUrl: currentDestination.image
+        lat: spot.lat || currentDestination.lat,
+        lng: spot.lng || currentDestination.lng,
+        image: currentDestination.image
       }));
     }
     return [];
@@ -90,11 +90,11 @@ export default function Step3LocalDiscovery() {
             destinationId: currentDestination.id,
             destinationName: currentDestination.name,
             name: food,
-            category: 'Ẩm thực đặc sản',
+            category: 'dish',
+            categoryName: 'Ẩm thực đặc sản',
             description: `Món ngon đặc trưng khi ghé thăm ${spot.name} (${currentDestination.name})`,
-            priceRangeVND: '45.000đ - 120.000đ',
-            bestPlaces: [spot.name, 'Chợ địa phương', 'Khu phố ẩm thực'],
-            mustTry: true
+            recommendedPlaces: [spot.name, 'Chợ địa phương', 'Khu ẩm thực'],
+            image: currentDestination.image
           });
         }
       });
@@ -114,11 +114,11 @@ export default function Step3LocalDiscovery() {
         id: `cul_${currentDestination.id}_1`,
         destinationId: currentDestination.id,
         destinationName: currentDestination.name,
-        name: `Văn hóa bản địa & Lễ hội ${currentDestination.name}`,
-        category: 'Lễ hội & Phong tục',
+        title: `Văn hóa bản địa & Lễ hội ${currentDestination.name}`,
+        type: 'festival' as const,
+        typeName: 'Lễ hội & Phong tục',
         description: `Tìm hiểu các nét đẹp truyền thống và phong tục tập quán của ${currentDestination.name} (${currentDestination.mergedFrom}).`,
-        seasonOrMonth: currentDestination.bestSeason || 'Quanh năm',
-        highlight: 'Trải nghiệm giao lưu cộng đồng và không gian di sản.'
+        periodOrTime: currentDestination.bestSeason || 'Quanh năm'
       }
     ];
   }, [currentDestination]);

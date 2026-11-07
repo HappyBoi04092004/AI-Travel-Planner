@@ -43,7 +43,9 @@ export default function Step2VietnamMap() {
     removeDestination,
     canProceedStep2,
     nextStep,
-    prevStep
+    prevStep,
+    isMapFullscreen,
+    setIsMapFullscreen
   } = useTripWizard();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,7 +55,6 @@ export default function Step2VietnamMap() {
   const [activeWeather, setActiveWeather] = useState<DestinationWeather | null>(null);
   const [loadingWeather, setLoadingWeather] = useState(false);
   const [compareWeatherMap, setCompareWeatherMap] = useState<Record<string, DestinationWeather>>({});
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [expandedClusterId, setExpandedClusterId] = useState<string | null>(null);
 
   // Filter destinations based on search query and region
@@ -111,13 +112,13 @@ export default function Step2VietnamMap() {
   // Handle ESC key to exit fullscreen
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isFullscreen) {
-        setIsFullscreen(false);
+      if (e.key === 'Escape' && isMapFullscreen) {
+        setIsMapFullscreen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFullscreen]);
+  }, [isMapFullscreen, setIsMapFullscreen]);
 
   // Handle selecting a tourist cluster
   const handleSelectCluster = useCallback((spot: TouristSpot, dest: VietnamDestination) => {
@@ -148,7 +149,7 @@ export default function Step2VietnamMap() {
 
           <button
             type="button"
-            onClick={() => setIsFullscreen(true)}
+            onClick={() => setIsMapFullscreen(true)}
             style={{
               backgroundColor: '#db2777',
               backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
@@ -489,14 +490,14 @@ export default function Step2VietnamMap() {
               activeDestination={activeDestination}
               activeSpot={activeSpot}
               weatherMap={compareWeatherMap}
-              isFullscreen={isFullscreen}
+              isFullscreen={isMapFullscreen}
               onSelectMarker={(dest) => {
                 setActiveDestination(dest);
                 setActiveSpot(null);
               }}
               onToggleDestination={(dest) => toggleDestination(dest)}
               onSelectSpot={(spot, dest) => handleSelectCluster(spot, dest)}
-              onToggleFullscreen={() => setIsFullscreen(prev => !prev)}
+              onToggleFullscreen={() => setIsMapFullscreen(!isMapFullscreen)}
             />
           </div>
 
@@ -538,14 +539,14 @@ export default function Step2VietnamMap() {
       </div>
 
       {/* FULLSCREEN MAP OVERLAY */}
-      {isFullscreen && (
+      {isMapFullscreen && (
         <div className="fixed inset-0 z-50 w-screen h-screen bg-gray-950 flex flex-col animate-fadeIn">
           {/* Fullscreen Top Glass Bar */}
           <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between gap-3 px-4 py-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-md">
             <div className="flex items-center gap-3">
               <button
                 type="button"
-                onClick={() => setIsFullscreen(false)}
+                onClick={() => setIsMapFullscreen(false)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950 text-gray-800 dark:text-gray-200 text-xs font-bold transition-all cursor-pointer"
                 title="Thu nhỏ bản đồ (hoặc bấm phím ESC)"
               >
@@ -610,12 +611,12 @@ export default function Step2VietnamMap() {
               }}
               onToggleDestination={(dest) => toggleDestination(dest)}
               onSelectSpot={(spot, dest) => handleSelectCluster(spot, dest)}
-              onToggleFullscreen={() => setIsFullscreen(false)}
+              onToggleFullscreen={() => setIsMapFullscreen(false)}
             />
           </div>
 
-          {/* Floating Bottom Drawer in Fullscreen Mode */}
-          <div className="absolute bottom-5 left-5 right-5 sm:left-auto sm:right-5 sm:w-[420px] max-h-[360px] z-30 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md p-4 rounded-2xl border border-gray-200/90 dark:border-gray-800/90 shadow-2xl overflow-y-auto space-y-3">
+          {/* Floating Bottom Drawer in Fullscreen Mode - Placed on the LEFT so it never overlaps the circular AI logo on the right */}
+          <div className="absolute bottom-5 left-3 sm:left-5 right-3 sm:right-auto sm:w-[420px] max-h-[380px] z-30 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-pink-200/80 dark:border-pink-900/60 shadow-2xl overflow-y-auto space-y-3">
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-pink-600 dark:text-pink-400">

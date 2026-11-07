@@ -47,6 +47,10 @@ interface TripWizardContextType extends TripWizardState {
   setBudgetEstimate: (budget: any) => void;
   setIsGeneratingItinerary: (loading: boolean) => void;
 
+  // Fullscreen Map State
+  isMapFullscreen: boolean;
+  setIsMapFullscreen: (val: boolean) => void;
+
   // Global
   resetWizard: () => void;
 }
@@ -79,7 +83,8 @@ const defaultState: TripWizardState = {
   activePOIList: [],
   isGeneratingItinerary: false,
   generatedItinerary: null,
-  budgetEstimate: null
+  budgetEstimate: null,
+  isMapFullscreen: false
 };
 
 const TripWizardContext = createContext<TripWizardContextType | undefined>(undefined);
@@ -363,6 +368,10 @@ export function TripWizardProvider({ children }: { children: React.ReactNode }) 
     setState(prev => ({ ...prev, isGeneratingItinerary }));
   };
 
+  const setIsMapFullscreen = (val: boolean) => {
+    setState(prev => ({ ...prev, isMapFullscreen: val }));
+  };
+
   const resetWizard = () => {
     sessionStorage.removeItem(STORAGE_KEY);
     setState(defaultState);
@@ -392,6 +401,7 @@ export function TripWizardProvider({ children }: { children: React.ReactNode }) 
         setGeneratedItinerary,
         setBudgetEstimate,
         setIsGeneratingItinerary,
+        setIsMapFullscreen,
         resetWizard
       }}
     >
