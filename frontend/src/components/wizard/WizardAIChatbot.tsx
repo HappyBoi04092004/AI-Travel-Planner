@@ -412,10 +412,10 @@ export default function WizardAIChatbot() {
             backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
             color: '#ffffff'
           }}
-          className="flex items-center gap-2.5 px-5 py-3 rounded-full text-white font-extrabold shadow-xl shadow-pink-900/35 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white/50"
+          className="flex items-center gap-3 px-5 py-3.5 rounded-full text-white font-black shadow-xl shadow-pink-600/40 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white ring-2 ring-pink-500/50"
           title="Mở Trợ lý AI Du lịch Việt Nam"
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/90 flex-shrink-0 shadow-xs bg-rose-950">
+          <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white flex-shrink-0 shadow-xs bg-rose-950">
             <img
               src="/logo.jpg"
               alt="Avatar Trợ lý AI"
@@ -425,7 +425,7 @@ export default function WizardAIChatbot() {
           <span className="text-sm tracking-wide drop-shadow-xs font-black">Hỏi Trợ lý AI Du lịch</span>
         </button>
       ) : (
-        <div className="flex flex-col h-full bg-white dark:bg-slate-900 border-2 border-pink-300 dark:border-pink-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="flex flex-col h-full bg-white dark:bg-slate-900 border-2 border-pink-400 dark:border-pink-700 rounded-3xl shadow-2xl overflow-hidden">
           {/* Header - High Contrast Bold Deep Hot Pink */}
           <div
             style={{
@@ -433,10 +433,10 @@ export default function WizardAIChatbot() {
               backgroundImage: 'linear-gradient(135deg, #be123c 0%, #db2777 50%, #e11d48 100%)',
               color: '#ffffff'
             }}
-            className="flex items-center justify-between px-4 py-3.5 text-white flex-shrink-0 shadow-md border-b border-pink-900"
+            className="flex items-center justify-between px-4 py-3.5 text-white flex-shrink-0 shadow-md border-b-2 border-pink-700"
           >
             <div className="flex items-center gap-2.5">
-              <div className="relative w-9 h-9 rounded-full ring-2 ring-white/90 shadow-sm flex-shrink-0 overflow-hidden bg-rose-950">
+              <div className="relative w-9 h-9 rounded-full ring-2 ring-white shadow-sm flex-shrink-0 overflow-hidden bg-rose-950">
                 <img
                   src="/logo.jpg"
                   alt="Logo Trợ lý AI"
@@ -448,8 +448,8 @@ export default function WizardAIChatbot() {
                 <h4 className="text-sm font-black leading-tight text-white drop-shadow-sm flex items-center gap-1.5">
                   <span>Trợ lý AI Du lịch Việt Nam</span>
                 </h4>
-                <div className="text-[11px] text-rose-100 flex items-center gap-1 font-bold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                <div className="text-[11px] text-pink-100 flex items-center gap-1 font-extrabold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
                   <span>Trực tuyến • Am hiểu 34 tỉnh thành</span>
                 </div>
               </div>
@@ -490,7 +490,7 @@ export default function WizardAIChatbot() {
           {!isMinimized && (
             <>
               {/* Messages Area */}
-              <div className="flex-1 p-3.5 overflow-y-auto space-y-3.5 bg-gray-50/60 dark:bg-gray-950/40 text-xs">
+              <div className="flex-1 p-3.5 overflow-y-auto space-y-3.5 bg-pink-50/20 dark:bg-gray-950/40 text-xs">
                 {messages.map((msg) => {
                   const isUser = msg.role === 'user';
 
@@ -511,8 +511,8 @@ export default function WizardAIChatbot() {
                         }
                         className={`group relative max-w-[90%] p-3.5 rounded-2xl leading-relaxed text-xs ${
                           isUser
-                            ? 'text-white font-medium rounded-br-xs shadow-md'
-                            : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-bl-xs shadow-sm'
+                            ? 'text-white font-bold rounded-br-xs shadow-md shadow-pink-600/25'
+                            : 'bg-white dark:bg-slate-800 border-2 border-pink-200 dark:border-pink-900 text-slate-900 dark:text-slate-100 rounded-bl-xs shadow-sm font-medium'
                         }`}
                       >
                         {/* Copy button for assistant message */}
@@ -520,11 +520,11 @@ export default function WizardAIChatbot() {
                           <button
                             type="button"
                             onClick={() => handleCopyMessage(msg.id, msg.content)}
-                            className="absolute top-2 right-2 p-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-rose-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute top-2 right-2 p-1 rounded-md bg-pink-50 dark:bg-slate-700 text-pink-700 dark:text-slate-300 hover:text-pink-900 opacity-0 group-hover:opacity-100 transition-opacity"
                             title="Sao chép nội dung"
                           >
                             {copiedMsgId === msg.id ? (
-                              <ClipboardDocumentCheckIcon className="w-3.5 h-3.5 text-rose-600" />
+                              <ClipboardDocumentCheckIcon className="w-3.5 h-3.5 text-pink-600" />
                             ) : (
                               <ClipboardDocumentIcon className="w-3.5 h-3.5" />
                             )}
@@ -539,7 +539,14 @@ export default function WizardAIChatbot() {
                             const boldFormatted = line.split(/(\*\*.*?\*\*)/g).map((part, pIdx) => {
                               if (part.startsWith('**') && part.endsWith('**')) {
                                 return (
-                                  <strong key={pIdx} className="font-black text-slate-950 dark:text-white">
+                                  <strong
+                                    key={pIdx}
+                                    className={
+                                      isUser
+                                        ? 'font-black text-white'
+                                        : 'font-black text-pink-700 dark:text-pink-300'
+                                    }
+                                  >
                                     {part.slice(2, -2)}
                                   </strong>
                                 );
@@ -557,7 +564,7 @@ export default function WizardAIChatbot() {
 
                         {/* Interactive Smart Action Buttons */}
                         {msg.actions && msg.actions.length > 0 && (
-                          <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-700 flex flex-wrap gap-1.5">
+                          <div className="mt-3 pt-2.5 border-t border-pink-200 dark:border-slate-700 flex flex-wrap gap-1.5">
                             {msg.actions.map((act, actIdx) => {
                               const actionKey = `${msg.id}_${act.type}_${actIdx}`;
                               const isApplied = appliedActionKeys.includes(actionKey);
@@ -565,9 +572,9 @@ export default function WizardAIChatbot() {
                               return isApplied ? (
                                 <div
                                   key={actionKey}
-                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-200 font-extrabold text-[11px]"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-pink-100 dark:bg-pink-950/80 text-pink-900 dark:text-pink-200 font-extrabold text-[11px]"
                                 >
-                                  <CheckIcon className="w-3.5 h-3.5 text-rose-600" />
+                                  <CheckIcon className="w-3.5 h-3.5 text-pink-600" />
                                   <span>Đã áp dụng</span>
                                 </div>
                               ) : (
@@ -575,9 +582,9 @@ export default function WizardAIChatbot() {
                                   key={actionKey}
                                   type="button"
                                   onClick={() => handleApplyAction(actionKey, act)}
-                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/80 dark:hover:bg-rose-900 border-2 border-rose-400 dark:border-rose-600 text-rose-900 dark:text-rose-100 text-[11px] font-extrabold transition-all shadow-xs cursor-pointer active:scale-95"
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-pink-50 hover:bg-pink-100 dark:bg-pink-950/80 dark:hover:bg-pink-900 border-2 border-pink-400 dark:border-pink-600 text-pink-950 dark:text-pink-100 text-[11px] font-black transition-all shadow-xs cursor-pointer active:scale-95"
                                 >
-                                  <BoltIcon className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
+                                  <BoltIcon className="w-3.5 h-3.5 text-pink-600 flex-shrink-0" />
                                   <span>{act.label || 'Thực hiện ngay'}</span>
                                 </button>
                               );
@@ -587,7 +594,7 @@ export default function WizardAIChatbot() {
                       </div>
 
                       <span
-                        className="text-[10px] text-slate-500 font-semibold mt-1 px-1 flex items-center gap-1"
+                        className="text-[10px] text-pink-800/70 dark:text-pink-400/70 font-semibold mt-1 px-1 flex items-center gap-1"
                         suppressHydrationWarning
                       >
                         {isMounted ? msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Vừa xong'}
@@ -608,13 +615,13 @@ export default function WizardAIChatbot() {
               </div>
 
               {/* Dynamic Suggested Prompts */}
-              <div className="p-2 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 flex gap-1.5 overflow-x-auto no-scrollbar">
+              <div className="p-2 border-t-2 border-pink-100 dark:border-pink-900 bg-pink-50/50 dark:bg-slate-900 flex gap-1.5 overflow-x-auto no-scrollbar">
                 {(messages[messages.length - 1]?.suggestions || samplePrompts).map((promptText, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => handleSendMessage(promptText)}
-                    className="flex-shrink-0 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 text-rose-800 dark:text-rose-200 border-2 border-rose-300 dark:border-rose-700 text-[11px] font-bold hover:bg-rose-50 dark:hover:bg-rose-950/50 shadow-xs transition-colors whitespace-nowrap cursor-pointer"
+                    className="flex-shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-pink-900 dark:text-pink-200 border-2 border-pink-300 dark:border-pink-700 text-[11px] font-black hover:bg-pink-100 dark:hover:bg-pink-950/50 shadow-2xs transition-colors whitespace-nowrap cursor-pointer"
                   >
                     💡 {promptText}
                   </button>
@@ -627,7 +634,7 @@ export default function WizardAIChatbot() {
                   e.preventDefault();
                   handleSendMessage();
                 }}
-                className="p-2.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-1.5"
+                className="p-2.5 border-t border-pink-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-1.5"
               >
                 {/* Voice Input Button */}
                 <button
@@ -636,7 +643,7 @@ export default function WizardAIChatbot() {
                   className={`p-2.5 rounded-xl transition-all cursor-pointer ${
                     isListening
                       ? 'bg-rose-600 text-white animate-pulse ring-4 ring-rose-400/40'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-rose-700 hover:bg-rose-50 border border-slate-200 dark:border-slate-700'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-pink-700 hover:bg-pink-50 border border-slate-200 dark:border-slate-700'
                   }`}
                   title={isListening ? 'Đang nghe... Bấm để dừng' : 'Nói để nhập tin nhắn tiếng Việt'}
                 >
@@ -652,7 +659,7 @@ export default function WizardAIChatbot() {
                       ? 'Đang lắng nghe giọng nói của bạn...'
                       : 'Hỏi về thời tiết, ẩm thực, nhà thuốc, đổi xe...'
                   }
-                  className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
+                  className="flex-1 px-3.5 py-2.5 rounded-xl border-2 border-pink-200 dark:border-slate-700 bg-pink-50/20 dark:bg-slate-800 text-xs font-bold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:bg-white"
                 />
 
                 <button

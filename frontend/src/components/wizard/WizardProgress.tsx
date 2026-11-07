@@ -40,9 +40,9 @@ export default function WizardProgress() {
   };
 
   return (
-    <div className="w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-16 z-30 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
-        <div className="flex items-center justify-between overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-1">
+    <div className="w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b-2 border-pink-200/80 dark:border-pink-900/40 sticky top-16 z-30 shadow-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <div className="flex items-center justify-between overflow-x-auto no-scrollbar gap-2 sm:gap-3 py-1">
           {STEPS.map((step) => {
             const isCompleted = currentStep > step.number;
             const isCurrent = currentStep === step.number;
@@ -55,14 +55,14 @@ export default function WizardProgress() {
                 type="button"
                 disabled={!isAccessible}
                 onClick={() => isAccessible && goToStep(step.number)}
-                className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl transition-all flex-shrink-0 text-left ${
+                className={`flex items-center gap-2.5 px-3.5 py-2 rounded-2xl transition-all flex-shrink-0 text-left ${
                   isCurrent
-                    ? 'bg-white dark:bg-slate-800 text-slate-950 dark:text-white border-2 border-pink-600 shadow-md shadow-pink-900/10'
+                    ? 'bg-gradient-to-r from-pink-500/15 via-rose-500/20 to-pink-500/10 dark:bg-pink-950/50 text-pink-950 dark:text-pink-100 border-2 border-pink-500 shadow-md shadow-pink-500/15'
                     : isCompleted
-                    ? 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer border border-transparent'
+                    ? 'bg-pink-50/60 dark:bg-pink-950/20 text-pink-900 dark:text-pink-200 hover:bg-pink-100/70 border-2 border-pink-200/80 dark:border-pink-900/50 cursor-pointer'
                     : isAccessible
-                    ? 'text-slate-600 hover:text-slate-900 dark:text-slate-400 border border-transparent'
-                    : 'text-slate-300 dark:text-slate-700 cursor-not-allowed opacity-50 border border-transparent'
+                    ? 'bg-white/80 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:border-pink-300 hover:bg-pink-50/40 border-2 border-slate-200/80 dark:border-slate-800 cursor-pointer'
+                    : 'bg-slate-50/50 dark:bg-slate-900/50 text-slate-400 dark:text-slate-600 border-2 border-transparent cursor-not-allowed opacity-50'
                 }`}
               >
                 {/* Step badge */}
@@ -76,23 +76,23 @@ export default function WizardProgress() {
                         }
                       : {}
                   }
-                  className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black transition-all ${
+                  className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-black transition-all ${
                     isCurrent
-                      ? 'text-white shadow-sm shadow-pink-900/30'
+                      ? 'text-white shadow-sm shadow-pink-500/40 ring-2 ring-pink-400/40'
                       : isCompleted
-                      ? 'bg-pink-100 dark:bg-pink-950 text-pink-800 dark:text-pink-200 font-extrabold'
+                      ? 'bg-pink-100 dark:bg-pink-900/60 text-pink-700 dark:text-pink-300 font-extrabold border border-pink-300'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
                   }`}
                 >
-                  {isCompleted ? <CheckIcon className="w-4 h-4 text-pink-600" /> : step.number}
+                  {isCompleted ? <CheckIcon className="w-4 h-4 text-pink-600 stroke-[3]" /> : step.number}
                 </div>
 
                 {/* Step details */}
                 <div className="hidden md:block">
-                  <div className={`text-xs leading-tight flex items-center gap-1.5 ${isCurrent ? 'font-black text-slate-950 dark:text-white' : 'font-bold text-slate-800 dark:text-slate-200'}`}>
+                  <div className={`text-xs leading-tight flex items-center gap-1.5 ${isCurrent ? 'font-black text-pink-950 dark:text-pink-100' : isCompleted ? 'font-extrabold text-pink-900 dark:text-pink-200' : 'font-bold text-slate-700 dark:text-slate-300'}`}>
                     <span>{step.title}</span>
                   </div>
-                  <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate max-w-[130px]">
+                  <div className={`text-[10.5px] font-medium truncate max-w-[130px] ${isCurrent ? 'text-pink-800 dark:text-pink-300 font-bold' : isCompleted ? 'text-pink-700/80 dark:text-pink-400' : 'text-slate-500 dark:text-slate-400'}`}>
                     {step.shortDesc}
                   </div>
                 </div>

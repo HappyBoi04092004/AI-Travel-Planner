@@ -110,15 +110,15 @@ export default function Step4Transportation() {
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
-          <TruckIcon className="w-4 h-4" />
+      <div className="border-b border-pink-200/80 dark:border-gray-800 pb-5">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-pink-100 text-pink-800 dark:bg-pink-950/70 dark:text-pink-300 border-2 border-pink-300 dark:border-pink-800 mb-3 shadow-2xs">
+          <TruckIcon className="w-4 h-4 text-pink-600" />
           <span>Bước 4 trên 6 • Lựa chọn di chuyển</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-          Lựa chọn phương tiện di chuyển
+        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+          Lựa chọn phương tiện <span className="bg-gradient-to-r from-pink-600 via-rose-600 to-fuchsia-600 bg-clip-text text-transparent">di chuyển</span>
         </h2>
-        <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-sm sm:text-base font-medium text-slate-700 dark:text-gray-300">
           Tùy chỉnh phương tiện cho toàn bộ hành trình hoặc thiết lập riêng cho từng chặng di chuyển (VD: Máy bay cho chặng xa, Ô tô riêng hoặc Xe máy cho chặng ngắn khám phá).
         </p>
       </div>
@@ -268,24 +268,24 @@ export default function Step4Transportation() {
       </div>
 
       {/* Confirmation Summary */}
-      <div className="p-4 rounded-2xl bg-pink-50 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 flex items-center justify-between text-xs">
-        <div className="flex items-center gap-2 text-pink-800 dark:text-pink-200">
-          <CheckCircleIcon className="w-5 h-5 text-pink-600" />
+      <div className="p-5 rounded-3xl bg-gradient-to-br from-pink-50/90 via-rose-50/60 to-white dark:from-slate-900 dark:via-pink-950/20 dark:to-slate-900 border-2 border-pink-300 dark:border-pink-800 shadow-md shadow-pink-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2 text-pink-950 dark:text-pink-200">
+          <CheckCircleIcon className="w-5 h-5 text-pink-600 stroke-[2.5]" />
           <span>
-            Phương tiện ưu tiên chính đã chọn: <strong>{TRANSPORT_OPTIONS.find(o => o.id === overallTransportMode)?.name}</strong>
+            Phương tiện ưu tiên chính đã chọn: <strong className="text-pink-700 dark:text-pink-300 font-black">{TRANSPORT_OPTIONS.find(o => o.id === overallTransportMode)?.name}</strong>
           </span>
         </div>
-        <div className="text-gray-500 dark:text-gray-400 text-[11px]">
+        <div className="text-pink-800 dark:text-pink-300 font-bold bg-pink-100/80 dark:bg-pink-950/70 px-3 py-1.5 rounded-xl border border-pink-200 text-[11px]">
           Có thể yêu cầu AI trợ lý đổi phương tiện bất kỳ lúc nào bằng lệnh chat.
         </div>
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800">
+      <div className="flex items-center justify-between pt-4 border-t border-pink-200/80 dark:border-gray-800">
         <button
           type="button"
           onClick={prevStep}
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-sm font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-gray-800 hover:bg-pink-50 dark:hover:bg-gray-700 border-2 border-slate-200 dark:border-slate-700 transition-all cursor-pointer"
         >
           <ArrowLeftIcon className="w-4 h-4" />
           <span>Quay lại Bước 3</span>
@@ -299,10 +299,10 @@ export default function Step4Transportation() {
             backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
             color: '#ffffff'
           }}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-black text-white transition-all shadow-lg shadow-pink-900/35 hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-9 py-4 rounded-2xl text-base font-black text-white transition-all shadow-xl shadow-pink-600/35 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
         >
           <span>Tiếp tục: Bản đồ tiện ích & Nhà thuốc gần nhất</span>
-          <ArrowRightIcon className="w-5 h-5 text-white" />
+          <ArrowRightIcon className="w-5 h-5 text-white stroke-[2.5]" />
         </button>
       </div>
     </div>

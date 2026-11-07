@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  /* Base colors - Clean modern neutral canvas for high contrast */
-  --background: #f8fafc;
+  /* Base colors - Warm luxurious canvas with subtle blush undertone */
+  --background: #faf6f9;
   --foreground: #0f172a;
 
   /* Primary - Bold Hot Pink / Deep Magenta-Rose */
@@ -10,25 +10,25 @@
   --primary-foreground: #ffffff;
   --primary-hover: #be123c;
 
-  /* Secondary - Crisp Neutral Slate Tint */
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
+  /* Secondary - Soft Rose Tint */
+  --secondary: #fdf2f8;
+  --secondary-foreground: #831843;
 
   /* Muted backgrounds */
-  --muted: #f1f5f9;
+  --muted: #fdf2f8;
   --muted-foreground: #475569;
 
   /* Accent - Electric Vibrant Hot Pink */
   --accent: #ec4899;
   --accent-foreground: #ffffff;
 
-  /* Card backgrounds - Pure Crisp White */
+  /* Card backgrounds - Pure Crisp White with Soft Rose Glow */
   --card: #ffffff;
   --card-foreground: #0f172a;
 
-  /* Borders - Crisp Slate Border with High Contrast */
-  --border: #e2e8f0;
-  --border-subtle: #f1f5f9;
+  /* Borders - Soft Rose-Slate Border */
+  --border: #fbcfe8;
+  --border-subtle: #fdf2f8;
 
   /* Input */
   --input: #ffffff;
@@ -41,10 +41,10 @@
   --destructive-foreground: #ffffff;
 
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(226, 232, 240, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.90);
+  --glass-border: rgba(251, 207, 232, 0.8);
 
-  --radius: 0.75rem;
+  --radius: 1rem;
 }
 
 .dark {
@@ -74,7 +74,7 @@
   --card-foreground: #f8fafc;
 
   /* Borders */
-  --border: #1e293b;
+  --border: #831843;
   --border-subtle: #162032;
 
   /* Input */
@@ -88,8 +88,8 @@
   --destructive-foreground: #ffffff;
 
   /* Glassmorphism */
-  --glass-bg: rgba(15, 23, 42, 0.85);
-  --glass-border: rgba(30, 41, 59, 0.8);
+  --glass-bg: rgba(15, 23, 42, 0.90);
+  --glass-border: rgba(131, 24, 67, 0.4);
 }
 
 @theme inline {
@@ -121,7 +121,13 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(at 10% 10%, rgba(244, 63, 94, 0.08) 0px, transparent 40%),
+    radial-gradient(at 90% 15%, rgba(219, 39, 119, 0.10) 0px, transparent 45%),
+    radial-gradient(at 50% 60%, rgba(244, 114, 182, 0.06) 0px, transparent 50%),
+    radial-gradient(at 20% 90%, rgba(251, 113, 133, 0.08) 0px, transparent 45%);
+  background-attachment: fixed;
   color: var(--foreground);
   font-feature-settings: "rlig" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;

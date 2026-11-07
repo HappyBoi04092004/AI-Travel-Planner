@@ -45,40 +45,96 @@ export default function Step3LocalDiscovery() {
     return selectedDestinations.find(d => d.id === activeDestId) || selectedDestinations[0];
   }, [selectedDestinations, activeDestId]);
 
-  // Filter items for the active destination
+  // Filter items for the active destination with rich automatic fallback from touristSpots
   const destAttractions = useMemo(() => {
     if (!currentDestination) return [];
-    return VIETNAM_ATTRACTIONS.filter(
+    const directMatches = VIETNAM_ATTRACTIONS.filter(
       a => a.destinationId === currentDestination.id || currentDestination.name.includes(a.destinationName)
     );
+    if (directMatches.length > 0) return directMatches;
+
+    // Synthesize from destination touristSpots
+    if (currentDestination.touristSpots && currentDestination.touristSpots.length > 0) {
+      return currentDestination.touristSpots.map((spot, idx) => ({
+        id: `att_${currentDestination.id}_${idx}`,
+        destinationId: currentDestination.id,
+        destinationName: currentDestination.name,
+        name: spot.name,
+        category: (spot.category || 'nature') as any,
+        categoryName: spot.highlightTag || spot.category || 'Điểm nổi bật',
+        description: spot.description,
+        estimatedDuration: '2 - 3 giờ',
+        recommendedTime: 'Buổi sáng hoặc chiều mát',
+        entryFeeVND: 50000,
+        tips: spot.activities ? spot.activities.join(' • ') : undefined,
+        imageUrl: currentDestination.image
+      }));
+    }
+    return [];
   }, [currentDestination]);
 
   const destSpecialties = useMemo(() => {
     if (!currentDestination) return [];
-    return VIETNAM_SPECIALTIES.filter(
+    const directMatches = VIETNAM_SPECIALTIES.filter(
       s => s.destinationId === currentDestination.id || currentDestination.name.includes(s.destinationName)
     );
+    if (directMatches.length > 0) return directMatches;
+
+    // Synthesize from destination touristSpots foodSpecialties
+    const synthesized: LocalSpecialty[] = [];
+    currentDestination.touristSpots?.forEach((spot, sIdx) => {
+      spot.foodSpecialties?.forEach((food, fIdx) => {
+        if (!synthesized.some(item => item.name === food)) {
+          synthesized.push({
+            id: `spec_${currentDestination.id}_${sIdx}_${fIdx}`,
+            destinationId: currentDestination.id,
+            destinationName: currentDestination.name,
+            name: food,
+            category: 'Ẩm thực đặc sản',
+            description: `Món ngon đặc trưng khi ghé thăm ${spot.name} (${currentDestination.name})`,
+            priceRangeVND: '45.000đ - 120.000đ',
+            bestPlaces: [spot.name, 'Chợ địa phương', 'Khu phố ẩm thực'],
+            mustTry: true
+          });
+        }
+      });
+    });
+    return synthesized;
   }, [currentDestination]);
 
   const destCultures = useMemo(() => {
     if (!currentDestination) return [];
-    return VIETNAM_CULTURE.filter(
+    const directMatches = VIETNAM_CULTURE.filter(
       c => c.destinationId === currentDestination.id || currentDestination.name.includes(c.destinationName)
     );
+    if (directMatches.length > 0) return directMatches;
+
+    return [
+      {
+        id: `cul_${currentDestination.id}_1`,
+        destinationId: currentDestination.id,
+        destinationName: currentDestination.name,
+        name: `Văn hóa bản địa & Lễ hội ${currentDestination.name}`,
+        category: 'Lễ hội & Phong tục',
+        description: `Tìm hiểu các nét đẹp truyền thống và phong tục tập quán của ${currentDestination.name} (${currentDestination.mergedFrom}).`,
+        seasonOrMonth: currentDestination.bestSeason || 'Quanh năm',
+        highlight: 'Trải nghiệm giao lưu cộng đồng và không gian di sản.'
+      }
+    ];
   }, [currentDestination]);
 
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
-          <SparklesIcon className="w-4 h-4" />
+      <div className="border-b border-pink-200/80 dark:border-gray-800 pb-5">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-pink-100 text-pink-800 dark:bg-pink-950/70 dark:text-pink-300 border-2 border-pink-300 dark:border-pink-800 mb-3 shadow-2xs">
+          <SparklesIcon className="w-4 h-4 text-pink-600" />
           <span>Bước 3 trên 6 • Khám phá tinh hoa địa phương</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-          Văn hóa, Ẩm thực & Điểm tham quan nổi bật
+        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+          Văn hóa, Ẩm thực & Điểm tham quan <span className="bg-gradient-to-r from-pink-600 via-rose-600 to-fuchsia-600 bg-clip-text text-transparent">nổi bật</span>
         </h2>
-        <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-sm sm:text-base font-medium text-slate-700 dark:text-gray-300">
           Khám phá những món ăn đặc sản đậm chất vùng miền, các danh lam thắng cảnh và lễ hội truyền thống. Chọn các địa điểm bạn muốn ghé thăm để đưa vào lịch trình.
         </p>
       </div>
@@ -343,26 +399,26 @@ export default function Step3LocalDiscovery() {
       )}
 
       {/* Selection Summary Basket */}
-      <div className="p-4 rounded-2xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+      <div className="p-5 rounded-3xl bg-gradient-to-br from-pink-50/90 via-rose-50/60 to-white dark:from-slate-900 dark:via-pink-950/20 dark:to-slate-900 border-2 border-pink-300 dark:border-pink-800 shadow-md shadow-pink-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
         <div className="space-y-1">
-          <span className="font-semibold text-gray-700 dark:text-gray-300">
+          <span className="font-extrabold text-pink-950 dark:text-pink-200">
             Tổng kết lựa chọn cho lịch trình:
           </span>
-          <div className="text-gray-600 dark:text-gray-400">
-            • <strong>{selectedAttractions.length}</strong> điểm tham quan đã chọn &nbsp;|&nbsp; • <strong>{selectedSpecialties.length}</strong> món ăn đặc sản đã lưu
+          <div className="text-slate-700 dark:text-slate-300 font-medium">
+            • <strong className="text-pink-700 dark:text-pink-300 font-black">{selectedAttractions.length}</strong> điểm tham quan đã chọn &nbsp;|&nbsp; • <strong className="text-pink-700 dark:text-pink-300 font-black">{selectedSpecialties.length}</strong> món ăn đặc sản đã lưu
           </div>
         </div>
-        <div className="text-[11px] text-pink-700 dark:text-pink-400 font-semibold">
+        <div className="text-[11px] text-pink-800 dark:text-pink-300 font-bold bg-pink-100/80 dark:bg-pink-950/70 px-3 py-1.5 rounded-xl border border-pink-200">
           AI sẽ tự động sắp xếp thời gian biểu phù hợp cho các điểm bạn đã chọn.
         </div>
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800">
+      <div className="flex items-center justify-between pt-4 border-t border-pink-200/80 dark:border-gray-800">
         <button
           type="button"
           onClick={prevStep}
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-sm font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-gray-800 hover:bg-pink-50 dark:hover:bg-gray-700 border-2 border-slate-200 dark:border-slate-700 transition-all cursor-pointer"
         >
           <ArrowLeftIcon className="w-4 h-4" />
           <span>Quay lại Bước 2</span>
@@ -376,10 +432,10 @@ export default function Step3LocalDiscovery() {
             backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
             color: '#ffffff'
           }}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-black text-white transition-all shadow-lg shadow-pink-900/35 hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+          className="inline-flex items-center gap-2.5 px-9 py-4 rounded-2xl text-base font-black text-white transition-all shadow-xl shadow-pink-600/35 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
         >
           <span>Tiếp tục: Chọn phương tiện di chuyển</span>
-          <ArrowRightIcon className="w-5 h-5 text-white" />
+          <ArrowRightIcon className="w-5 h-5 text-white stroke-[2.5]" />
         </button>
       </div>
     </div>

@@ -173,15 +173,15 @@ export default function Step6ReviewConfirm() {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
+      <div className="border-b border-pink-200/80 dark:border-gray-800 pb-5">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-pink-100 text-pink-800 dark:bg-pink-950/70 dark:text-pink-300 border-2 border-pink-300 dark:border-pink-800 mb-3 shadow-2xs">
           <DocumentCheckIcon className="w-4 h-4 text-pink-600" />
           <span>Bước 6 trên 6 • Xác nhận & Sinh lịch trình</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-          Tổng quan chuyến đi & Khởi tạo lịch trình chi tiết
+        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+          Tổng quan chuyến đi & <span className="bg-gradient-to-r from-pink-600 via-rose-600 to-fuchsia-600 bg-clip-text text-transparent">Khởi tạo lịch trình chi tiết</span>
         </h2>
-        <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-sm sm:text-base font-medium text-slate-700 dark:text-gray-300">
           Kiểm tra lại toàn bộ thông tin đã chọn từ Bước 1 đến Bước 5. Nhấn &quot;Khởi tạo lịch trình AI&quot; để tạo kế hoạch du lịch ngày theo ngày hoàn chỉnh!
         </p>
       </div>

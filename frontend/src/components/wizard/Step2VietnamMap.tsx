@@ -131,17 +131,17 @@ export default function Step2VietnamMap() {
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
-      <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300 border border-pink-200 dark:border-pink-800 mb-3">
-          <MapPinIcon className="w-4 h-4" />
+      <div className="border-b border-pink-200/80 dark:border-gray-800 pb-5">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-pink-100 text-pink-800 dark:bg-pink-950/70 dark:text-pink-300 border-2 border-pink-300 dark:border-pink-800 mb-3 shadow-2xs">
+          <MapPinIcon className="w-4 h-4 text-pink-600" />
           <span>Bước 2 trên 6 • Bản đồ số Địa hình & 34 Tỉnh thành mới</span>
         </div>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-              Bản đồ Địa hình 3D Việt Nam (34 Tỉnh Thành Sau Sáp Nhập)
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+              Bản đồ Địa hình 3D <span className="bg-gradient-to-r from-pink-600 via-rose-600 to-fuchsia-600 bg-clip-text text-transparent">Việt Nam</span> (34 Tỉnh Thành Sau Sáp Nhập)
             </h2>
-            <p className="mt-1.5 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+            <p className="mt-1.5 text-sm sm:text-base font-medium text-slate-700 dark:text-gray-300">
               Khám phá 34 tỉnh thành với các tụ điểm du lịch & hoạt động ăn chơi chi tiết (Cố đô Hoa Lư, Tràng An, Sa Pa, Pác Bó, Bà Nà Hills...). Hỗ trợ chế độ toàn màn hình.
             </p>
           </div>
@@ -154,7 +154,7 @@ export default function Step2VietnamMap() {
               backgroundImage: 'linear-gradient(135deg, #e11d48 0%, #db2777 50%, #ec4899 100%)',
               color: '#ffffff'
             }}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white font-extrabold text-xs shadow-md shadow-pink-900/25 transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-white font-black text-xs shadow-lg shadow-pink-600/35 hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer"
           >
             <ArrowsPointingOutIcon className="w-4 h-4 text-white" />
             <span>Phóng to Toàn Màn hình</span>
@@ -163,7 +163,7 @@ export default function Step2VietnamMap() {
       </div>
 
       {/* Search & Region Filter Bar */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white/95 dark:bg-gray-900/95 p-4 rounded-3xl border-2 border-pink-200/80 dark:border-pink-900/60 shadow-lg shadow-pink-500/5">
         {/* Search Input */}
         <div className="relative flex-1">
           <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-3.5 top-3" />
