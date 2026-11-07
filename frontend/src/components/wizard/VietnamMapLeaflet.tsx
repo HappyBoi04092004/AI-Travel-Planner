@@ -228,14 +228,15 @@ export default function VietnamMapLeaflet({
       // Compact weather chip on marker (showing temperature & condition icon for selected dates)
       const weatherChip = w?.forecastAvailable
         ? `<span style="
-            background: rgba(255,255,255,0.95);
-            color: #0369a1;
+            background: rgba(255, 241, 242, 0.95);
+            color: #be123c;
+            border: 1px solid #fecdd3;
             padding: 1px 6px;
             border-radius: 10px;
             font-size: 10px;
             font-weight: 800;
             margin-left: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            box-shadow: 0 1px 3px rgba(244,63,94,0.2);
             display: inline-flex;
             align-items: center;
             gap: 2px;
@@ -365,7 +366,7 @@ export default function VietnamMapLeaflet({
         const spotBg = isThisSpotActive
           ? 'linear-gradient(135deg, #e11d48, #be123c)'
           : isParentActive
-          ? 'linear-gradient(135deg, #0284c7, #0369a1)'
+          ? 'linear-gradient(135deg, #f43f5e, #fb7185)'
           : isZoomedIn
           ? 'rgba(255, 255, 255, 0.95)'
           : 'rgba(255, 255, 255, 0.78)';
@@ -374,7 +375,7 @@ export default function VietnamMapLeaflet({
         const spotBorder = isThisSpotActive
           ? '2px solid #ffffff'
           : isParentActive
-          ? '2px solid #38bdf8'
+          ? '2px solid #fda4af'
           : isZoomedIn
           ? '1.5px solid rgba(148, 163, 184, 0.7)'
           : '1px solid rgba(203, 213, 225, 0.6)';
@@ -382,7 +383,7 @@ export default function VietnamMapLeaflet({
         const spotShadow = isThisSpotActive
           ? '0 0 20px rgba(225, 29, 72, 0.75), 0 4px 12px rgba(0,0,0,0.4)'
           : isParentActive
-          ? '0 0 16px rgba(56, 189, 248, 0.6), 0 4px 12px rgba(0,0,0,0.35)'
+          ? '0 0 16px rgba(244, 63, 94, 0.6), 0 4px 12px rgba(0,0,0,0.35)'
           : '0 2px 6px rgba(0,0,0,0.18)';
 
         const spotScale = isThisSpotActive ? 'scale(1.25)' : isParentActive ? 'scale(1.15)' : isZoomedIn ? 'scale(1)' : 'scale(0.85)';
@@ -437,17 +438,17 @@ export default function VietnamMapLeaflet({
 
         // Activities list formatting (Đi thuyền, ăn dê núi, đi chùa, đi đền thờ...)
         const activitiesHtml = (spot.activities || [])
-          .map(act => `<li style="margin-bottom: 3px; color: #0369a1;">✓ ${act}</li>`)
+          .map(act => `<li style="margin-bottom: 3px; color: #be123c;">✓ ${act}</li>`)
           .join('');
 
         // Food specialties formatting
         const foodHtml = (spot.foodSpecialties || [])
-          .map(f => `<span style="display:inline-block; background: #fef3c7; color: #92400e; padding: 1px 5px; border-radius: 4px; font-size: 9.5px; font-weight: 700; margin: 1px;">🍲 ${f}</span>`)
+          .map(f => `<span style="display:inline-block; background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; padding: 1px 5px; border-radius: 4px; font-size: 9.5px; font-weight: 700; margin: 1px;">🍲 ${f}</span>`)
           .join('');
 
         spotMarker.bindPopup(`
           <div style="font-family: sans-serif; padding: 4px; min-width: 260px; max-width: 320px;">
-            <div style="font-size: 10px; color: #0284c7; font-weight: 800; text-transform: uppercase;">
+            <div style="font-size: 10px; color: #be123c; font-weight: 800; text-transform: uppercase;">
               ${spot.category} • Thuộc ${dest.name}
             </div>
             <h4 style="margin: 2px 0 4px; font-size: 14px; font-weight: 800; color: #0f172a;">

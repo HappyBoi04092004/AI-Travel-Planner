@@ -120,7 +120,7 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-primary to-accent text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center z-50 hover:scale-110"
+          className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-full shadow-xl shadow-pink-500/30 hover:shadow-2xl hover:scale-110 transition-all flex items-center justify-center z-50 cursor-pointer"
           aria-label="Open chat"
         >
           <ChatBubbleLeftRightIcon className="w-6 h-6" />
@@ -131,14 +131,14 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
       {isOpen && (
         <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-background border border-border-subtle rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-br from-primary to-accent text-primary-foreground px-4 py-3 flex items-center justify-between rounded-t-2xl">
+          <div className="bg-gradient-to-r from-pink-500 to-rose-600 text-white px-4 py-3 flex items-center justify-between rounded-t-2xl">
             <div className="flex items-center gap-2">
               <ChatBubbleLeftRightIcon className="w-5 h-5" />
               <span className="font-semibold">Trợ lý AI Du lịch Việt Nam</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="hover:bg-white/20 rounded-lg p-1 transition-colors"
+              className="hover:bg-white/20 rounded-lg p-1 transition-colors cursor-pointer"
               aria-label="Close chat"
             >
               <XMarkIcon className="w-5 h-5" />
@@ -155,12 +155,12 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                     message.role === 'user'
-                      ? 'bg-gradient-to-br from-primary to-accent text-primary-foreground'
+                      ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white'
                       : 'bg-card border border-border-subtle text-card-foreground'
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                  <p className={`text-xs mt-1 ${message.role === 'user' ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                  <p className={`text-xs mt-1 ${message.role === 'user' ? 'text-pink-100' : 'text-muted-foreground'}`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
@@ -171,9 +171,9 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
               <div className="flex justify-start">
                 <div className="bg-card border border-border-subtle rounded-2xl px-4 py-2">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                   </div>
                 </div>
               </div>
@@ -191,13 +191,13 @@ export default function ChatBot({ currentTrip, onTripUpdate }: ChatBotProps) {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Hỏi về thời tiết, ẩm thực, đổi điểm..."
-                className="flex-1 px-4 py-2 border border-border-subtle rounded-xl bg-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-xs"
+                className="flex-1 px-4 py-2 border border-border-subtle rounded-xl bg-input text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-pink-500 text-xs"
                 disabled={isLoading}
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!input.trim() || isLoading}
-                className="px-4 py-2 bg-gradient-to-br from-primary to-accent text-primary-foreground rounded-xl hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                className="px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-xl shadow-md shadow-pink-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
                 aria-label="Send message"
               >
                 <PaperAirplaneIcon className="w-5 h-5" />

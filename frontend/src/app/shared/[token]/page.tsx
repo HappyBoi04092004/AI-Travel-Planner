@@ -95,7 +95,7 @@ export default function SharedTripPage() {
           </p>
           <button
             onClick={() => router.push('/')}
-            className="px-6 py-3 bg-gradient-to-br from-primary to-accent text-primary-foreground rounded-xl hover:shadow-lg transition-all font-semibold"
+            className="px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-xl shadow-md shadow-pink-500/25 transition-all font-semibold cursor-pointer"
           >
             Plan Your Own Trip
           </button>
@@ -186,7 +186,7 @@ export default function SharedTripPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all ${
                   activeTab === tab.id
-                    ? 'bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-lg'
+                    ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-md shadow-pink-500/25'
                     : 'glass-card border border-border-subtle text-muted-foreground hover:text-foreground hover:shadow-md'
                 }`}
               >
@@ -234,7 +234,7 @@ export default function SharedTripPage() {
           </p>
           <button
             onClick={() => router.push('/')}
-            className="px-8 py-4 bg-gradient-to-br from-primary to-accent text-primary-foreground rounded-xl hover:shadow-lg transition-all font-semibold text-lg"
+            className="px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-xl shadow-md shadow-pink-500/25 transition-all font-semibold text-lg cursor-pointer"
           >
             Start Planning
           </button>

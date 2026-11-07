@@ -133,7 +133,7 @@ export default function ProfilePage() {
             Back to Home
           </button>
 
-          <h1 className="text-4xl font-bold bg-gradient-to-br from-foreground to-primary bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
             Profile Settings
           </h1>
           <p className="text-muted-foreground">Manage your account settings and preferences</p>
@@ -141,8 +141,8 @@ export default function ProfilePage() {
 
         {/* Success/Error Messages */}
         {success && (
-          <div className="mb-6 p-4 bg-success/10 border border-success/20 rounded-xl flex items-center gap-3 text-success">
-            <CheckCircleIcon className="w-5 h-5" />
+          <div className="mb-6 p-4 bg-pink-500/10 border border-pink-500/20 rounded-xl flex items-center gap-3 text-pink-700 dark:text-pink-300">
+            <CheckCircleIcon className="w-5 h-5 text-pink-600" />
             {success}
           </div>
         )}
@@ -156,7 +156,7 @@ export default function ProfilePage() {
         {/* Profile Information */}
         <div className="glass-card rounded-2xl p-8 border border-border-subtle shadow-lg mb-6">
           <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-            <UserCircleIcon className="w-6 h-6 text-primary" />
+            <UserCircleIcon className="w-6 h-6 text-pink-600" />
             Profile Information
           </h2>
 
@@ -170,7 +170,7 @@ export default function ProfilePage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
             </div>
 
@@ -183,14 +183,14 @@ export default function ProfilePage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold py-3 px-6 rounded-xl transition-all hover:shadow-lg hover:scale-[1.02] disabled:opacity-50"
+              className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
             >
               {isLoading ? 'Saving...' : 'Save Changes'}
             </button>
@@ -201,7 +201,7 @@ export default function ProfilePage() {
         {user.has_password && (
           <div className="glass-card rounded-2xl p-8 border border-border-subtle shadow-lg">
             <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-              <KeyIcon className="w-6 h-6 text-primary" />
+              <KeyIcon className="w-6 h-6 text-pink-600" />
               Change Password
             </h2>
 
@@ -216,7 +216,7 @@ export default function ProfilePage() {
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
                   placeholder="Enter new password"
                 />
               </div>
@@ -231,7 +231,7 @@ export default function ProfilePage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
                   placeholder="Confirm new password"
                 />
               </div>
@@ -239,7 +239,7 @@ export default function ProfilePage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold py-3 px-6 rounded-xl transition-all hover:shadow-lg hover:scale-[1.02] disabled:opacity-50"
+                className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
               >
                 {isLoading ? 'Updating...' : 'Update Password'}
               </button>

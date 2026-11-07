@@ -22,13 +22,13 @@ export default function UserMenu() {
   if (!user) {
     return (
       <>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             onClick={() => {
               setAuthMode('signin');
               setShowAuthModal(true);
             }}
-            className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-lg hover:bg-muted"
+            className="px-3 sm:px-3.5 py-1.5 text-xs font-bold text-gray-700 dark:text-gray-200 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-950/40 rounded-xl transition-colors cursor-pointer"
           >
             Sign In
           </button>
@@ -37,7 +37,7 @@ export default function UserMenu() {
               setAuthMode('signup');
               setShowAuthModal(true);
             }}
-            className="px-4 py-2 text-sm font-medium bg-gradient-to-br from-primary to-accent text-primary-foreground rounded-lg hover:shadow-lg transition-all"
+            className="px-3.5 sm:px-4 py-1.5 text-xs font-bold bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white rounded-xl shadow-sm shadow-pink-500/25 transition-all cursor-pointer"
           >
             Sign Up
           </button>
@@ -56,20 +56,20 @@ export default function UserMenu() {
       {/* User Avatar Button */}
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted transition-colors"
+        className="flex items-center gap-2 px-3 py-1.5 rounded-xl hover:bg-pink-50 dark:hover:bg-pink-950/40 transition-colors"
       >
         {user.profile_picture ? (
           <img
             src={user.profile_picture}
             alt={user.username}
-            className="w-8 h-8 rounded-full"
+            className="w-8 h-8 rounded-full ring-2 ring-pink-500/30"
           />
         ) : (
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-semibold text-sm">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 flex items-center justify-center text-white font-semibold text-sm shadow-xs shadow-pink-500/20">
             {user.username.charAt(0).toUpperCase()}
           </div>
         )}
-        <span className="text-sm font-medium text-foreground hidden sm:inline">
+        <span className="text-xs font-bold text-gray-800 dark:text-gray-200 hidden sm:inline">
           {user.username}
         </span>
       </button>
@@ -98,10 +98,10 @@ export default function UserMenu() {
                   router.push('/profile');
                   setShowDropdown(false);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-pink-950/40 hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
               >
-                <Cog6ToothIcon className="w-5 h-5 text-muted-foreground" />
-                Profile Settings
+                <Cog6ToothIcon className="w-4 h-4 text-pink-600" />
+                <span>Profile Settings</span>
               </button>
 
               <button
@@ -109,10 +109,10 @@ export default function UserMenu() {
                   router.push('/saved-trips');
                   setShowDropdown(false);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-pink-950/40 hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
               >
-                <BookmarkIcon className="w-5 h-5 text-muted-foreground" />
-                Saved Trips ({user.trip_count})
+                <BookmarkIcon className="w-4 h-4 text-pink-600" />
+                <span>Saved Trips ({user.trip_count})</span>
               </button>
             </div>
 

@@ -86,7 +86,7 @@ export default function AuthModal({ isOpen, onClose, defaultMode = 'signin' }: A
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold bg-gradient-to-br from-foreground to-primary bg-clip-text text-transparent mb-2">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
             {mode === 'signin' ? 'Welcome Back' : 'Create Account'}
           </h2>
           <p className="text-sm text-muted-foreground">
@@ -115,7 +115,7 @@ export default function AuthModal({ isOpen, onClose, defaultMode = 'signin' }: A
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
               placeholder="you@example.com"
             />
           </div>
@@ -131,7 +131,7 @@ export default function AuthModal({ isOpen, onClose, defaultMode = 'signin' }: A
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
                 placeholder="johndoe"
               />
             </div>
@@ -148,7 +148,7 @@ export default function AuthModal({ isOpen, onClose, defaultMode = 'signin' }: A
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
               placeholder="••••••••"
             />
           </div>
@@ -157,7 +157,7 @@ export default function AuthModal({ isOpen, onClose, defaultMode = 'signin' }: A
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold py-3 px-6 rounded-xl transition-all hover:shadow-lg hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 hover:shadow-lg hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {isLoading ? 'Please wait...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
           </button>
@@ -196,7 +196,7 @@ export default function AuthModal({ isOpen, onClose, defaultMode = 'signin' }: A
                 setMode(mode === 'signin' ? 'signup' : 'signin');
                 setError('');
               }}
-              className="text-primary hover:text-primary-hover font-semibold transition-colors"
+              className="text-pink-600 hover:text-rose-600 font-bold transition-colors cursor-pointer"
             >
               {mode === 'signin' ? 'Sign Up' : 'Sign In'}
             </button>

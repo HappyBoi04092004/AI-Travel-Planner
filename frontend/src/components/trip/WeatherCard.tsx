@@ -23,8 +23,8 @@ export default function WeatherCard({ weather, destination }: WeatherCardProps) 
     <div className="glass-card rounded-2xl p-6 border border-border-subtle shadow-lg">
       {/* Header */}
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-          <CloudIcon className="w-5 h-5 text-primary-foreground" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-xs shadow-pink-500/20">
+          <CloudIcon className="w-5 h-5 text-white" />
         </div>
         <h3 className="text-xl font-bold text-card-foreground">
           Weather Forecast
@@ -46,7 +46,7 @@ export default function WeatherCard({ weather, destination }: WeatherCardProps) 
         </div>
         <div className="flex items-start gap-6">
           <div>
-            <div className="text-4xl font-bold text-primary">
+            <div className="text-4xl font-bold text-pink-600">
               {Math.round(today.maxtemp_c)}°
             </div>
             <div className="text-sm text-muted-foreground mt-1">
@@ -65,7 +65,7 @@ export default function WeatherCard({ weather, destination }: WeatherCardProps) 
                 Wind: {Math.round(today.wind_speed_max)} km/h
               </p>
               {today.precipitation_probability > 0 && (
-                <p className="text-primary">
+                <p className="text-pink-600">
                   Rain: {today.precipitation_probability}%
                 </p>
               )}
@@ -111,7 +111,7 @@ export default function WeatherCard({ weather, destination }: WeatherCardProps) 
                     {day.condition.text}
                   </p>
                   {day.precipitation_probability > 0 && (
-                    <p className="text-xs text-primary">
+                    <p className="text-xs text-pink-600">
                       {day.precipitation_probability}% chance of rain
                     </p>
                   )}

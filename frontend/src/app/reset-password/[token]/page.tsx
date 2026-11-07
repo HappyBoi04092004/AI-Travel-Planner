@@ -171,14 +171,14 @@ export default function ResetPasswordPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold py-3 px-6 rounded-xl transition-all hover:shadow-lg hover:scale-[1.02] disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
             >
               {isLoading ? 'Resetting...' : 'Reset Password'}
             </button>
           </form>
 
-          <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
-            <p className="text-xs text-blue-600">
+          <div className="mt-6 p-4 bg-pink-500/10 border border-pink-500/20 rounded-xl">
+            <p className="text-xs text-pink-600">
               Password must be at least 6 characters long
             </p>
           </div>

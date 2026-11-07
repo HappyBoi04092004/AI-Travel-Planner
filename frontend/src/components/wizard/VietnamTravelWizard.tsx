@@ -10,6 +10,8 @@ import Step4Transportation from './Step4Transportation';
 import Step5POIMap from './Step5POIMap';
 import Step6ReviewConfirm from './Step6ReviewConfirm';
 import WizardAIChatbot from './WizardAIChatbot';
+import { UserMenu } from '@/components/auth';
+import { ThemeToggle } from '@/components/ui';
 import Link from 'next/link';
 import { SparklesIcon, BookmarkIcon } from '@heroicons/react/24/outline';
 import { initGlobalErrorLogging } from '@/utils/logger';
@@ -42,14 +44,16 @@ function WizardContent() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-3 pr-28 sm:pr-32">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <Link
               href="/saved-trips"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-950/40 transition-colors"
             >
               <BookmarkIcon className="w-4 h-4 text-pink-600" />
               <span>Chuyến đi đã lưu</span>
             </Link>
+            <ThemeToggle />
+            <UserMenu />
           </div>
         </div>
       </header>

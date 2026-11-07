@@ -40,8 +40,8 @@ export default function ForgotPasswordPage() {
       <div className="min-h-screen bg-background flex items-center justify-center px-6">
         <div className="max-w-md w-full">
           <div className="glass-card rounded-2xl p-8 border border-border-subtle shadow-lg text-center">
-            <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircleIcon className="w-8 h-8 text-green-500" />
+            <div className="w-16 h-16 bg-pink-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircleIcon className="w-8 h-8 text-pink-500" />
             </div>
             <h2 className="text-2xl font-bold text-foreground mb-3">
               Check Your Email
@@ -54,7 +54,7 @@ export default function ForgotPasswordPage() {
             </p>
             <button
               onClick={() => router.push('/')}
-              className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all"
+              className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md shadow-pink-500/25 transition-all cursor-pointer"
             >
               Back to Home
             </button>
@@ -77,10 +77,10 @@ export default function ForgotPasswordPage() {
 
         <div className="glass-card rounded-2xl p-8 border border-border-subtle shadow-lg">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <EnvelopeIcon className="w-8 h-8 text-primary" />
+            <div className="w-16 h-16 bg-pink-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <EnvelopeIcon className="w-8 h-8 text-pink-600" />
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-br from-foreground to-primary bg-clip-text text-transparent mb-2">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
               Forgot Password?
             </h1>
             <p className="text-muted-foreground">
@@ -105,14 +105,14 @@ export default function ForgotPasswordPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="your@email.com"
-                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-3 border border-border bg-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold py-3 px-6 rounded-xl transition-all hover:shadow-lg hover:scale-[1.02] disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-pink-500/25 hover:scale-[1.01] disabled:opacity-50 cursor-pointer"
             >
               {isLoading ? 'Sending...' : 'Send Reset Link'}
             </button>
@@ -121,7 +121,7 @@ export default function ForgotPasswordPage() {
           <div className="mt-6 text-center">
             <button
               onClick={() => router.push('/')}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-pink-600 hover:underline cursor-pointer"
             >
               Remember your password? Sign in
             </button>

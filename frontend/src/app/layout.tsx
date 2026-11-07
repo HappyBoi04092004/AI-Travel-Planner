@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider, ThemeToggle } from "@/components/ui";
+import { ThemeProvider } from "@/components/ui";
 import { AuthProvider } from "@/context/AuthContext";
-import { UserMenu } from "@/components/auth";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = Geist({
@@ -37,10 +36,6 @@ export default function RootLayout({
         <GoogleOAuthProvider clientId={googleClientId}>
           <ThemeProvider>
             <AuthProvider>
-              <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
-                <UserMenu />
-                <ThemeToggle />
-              </div>
               {children}
             </AuthProvider>
           </ThemeProvider>

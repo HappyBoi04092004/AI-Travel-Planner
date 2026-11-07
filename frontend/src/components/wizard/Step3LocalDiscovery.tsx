@@ -178,7 +178,7 @@ export default function Step3LocalDiscovery() {
                         <span>Thời lượng: <strong>{attraction.estimatedDuration}</strong></span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <MapPinIcon className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                        <MapPinIcon className="w-3.5 h-3.5 text-pink-600 flex-shrink-0" />
                         <span>Thời gian đẹp: {attraction.recommendedTime}</span>
                       </div>
                     </div>

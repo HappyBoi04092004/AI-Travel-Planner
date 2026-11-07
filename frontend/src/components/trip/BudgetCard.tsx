@@ -58,17 +58,17 @@ export default function BudgetCard({ budget }: BudgetCardProps) {
 
         <div className="grid gap-3">
           {estimation.hotel_per_night && (
-            <div className="bg-green-50 dark:bg-green-900/20 p-3.5 rounded-lg border border-green-400">
-              <div className="text-sm font-bold text-green-800 dark:text-green-300 mb-1.5">
+            <div className="bg-pink-50 dark:bg-pink-900/20 p-3.5 rounded-lg border border-pink-300 dark:border-pink-800">
+              <div className="text-sm font-bold text-pink-800 dark:text-pink-300 mb-1.5">
                 Hotel (per night)
               </div>
-              <div className="text-lg font-bold text-green-700 dark:text-green-400">
+              <div className="text-lg font-bold text-pink-700 dark:text-pink-400">
                 {estimation.currency || '$'}
                 {estimation.hotel_per_night.min} - {estimation.currency || '$'}
                 {estimation.hotel_per_night.max}
               </div>
               {estimation.hotel_per_night.note && (
-                <div className="text-xs text-green-800 dark:text-green-300 mt-1">
+                <div className="text-xs text-pink-800 dark:text-pink-300 mt-1">
                   {estimation.hotel_per_night.note}
                 </div>
               )}
@@ -94,17 +94,17 @@ export default function BudgetCard({ budget }: BudgetCardProps) {
           )}
 
           {estimation.transport_total && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-3.5 rounded-lg border border-blue-400">
-              <div className="text-sm font-bold text-blue-900 dark:text-blue-300 mb-1.5">
+            <div className="bg-rose-50 dark:bg-rose-950/30 p-3.5 rounded-lg border border-rose-300 dark:border-rose-800">
+              <div className="text-sm font-bold text-rose-900 dark:text-rose-200 mb-1.5">
                 Transport (total)
               </div>
-              <div className="text-lg font-bold text-blue-800 dark:text-blue-400">
+              <div className="text-lg font-bold text-rose-700 dark:text-rose-400">
                 {estimation.currency || '$'}
                 {estimation.transport_total.min} - {estimation.currency || '$'}
                 {estimation.transport_total.max}
               </div>
               {estimation.transport_total.note && (
-                <div className="text-xs text-blue-900 dark:text-blue-300 mt-1">
+                <div className="text-xs text-rose-900 dark:text-rose-300 mt-1">
                   {estimation.transport_total.note}
                 </div>
               )}

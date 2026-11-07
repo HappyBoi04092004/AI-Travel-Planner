@@ -444,7 +444,7 @@ export default function Step6ReviewConfirm() {
 
                     {/* Afternoon */}
                     <div className="p-3 rounded-xl bg-white dark:bg-gray-900 border border-gray-200/80 dark:border-gray-800 space-y-1">
-                      <span className="font-bold text-sky-600 flex items-center gap-1">
+                      <span className="font-bold text-rose-500 flex items-center gap-1">
                         <span>☀️</span> Buổi chiều
                       </span>
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed">

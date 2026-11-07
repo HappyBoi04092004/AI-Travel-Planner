@@ -18,9 +18,9 @@
   --muted: oklch(0.97 0.008 350);
   --muted-foreground: oklch(0.50 0.02 350);
 
-  /* Accent - Tender Blossom Pink */
-  --accent: oklch(0.93 0.05 350);
-  --accent-foreground: oklch(0.38 0.18 355);
+  /* Accent - Warm Rose Pink */
+  --accent: oklch(0.58 0.24 15);
+  --accent-foreground: oklch(1 0 0);
 
   /* Card backgrounds - Pure Crisp White */
   --card: oklch(1 0 0);
@@ -65,9 +65,9 @@
   --muted: oklch(0.18 0.025 345);
   --muted-foreground: oklch(0.68 0.03 350);
 
-  /* Accent - Luminous rose */
-  --accent: oklch(0.26 0.06 345);
-  --accent-foreground: oklch(0.97 0.01 350);
+  /* Accent - Warm Glowing Rose */
+  --accent: oklch(0.62 0.24 15);
+  --accent-foreground: oklch(1 0 0);
 
   /* Card backgrounds */
   --card: oklch(0.16 0.03 345);
@@ -214,4 +214,34 @@ body {
 
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Pretty Leaflet controls & popups styling for White & Pink Theme */
+.leaflet-bar {
+  border: 1.5px solid rgba(244, 63, 94, 0.3) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.18) !important;
+}
+
+.leaflet-bar a {
+  background-color: #ffffff !important;
+  color: #e11d48 !important;
+  border-bottom: 1px solid rgba(254, 205, 211, 0.9) !important;
+  transition: all 0.2s ease !important;
+}
+
+.leaflet-bar a:hover {
+  background-color: #fff1f2 !important;
+  color: #be123c !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 16px !important;
+  border: 1.5px solid #fecdd3 !important;
+  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.2), 0 8px 10px -6px rgba(244, 63, 94, 0.1) !important;
+}
+
+.leaflet-popup-tip {
+  background: #ffffff !important;
 }

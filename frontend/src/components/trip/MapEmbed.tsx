@@ -98,7 +98,7 @@ export default function MapEmbed({ mapData = [], destination }: MapEmbedProps) {
                   href={p.wiki}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline font-medium"
+                  className="text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 underline font-medium"
                   title="Learn more on Wikipedia"
                 >
                   {p.name}
@@ -112,7 +112,7 @@ export default function MapEmbed({ mapData = [], destination }: MapEmbedProps) {
         </ul>
       </div>
 
-      <div className="mt-3 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-md text-xs text-blue-900 dark:text-blue-300">
+      <div className="mt-3 p-2 bg-pink-50 dark:bg-pink-900/20 rounded-md text-xs text-pink-900 dark:text-pink-300">
         Powered by OpenStreetMap (free & open-source)
       </div>
     </div>

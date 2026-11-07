@@ -14,8 +14,8 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800">
-        <div className="w-6 h-6" />
+      <button className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800" aria-label="Toggle theme">
+        <div className="w-5 h-5" />
       </button>
     );
   }
@@ -23,13 +23,14 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-3 rounded-xl glass-card hover:scale-105 transition-all duration-300 group border border-border-subtle"
+      className="p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:text-pink-600 dark:hover:text-pink-400 hover:bg-pink-50 dark:hover:bg-pink-950/40 border border-transparent hover:border-pink-200 dark:hover:border-pink-900 transition-all cursor-pointer group"
       aria-label="Toggle theme"
+      title={theme === 'dark' ? 'Chuyển sang chế độ Sáng' : 'Chuyển sang chế độ Tối'}
     >
       {theme === 'dark' ? (
-        <SunIcon className="w-6 h-6 text-warning group-hover:rotate-90 transition-transform duration-500" />
+        <SunIcon className="w-5 h-5 text-amber-500 group-hover:rotate-90 transition-transform duration-500" />
       ) : (
-        <MoonIcon className="w-6 h-6 text-primary group-hover:-rotate-12 transition-transform duration-500" />
+        <MoonIcon className="w-5 h-5 text-pink-600 dark:text-pink-400 group-hover:-rotate-12 transition-transform duration-500" />
       )}
     </button>
   );

@@ -64,7 +64,7 @@ export default function BookingsCard({ bookings, origin, destination, startDate,
 
       {bookings.hotels && bookings.hotels.length > 0 && (
         <div className="mb-5">
-          <h4 className="text-lg mb-3 text-blue-600 dark:text-blue-400 border-l-4 border-blue-600 pl-3">
+          <h4 className="text-lg mb-3 text-pink-600 dark:text-pink-400 border-l-4 border-pink-500 pl-3">
             Hotel Websites
           </h4>
           <div className="grid gap-3">
@@ -85,7 +85,7 @@ export default function BookingsCard({ bookings, origin, destination, startDate,
                   href={buildHotelUrl(h.link, h.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors ml-4"
+                  className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-all shadow-sm shadow-pink-500/20 ml-4"
                 >
                   Search Hotels →
                 </a>
@@ -97,7 +97,7 @@ export default function BookingsCard({ bookings, origin, destination, startDate,
 
       {bookings.flights && bookings.flights.length > 0 && (
         <div>
-          <h4 className="text-lg mb-3 text-blue-600 dark:text-blue-400 border-l-4 border-blue-600 pl-3">
+          <h4 className="text-lg mb-3 text-pink-600 dark:text-pink-400 border-l-4 border-pink-500 pl-3">
             Flight Websites
           </h4>
           <div className="grid gap-3">
@@ -118,7 +118,7 @@ export default function BookingsCard({ bookings, origin, destination, startDate,
                   href={buildFlightUrl(f.link, f.airline || 'Google Flights')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-colors ml-4"
+                  className="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white px-4 py-2 rounded-md text-sm font-bold transition-all shadow-sm shadow-pink-500/20 ml-4"
                 >
                   Search Flights →
                 </a>

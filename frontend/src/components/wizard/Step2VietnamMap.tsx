@@ -329,7 +329,7 @@ export default function Step2VietnamMap() {
                       <span className="text-[11px] font-normal text-gray-500">({activeWeather.condition})</span>
                     </div>
                     <div className="flex items-center gap-2.5 text-[11px] text-gray-600 dark:text-gray-400">
-                      <span>🌧️ Mưa: <strong className="text-sky-600">{activeWeather.rainProbability}%</strong></span>
+                      <span>🌧️ Mưa: <strong className="text-rose-500">{activeWeather.rainProbability}%</strong></span>
                       <span>💨 {activeWeather.windSpeed} km/h</span>
                     </div>
                   </>
@@ -424,15 +424,15 @@ export default function Step2VietnamMap() {
 
                               {/* Specific Activities / Experiences Inside This Cluster */}
                               {spot.activities && spot.activities.length > 0 && (
-                                <div className="p-2.5 rounded-lg bg-sky-50/60 dark:bg-sky-950/40 border border-sky-100 dark:border-sky-900/40 space-y-1.5">
-                                  <div className="font-bold text-[10.5px] text-sky-900 dark:text-sky-200 flex items-center gap-1">
+                                <div className="p-2.5 rounded-lg bg-pink-50/70 dark:bg-pink-950/40 border border-pink-200/80 dark:border-pink-900/60 space-y-1.5">
+                                  <div className="font-bold text-[10.5px] text-pink-900 dark:text-pink-200 flex items-center gap-1">
                                     <span>🎯</span>
                                     <span>Hoạt động vui chơi & trải nghiệm cụ thể:</span>
                                   </div>
                                   <div className="space-y-1 pl-1">
                                     {spot.activities.map((act, i) => (
-                                      <div key={i} className="text-[11px] text-sky-800 dark:text-sky-300 flex items-start gap-1.5">
-                                        <span className="text-sky-500 font-bold">✓</span>
+                                      <div key={i} className="text-[11px] text-pink-800 dark:text-pink-300 flex items-start gap-1.5 font-medium">
+                                        <span className="text-pink-500 font-bold">✓</span>
                                         <span>{act}</span>
                                       </div>
                                     ))}
@@ -490,7 +490,7 @@ export default function Step2VietnamMap() {
           {selectedDestinations.length > 1 && (
             <div className="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs">
               <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2">
-                <CloudIcon className="w-4 h-4 text-sky-500" />
+                <CloudIcon className="w-4 h-4 text-pink-500" />
                 <span>So sánh thời tiết các tỉnh thành đã chọn ({selectedDestinations.length} điểm)</span>
               </h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -509,7 +509,7 @@ export default function Step2VietnamMap() {
                             <span>{w.tempMin}° - {w.tempMax}°C</span>
                           </div>
                           <div className="text-[10px] text-gray-500 truncate">{w.condition}</div>
-                          <div className="text-[10px] text-sky-600">Mưa: {w.rainProbability}% ({w.rainfallMm}mm)</div>
+                          <div className="text-[10px] text-pink-600 font-medium">Mưa: {w.rainProbability}% ({w.rainfallMm}mm)</div>
                         </div>
                       ) : (
                         <div className="text-[10px] text-gray-400 mt-1">Dự báo ngoài 16 ngày</div>
@@ -627,9 +627,9 @@ export default function Step2VietnamMap() {
 
             {/* Compact Weather in Drawer */}
             {activeWeather?.forecastAvailable && (
-              <div className="px-3 py-1.5 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-100 dark:border-sky-900 text-xs flex items-center justify-between">
+              <div className="px-3 py-1.5 rounded-lg bg-pink-50 dark:bg-pink-950/60 border border-pink-100 dark:border-pink-900 text-xs flex items-center justify-between">
                 <span>{activeWeather.conditionIcon} {activeWeather.tempMin}° - {activeWeather.tempMax}°C ({activeWeather.condition})</span>
-                <span className="text-sky-600 font-bold">Mưa: {activeWeather.rainProbability}%</span>
+                <span className="text-pink-600 font-bold">Mưa: {activeWeather.rainProbability}%</span>
               </div>
             )}
 
@@ -659,7 +659,7 @@ export default function Step2VietnamMap() {
                       )}
                     </div>
                     {spot.activities && spot.activities.length > 0 && (
-                      <div className="text-[10.5px] text-sky-700 dark:text-sky-300 mt-1 truncate">
+                      <div className="text-[10.5px] text-pink-700 dark:text-pink-300 mt-1 truncate">
                         🎯 {spot.activities[0]}
                       </div>
                     )}

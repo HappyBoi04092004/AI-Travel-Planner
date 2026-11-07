@@ -66,10 +66,10 @@ export default function ItineraryCard({ itinerary }: ItineraryCardProps) {
   return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-          <CalendarIcon className="w-5 h-5 text-primary-foreground" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-xs shadow-pink-500/20">
+          <CalendarIcon className="w-5 h-5 text-white" />
         </div>
-        <h2 className="text-3xl font-bold bg-gradient-to-br from-foreground to-primary bg-clip-text text-transparent">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
           Your Itinerary
         </h2>
       </div>
@@ -94,7 +94,7 @@ export default function ItineraryCard({ itinerary }: ItineraryCardProps) {
               <div className="px-6 pt-6 pb-4 border-b border-border-subtle">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center font-bold text-primary">
+                    <div className="w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-950/60 flex items-center justify-center font-bold text-pink-600 dark:text-pink-400">
                       {dayNumber}
                     </div>
                     <h3 className="text-2xl font-bold text-card-foreground">
@@ -103,7 +103,7 @@ export default function ItineraryCard({ itinerary }: ItineraryCardProps) {
                   </div>
                   {day.location && (
                     <div className="flex items-center gap-2">
-                      <MapPinIcon className="w-5 h-5 text-primary" />
+                      <MapPinIcon className="w-5 h-5 text-pink-600" />
                       <span className="text-sm font-medium text-muted-foreground">{day.location}</span>
                     </div>
                   )}
@@ -115,9 +115,9 @@ export default function ItineraryCard({ itinerary }: ItineraryCardProps) {
 
               {/* Transportation */}
               {day.transportation && (
-                <div className="mb-6 p-5 rounded-xl border-l-4 border-primary bg-gradient-to-r from-primary/10 to-transparent">
+                <div className="mb-6 p-5 rounded-xl border-l-4 border-pink-500 bg-gradient-to-r from-pink-500/10 to-transparent">
                   <div className="flex items-center gap-2 mb-3">
-                    <TruckIcon className="w-5 h-5 text-primary" />
+                    <TruckIcon className="w-5 h-5 text-pink-600" />
                     <span className="text-sm font-bold text-card-foreground">
                       Transportation to {day.location}
                     </span>
@@ -316,8 +316,8 @@ export default function ItineraryCard({ itinerary }: ItineraryCardProps) {
                 )}
 
                 {day.cultural_highlight && (
-                  <div className="p-4 rounded-xl border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent">
-                    <div className="text-xs font-bold text-primary mb-2">
+                  <div className="p-4 rounded-xl border border-pink-500/30 bg-gradient-to-r from-pink-500/10 to-transparent">
+                    <div className="text-xs font-bold text-pink-600 mb-2">
                       Cultural Highlight
                     </div>
                     <p className="m-0 text-xs leading-relaxed text-muted-foreground">

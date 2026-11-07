@@ -155,12 +155,12 @@ export default function POIMapLeaflet({
         className: 'attr-marker',
         html: `
           <div style="
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
             color: white;
             padding: 4px 10px;
             border-radius: 14px;
             border: 2px solid white;
-            box-shadow: 0 3px 10px rgba(37,99,235,0.35);
+            box-shadow: 0 3px 10px rgba(236,72,153,0.35);
             font-size: 11px;
             font-weight: 700;
             white-space: nowrap;
@@ -179,7 +179,7 @@ export default function POIMapLeaflet({
       L.marker([attr.lat, attr.lng], { icon: attrIcon, zIndexOffset: 500 })
         .bindPopup(`
           <div style="font-family: sans-serif; padding: 4px; min-width: 180px;">
-            <strong style="color: #1e40af; font-size: 13px;">🏛️ ${attr.name}</strong>
+            <strong style="color: #be123c; font-size: 13px;">🏛️ ${attr.name}</strong>
             <p style="margin: 4px 0 0; font-size: 11px; color: #475569;">${attr.description || 'Điểm tham quan đã chọn'}</p>
           </div>
         `)
@@ -249,7 +249,7 @@ export default function POIMapLeaflet({
 
       marker.bindPopup(`
         <div style="font-family: sans-serif; padding: 4px; max-width: 240px;">
-          <div style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: ${isPharma ? '#e11d48' : '#0284c7'}; margin-bottom: 2px;">
+          <div style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: ${isPharma ? '#e11d48' : '#be123c'}; margin-bottom: 2px;">
             ${iconEmoji} ${isPharma ? 'Hiệu thuốc / Nhà thuốc' : isHosp ? 'Bệnh viện & Y tế' : poi.category}
           </div>
           <h4 style="margin: 0 0 4px; font-size: 13px; font-weight: bold; color: #111827;">${poi.name}</h4>
@@ -333,7 +333,7 @@ export default function POIMapLeaflet({
           <span className="text-gray-700 dark:text-gray-300 font-bold">Nhà thuốc & Hiệu thuốc (Khẩn cấp)</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-blue-600 inline-block" />
+          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 inline-block" />
           <span className="text-gray-700 dark:text-gray-300 font-medium">Điểm tham quan đã chọn</span>
         </div>
       </div>
