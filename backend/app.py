@@ -44,31 +44,35 @@ DATABASE_URL = DATABASE_URL.strip()
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Detect connection type: Supabase pooler (PgBouncer) vs direct PostgreSQL
+# Detect connection type: SQLite vs Supabase pooler (PgBouncer) vs direct PostgreSQL
+_is_sqlite = DATABASE_URL.startswith('sqlite')
 _is_pooler = 'pooler.supabase.com' in DATABASE_URL or ':6543/' in DATABASE_URL
 
-if _is_pooler:
-    # Supabase transaction pooler (PgBouncer): keepalives not supported
-    _connect_args = {'connect_timeout': 10}
-    _pool_kwargs = {'pool_size': 5, 'max_overflow': 10}
+if _is_sqlite:
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {}
 else:
-    # Direct PostgreSQL (Render DB, Supabase direct, etc.)
-    _connect_args = {
-        'connect_timeout': 10,
-        'keepalives': 1,
-        'keepalives_idle': 30,
-        'keepalives_interval': 10,
-        'keepalives_count': 5,
-    }
-    _pool_kwargs = {'pool_size': 5, 'max_overflow': 10}
+    if _is_pooler:
+        # Supabase transaction pooler (PgBouncer): keepalives not supported
+        _connect_args = {'connect_timeout': 10}
+        _pool_kwargs = {'pool_size': 5, 'max_overflow': 10}
+    else:
+        # Direct PostgreSQL (Render DB, Supabase direct, etc.)
+        _connect_args = {
+            'connect_timeout': 10,
+            'keepalives': 1,
+            'keepalives_idle': 30,
+            'keepalives_interval': 10,
+            'keepalives_count': 5,
+        }
+        _pool_kwargs = {'pool_size': 5, 'max_overflow': 10}
 
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_pre_ping': True,
-    'pool_recycle': 300,
-    'pool_timeout': 30,
-    'connect_args': _connect_args,
-    **_pool_kwargs,
-}
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'pool_pre_ping': True,
+        'pool_recycle': 300,
+        'pool_timeout': 30,
+        'connect_args': _connect_args,
+        **_pool_kwargs,
+    }
 
 # JWT configuration - require secret key, reduce token lifetime for security
 JWT_SECRET = os.getenv('JWT_SECRET_KEY', '').strip()
@@ -325,7 +329,15 @@ def plan_trip():
 @app.route('/chat', methods=['POST'])
 def chat():
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
+        if data is None:
+            try:
+                raw = request.get_data().decode('utf-8', errors='replace')
+                import json
+                data = json.loads(raw)
+            except Exception:
+                data = {}
+
         user_message = data.get('message')
         current_trip = data.get('currentTrip', {})
 

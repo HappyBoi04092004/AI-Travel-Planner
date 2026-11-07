@@ -6,7 +6,9 @@ import re
 from google import genai
 from google.genai import types
 
-_client = genai.Client(api_key=os.getenv('GEMINI_API_KEY', ''))
+def _get_client():
+    api_key = os.getenv('GEMINI_API_KEY', '').strip()
+    return genai.Client(api_key=api_key) if api_key else None
 
 
 async def itinerary_agent(country: str, locations: str = None, days: int = 3, origin: str = '', additional_details: str = None, detail_level: str = 'standard') -> dict:
@@ -52,9 +54,12 @@ async def itinerary_agent(country: str, locations: str = None, days: int = 3, or
         location_list = None
 
     # Build additional context if user provided preferences
-    additional_context = ""
+    is_vietnam = 'vietnam' in country.lower() or 'việt nam' in country.lower()
+    vietnam_instruction = "\nQUAN TRỌNG: Toàn bộ hoạt động (morning, afternoon, evening), gợi ý ẩm thực (food_recommendation), điểm nhấn văn hóa (cultural_highlight) và ghi chú phải được viết hoàn toàn bằng TIẾNG VIỆT tự nhiên, phong phú, chuẩn mực.\n" if is_vietnam else ""
+
+    additional_context = vietnam_instruction
     if additional_details and additional_details.strip():
-        additional_context = f"""
+        additional_context += f"""
 
 CRITICAL - USER HAS EXISTING RESERVATIONS AND SCHEDULE:
 The traveler has already made bookings and has scheduled activities. You MUST build the itinerary around these:
@@ -299,9 +304,13 @@ Return ONLY valid JSON with keys 'day1', 'day2', etc. Example:
 
     max_tokens = 16000 if detail_level == 'comprehensive' else 8000
 
+    client = _get_client()
+    if not client:
+        return {'error': 'GEMINI_API_KEY is not configured. Please add GEMINI_API_KEY to your .env file.'}
+
     try:
         response = await asyncio.wait_for(
-            _client.aio.models.generate_content(
+            client.aio.models.generate_content(
                 model='gemini-2.5-flash',
                 contents=prompt,
                 config=types.GenerateContentConfig(

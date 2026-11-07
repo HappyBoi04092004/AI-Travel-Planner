@@ -1,0 +1,374 @@
+'use client';
+
+import React, { useState, useMemo } from 'react';
+import { useTripWizard } from '@/context/TripWizardContext';
+import {
+  VIETNAM_SPECIALTIES,
+  VIETNAM_ATTRACTIONS,
+  VIETNAM_CULTURE
+} from '@/data/vietnamData';
+import { AttractionItem, LocalSpecialty } from '@/types/wizard';
+import {
+  SparklesIcon,
+  ClockIcon,
+  CheckCircleIcon,
+  PlusIcon,
+  TrashIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
+  FireIcon,
+  BookOpenIcon,
+  BuildingLibraryIcon,
+  MapPinIcon
+} from '@heroicons/react/24/outline';
+
+export default function Step3LocalDiscovery() {
+  const {
+    selectedDestinations,
+    selectedAttractions,
+    selectedSpecialties,
+    toggleAttraction,
+    toggleSpecialty,
+    nextStep,
+    prevStep
+  } = useTripWizard();
+
+  // Active destination tab
+  const [activeDestId, setActiveDestId] = useState<string>(
+    selectedDestinations[0]?.id || 'ninhbinh'
+  );
+
+  // Active category tab: 'attractions' | 'specialties' | 'culture'
+  const [activeTab, setActiveTab] = useState<'attractions' | 'specialties' | 'culture'>('attractions');
+
+  const currentDestination = useMemo(() => {
+    return selectedDestinations.find(d => d.id === activeDestId) || selectedDestinations[0];
+  }, [selectedDestinations, activeDestId]);
+
+  // Filter items for the active destination
+  const destAttractions = useMemo(() => {
+    if (!currentDestination) return [];
+    return VIETNAM_ATTRACTIONS.filter(
+      a => a.destinationId === currentDestination.id || currentDestination.name.includes(a.destinationName)
+    );
+  }, [currentDestination]);
+
+  const destSpecialties = useMemo(() => {
+    if (!currentDestination) return [];
+    return VIETNAM_SPECIALTIES.filter(
+      s => s.destinationId === currentDestination.id || currentDestination.name.includes(s.destinationName)
+    );
+  }, [currentDestination]);
+
+  const destCultures = useMemo(() => {
+    if (!currentDestination) return [];
+    return VIETNAM_CULTURE.filter(
+      c => c.destinationId === currentDestination.id || currentDestination.name.includes(c.destinationName)
+    );
+  }, [currentDestination]);
+
+  return (
+    <div className="space-y-6 animate-fadeIn">
+      {/* Header */}
+      <div className="border-b border-gray-200 dark:border-gray-800 pb-5">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-3">
+          <SparklesIcon className="w-4 h-4" />
+          <span>Bước 3 trên 6 • Khám phá tinh hoa địa phương</span>
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+          Văn hóa, Ẩm thực & Điểm tham quan nổi bật
+        </h2>
+        <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">
+          Khám phá những món ăn đặc sản đậm chất vùng miền, các danh lam thắng cảnh và lễ hội truyền thống. Chọn các địa điểm bạn muốn ghé thăm để đưa vào lịch trình.
+        </p>
+      </div>
+
+      {/* Destination Switcher Tabs */}
+      {selectedDestinations.length > 1 && (
+        <div className="flex items-center gap-2 overflow-x-auto pb-2">
+          <span className="text-xs font-semibold text-gray-500 whitespace-nowrap">Xem theo điểm:</span>
+          {selectedDestinations.map(dest => (
+            <button
+              key={dest.id}
+              type="button"
+              onClick={() => setActiveDestId(dest.id)}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                activeDestId === dest.id
+                  ? 'bg-emerald-600 text-white shadow-sm'
+                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-emerald-500'
+              }`}
+            >
+              {dest.name} ({dest.regionName})
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Category Tabs: Điểm tham quan / Ẩm thực đặc sản / Văn hóa truyền thống */}
+      <div className="flex border-b border-gray-200 dark:border-gray-800">
+        {[
+          { id: 'attractions', label: `Điểm tham quan (${destAttractions.length})`, icon: BuildingLibraryIcon },
+          { id: 'specialties', label: `Ẩm thực & Đặc sản (${destSpecialties.length})`, icon: FireIcon },
+          { id: 'culture', label: `Văn hóa & Lễ hội (${destCultures.length})`, icon: BookOpenIcon }
+        ].map(tab => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all ${
+                isActive
+                  ? 'border-emerald-600 text-emerald-600 dark:text-emerald-400'
+                  : 'border-transparent text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* TAB CONTENT 1: ATTRACTIONS */}
+      {activeTab === 'attractions' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {destAttractions.length === 0 ? (
+            <div className="col-span-full py-12 text-center text-sm text-gray-500 bg-gray-50 dark:bg-gray-800/40 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
+              Đang tổng hợp các điểm tham quan tiêu biểu cho khu vực này...
+            </div>
+          ) : (
+            destAttractions.map(attraction => {
+              const isSelected = selectedAttractions.some(a => a.id === attraction.id);
+              return (
+                <div
+                  key={attraction.id}
+                  className={`flex flex-col bg-white dark:bg-gray-900 rounded-2xl border overflow-hidden shadow-xs transition-all ${
+                    isSelected
+                      ? 'border-emerald-500 ring-2 ring-emerald-500/20'
+                      : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
+                  }`}
+                >
+                  <div className="relative h-44 w-full">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={attraction.image}
+                      alt={attraction.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold">
+                      {attraction.categoryName}
+                    </div>
+                  </div>
+
+                  <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                      <h4 className="text-base font-bold text-gray-900 dark:text-white leading-tight">
+                        {attraction.name}
+                      </h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 line-clamp-2">
+                        {attraction.description}
+                      </p>
+                    </div>
+
+                    <div className="space-y-1.5 pt-2 border-t border-gray-100 dark:border-gray-800 text-[11px] text-gray-500">
+                      <div className="flex items-center gap-1.5">
+                        <ClockIcon className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                        <span>Thời lượng: <strong>{attraction.estimatedDuration}</strong></span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <MapPinIcon className="w-3.5 h-3.5 text-sky-600 flex-shrink-0" />
+                        <span>Thời gian đẹp: {attraction.recommendedTime}</span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => toggleAttraction(attraction)}
+                      className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                        isSelected
+                          ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
+                          : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
+                      }`}
+                    >
+                      {isSelected ? (
+                        <>
+                          <CheckCircleIcon className="w-4 h-4 text-emerald-600" />
+                          <span>Đã thêm vào lịch trình</span>
+                        </>
+                      ) : (
+                        <>
+                          <PlusIcon className="w-4 h-4" />
+                          <span>Thêm vào chuyến đi</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+      )}
+
+      {/* TAB CONTENT 2: SPECIALTIES */}
+      {activeTab === 'specialties' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {destSpecialties.length === 0 ? (
+            <div className="col-span-full py-12 text-center text-sm text-gray-500 bg-gray-50 dark:bg-gray-800/40 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
+              Đang cập nhật danh mục ẩm thực đặc sản cho vùng này...
+            </div>
+          ) : (
+            destSpecialties.map(spec => {
+              const isSelected = selectedSpecialties.some(s => s.id === spec.id);
+              return (
+                <div
+                  key={spec.id}
+                  className={`flex flex-col bg-white dark:bg-gray-900 rounded-2xl border overflow-hidden shadow-xs transition-all ${
+                    isSelected
+                      ? 'border-emerald-500 ring-2 ring-emerald-500/20'
+                      : 'border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
+                  }`}
+                >
+                  <div className="relative h-44 w-full">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={spec.image}
+                      alt={spec.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-amber-500/90 text-white text-[10px] font-bold">
+                      {spec.categoryName}
+                    </div>
+                  </div>
+
+                  <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                      <h4 className="text-base font-bold text-gray-900 dark:text-white leading-tight">
+                        {spec.name}
+                      </h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 leading-relaxed">
+                        {spec.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-gray-100 dark:border-gray-800 text-[11px] text-gray-500">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300 block mb-1">
+                        Quán ngon gợi ý:
+                      </span>
+                      <ul className="list-disc list-inside space-y-0.5 text-gray-600 dark:text-gray-400">
+                        {spec.recommendedPlaces.map((place, i) => (
+                          <li key={i} className="truncate">{place}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => toggleSpecialty(spec)}
+                      className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                        isSelected
+                          ? 'bg-amber-50 text-amber-800 dark:bg-amber-950/60 dark:text-amber-200 border border-amber-300 dark:border-amber-700'
+                          : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
+                      }`}
+                    >
+                      {isSelected ? (
+                        <>
+                          <CheckCircleIcon className="w-4 h-4 text-amber-600" />
+                          <span>Đã lưu vào danh mục ẩm thực</span>
+                        </>
+                      ) : (
+                        <>
+                          <PlusIcon className="w-4 h-4" />
+                          <span>Lưu món này</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+      )}
+
+      {/* TAB CONTENT 3: CULTURE & FESTIVALS */}
+      {activeTab === 'culture' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {destCultures.length === 0 ? (
+            <div className="col-span-full py-12 text-center text-sm text-gray-500 bg-gray-50 dark:bg-gray-800/40 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
+              Đang cập nhật lễ hội và truyền thống văn hóa...
+            </div>
+          ) : (
+            destCultures.map(culture => (
+              <div
+                key={culture.id}
+                className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs space-y-3"
+              >
+                <div className="flex items-start justify-between">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                      {culture.typeName}
+                    </span>
+                    <h4 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">
+                      {culture.title}
+                    </h4>
+                  </div>
+                </div>
+
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {culture.description}
+                </p>
+
+                {culture.periodOrTime && (
+                  <div className="p-2.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-800 text-[11px] text-emerald-900 dark:text-emerald-200 font-medium flex items-center gap-2">
+                    <ClockIcon className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>Thời gian diễn ra: <strong>{culture.periodOrTime}</strong></span>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {/* Selection Summary Basket */}
+      <div className="p-4 rounded-2xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="space-y-1">
+          <span className="font-semibold text-gray-700 dark:text-gray-300">
+            Tổng kết lựa chọn cho lịch trình:
+          </span>
+          <div className="text-gray-600 dark:text-gray-400">
+            • <strong>{selectedAttractions.length}</strong> điểm tham quan đã chọn &nbsp;|&nbsp; • <strong>{selectedSpecialties.length}</strong> món ăn đặc sản đã lưu
+          </div>
+        </div>
+        <div className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">
+          AI sẽ tự động sắp xếp thời gian biểu phù hợp cho các điểm bạn đã chọn.
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-800">
+        <button
+          type="button"
+          onClick={prevStep}
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        >
+          <ArrowLeftIcon className="w-4 h-4" />
+          <span>Quay lại Bước 2</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={nextStep}
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all shadow-md cursor-pointer"
+        >
+          <span>Tiếp tục: Chọn phương tiện di chuyển</span>
+          <ArrowRightIcon className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+

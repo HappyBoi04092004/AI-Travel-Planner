@@ -6,7 +6,9 @@ import re
 from google import genai
 from google.genai import types
 
-_client = genai.Client(api_key=os.getenv('GEMINI_API_KEY', ''))
+def _get_client():
+    api_key = os.getenv('GEMINI_API_KEY', '').strip()
+    return genai.Client(api_key=api_key) if api_key else None
 
 
 async def budget_agent(country: str, locations: str = None, days: int = 3, origin: str = 'United States', additional_details: str = None) -> dict:
@@ -50,9 +52,13 @@ Return ONLY this JSON (no markdown):
 
 Use 2024-2025 prices. Numbers not strings. Brief notes."""
 
+    client = _get_client()
+    if not client:
+        return {'error': 'GEMINI_API_KEY is not configured. Please add GEMINI_API_KEY to your .env file.'}
+
     try:
         response = await asyncio.wait_for(
-            _client.aio.models.generate_content(
+            client.aio.models.generate_content(
                 model='gemini-2.5-flash',
                 contents=prompt,
                 config=types.GenerateContentConfig(
