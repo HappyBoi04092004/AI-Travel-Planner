@@ -42,7 +42,7 @@ export default function ResetPasswordPage() {
     setIsLoading(true);
 
     try {
-      await axios.post(`${API_ENDPOINTS.resetPassword}/${token}`, {
+      await axios.post(API_ENDPOINTS.resetPassword(token), {
         password
       });
 

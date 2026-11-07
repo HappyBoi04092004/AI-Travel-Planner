@@ -33,8 +33,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # Logs
-logs/
+/logs/
 *.log
+!frontend/src/app/logs/
 
 # Temporary Files
 *.tmp

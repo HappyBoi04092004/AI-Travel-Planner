@@ -85,8 +85,18 @@ function WizardContent() {
       <WizardAIChatbot />
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-800 py-6 bg-white dark:bg-gray-900 text-center text-xs text-gray-500">
-        <p>© 2026 AI Vietnam Travel Planner • Nền tảng lập kế hoạch du lịch thông minh Việt Nam</p>
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-6 bg-white dark:bg-slate-900 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p>© 2026 AI Vietnam Travel Planner • Nền tảng lập kế hoạch du lịch thông minh Việt Nam</p>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/logs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:text-pink-600 hover:border-pink-300 hover:bg-pink-50/50 dark:hover:bg-pink-950/30 transition-colors font-bold text-[11px]"
+            >
+              <span>📋 Nhật ký Lỗi & Hệ thống (Logs)</span>
+            </Link>
+          </div>
+        </div>
       </footer>
     </div>
   );
