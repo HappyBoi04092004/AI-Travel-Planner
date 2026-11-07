@@ -17,3 +17,4 @@ with sync_playwright() as p:
     page.screenshot(path=os.path.join(output_dir, 'current_chat_open.png'))
     print('Captured chat open')
     browser.close()
+
