@@ -63,6 +63,10 @@ vite.config.ts.timestamp-*
 .claude/
 
 # Misc
+instance/
+*.db
+*.sqlite
+*.sqlite3
 *.bak
 *.orig
 *.tgz

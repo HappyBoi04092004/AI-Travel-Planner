@@ -8,6 +8,8 @@ interface User {
   id: number;
   email: string;
   username: string;
+  role?: string;
+  is_verified?: boolean;
   profile_picture?: string;
   has_password?: boolean;
   trip_count: number;
@@ -16,6 +18,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   token: string | null;
+  isAdmin: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (email: string, username: string, password: string) => Promise<void>;
   googleAuth: (googleToken: string) => Promise<void>;
@@ -31,6 +34,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const isAdmin = user?.role === 'admin';
+
   const setAuthState = (access_token: string, userData: User) => {
     localStorage.setItem('auth_token', access_token);
     localStorage.setItem('user', JSON.stringify(userData));
@@ -39,19 +44,61 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
   };
 
-  // Load token and user from localStorage on mount
+  // Load token and user from localStorage on mount & setup 401 interceptor
   useEffect(() => {
     const storedToken = localStorage.getItem('auth_token');
     const storedUser = localStorage.getItem('user');
 
     if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
-      // Set axios default header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+      try {
+        const parsed = JSON.parse(storedUser);
+        setToken(storedToken);
+        setUser(parsed);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+
+        // Verify session validity with backend
+        axios.get(API_ENDPOINTS.profile, {
+          headers: { Authorization: `Bearer ${storedToken}` }
+        }).then(res => {
+          if (res.data?.user) {
+            setUser(res.data.user);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+          }
+        }).catch(err => {
+          if (err.response?.status === 401) {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user');
+            setToken(null);
+            setUser(null);
+            delete axios.defaults.headers.common['Authorization'];
+          }
+        });
+      } catch {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('user');
+      }
     }
 
+    // Intercept 401 to handle session expiry gracefully
+    const interceptor = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401 && !error.config?.url?.includes('/login')) {
+          localStorage.removeItem('auth_token');
+          localStorage.removeItem('user');
+          setToken(null);
+          setUser(null);
+          delete axios.defaults.headers.common['Authorization'];
+        }
+        return Promise.reject(error);
+      }
+    );
+
     setIsLoading(false);
+
+    return () => {
+      axios.interceptors.response.eject(interceptor);
+    };
   }, []);
 
   const login = async (email: string, password: string) => {
@@ -122,7 +169,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, signup, googleAuth, logout, updateUser, isLoading }}>
+    <AuthContext.Provider value={{ user, token, isAdmin, login, signup, googleAuth, logout, updateUser, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

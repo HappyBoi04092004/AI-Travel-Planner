@@ -9,7 +9,8 @@ import {
   BookmarkIcon,
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
-  UserIcon
+  UserIcon,
+  ShieldCheckIcon
 } from '@heroicons/react/24/outline';
 
 export default function UserMenu() {
@@ -84,6 +85,11 @@ export default function UserMenu() {
         <span className="text-xs font-bold text-gray-800 dark:text-gray-200 hidden sm:inline">
           {user.username}
         </span>
+        {user.role === 'admin' && (
+          <span className="text-[10px] font-black uppercase tracking-wider bg-rose-600 text-white px-1.5 py-0.5 rounded-full shadow-xs">
+            Admin
+          </span>
+        )}
       </button>
 
       {/* Dropdown Menu */}
@@ -105,6 +111,19 @@ export default function UserMenu() {
 
             {/* Menu items */}
             <div className="py-2">
+              {user.role === 'admin' && (
+                <button
+                  onClick={() => {
+                    router.push('/admin');
+                    setShowDropdown(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-black text-rose-600 bg-rose-50/60 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors"
+                >
+                  <ShieldCheckIcon className="w-4 h-4 text-rose-600" />
+                  <span>Admin Dashboard</span>
+                </button>
+              )}
+
               <button
                 onClick={() => {
                   router.push('/profile');

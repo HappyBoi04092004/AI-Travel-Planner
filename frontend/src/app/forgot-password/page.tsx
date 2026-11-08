@@ -17,16 +17,21 @@ export default function ForgotPasswordPage() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const [resetToken, setResetToken] = useState('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
-      await axios.post(API_ENDPOINTS.forgotPassword, {
+      const res = await axios.post(API_ENDPOINTS.forgotPassword, {
         email
       });
 
+      if (res.data?.reset_token) {
+        setResetToken(res.data.reset_token);
+      }
       setSuccess(true);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to send reset email');
@@ -52,6 +57,19 @@ export default function ForgotPasswordPage() {
             <p className="text-sm text-muted-foreground mb-6">
               The link will expire in 1 hour. If you don't see the email, check your spam folder.
             </p>
+            {resetToken && (
+              <div className="mb-6 p-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 rounded-xl text-left">
+                <p className="text-xs font-bold text-rose-700 dark:text-rose-300 mb-2">
+                  🔒 Mã kích hoạt trực tiếp (Chế độ phát triển / Development Mode):
+                </p>
+                <button
+                  onClick={() => router.push(`/reset-password/${resetToken}`)}
+                  className="w-full py-2 px-3 text-xs font-black text-white bg-rose-600 hover:bg-rose-700 rounded-lg shadow-sm cursor-pointer transition-all"
+                >
+                  Bấm vào đây để Đặt lại mật khẩu ngay →
+                </button>
+              </div>
+            )}
             <button
               onClick={() => router.push('/')}
               className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md shadow-rose-600/35 transition-all cursor-pointer"

@@ -6,10 +6,16 @@ from google.auth.transport import requests as google_requests
 import os
 import json
 import secrets
+from datetime import datetime, timedelta
 
 auth_bp = Blueprint('auth', __name__)
 
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', '')
+
+
+def _current_user_id():
+    identity = get_jwt_identity()
+    return int(identity) if identity is not None else None
 
 
 @auth_bp.route('/signup', methods=['POST'])
@@ -41,7 +47,7 @@ def signup():
         db.session.commit()
 
         # Create access token
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=str(user.id))
 
         return jsonify({
             'message': 'User created successfully',
@@ -73,7 +79,7 @@ def login():
             return jsonify({'error': 'Invalid email or password'}), 401
 
         # Create access token
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=str(user.id))
 
         return jsonify({
             'message': 'Login successful',
@@ -128,7 +134,7 @@ def google_auth():
                 db.session.commit()
 
             # Create access token
-            access_token = create_access_token(identity=user.id)
+            access_token = create_access_token(identity=str(user.id))
 
             return jsonify({
                 'message': 'Google authentication successful',
@@ -151,7 +157,7 @@ def google_auth():
 def get_profile():
     """Get current user's profile"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
         user = db.session.get(User, user_id)
 
         if not user:
@@ -169,7 +175,7 @@ def get_profile():
 def update_profile():
     """Update user profile"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
         user = db.session.get(User, user_id)
 
         if not user:
@@ -228,7 +234,7 @@ def update_profile():
 def save_trip():
     """Save a trip to user's account"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
         data = request.get_json()
 
         # Required fields
@@ -277,7 +283,7 @@ def save_trip():
 def get_trips():
     """Get all saved trips for current user"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
 
         # Get trips ordered by most recent
         trips = SavedTrip.query.filter_by(user_id=user_id).order_by(
@@ -299,7 +305,7 @@ def get_trips():
 def get_trip(trip_id):
     """Get a specific trip with full data"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
 
         trip = SavedTrip.query.filter_by(id=trip_id, user_id=user_id).first()
 
@@ -320,7 +326,7 @@ def get_trip(trip_id):
 def update_trip(trip_id):
     """Update a saved trip"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
         trip = SavedTrip.query.filter_by(id=trip_id, user_id=user_id).first()
 
         if not trip:
@@ -354,7 +360,7 @@ def update_trip(trip_id):
 def delete_trip(trip_id):
     """Delete a saved trip"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
         trip = SavedTrip.query.filter_by(id=trip_id, user_id=user_id).first()
 
         if not trip:
@@ -376,7 +382,7 @@ def delete_trip(trip_id):
 def share_trip(trip_id):
     """Generate a share token for a trip"""
     try:
-        user_id = get_jwt_identity()
+        user_id = _current_user_id()
         trip = SavedTrip.query.filter_by(id=trip_id, user_id=user_id).first()
 
         if not trip:
@@ -419,3 +425,168 @@ def get_shared_trip(token):
     except Exception as e:
         print(f'Get shared trip error: {e}')
         return jsonify({'error': 'Failed to get shared trip'}), 500
+
+
+@auth_bp.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    """Generate password reset token and send/return reset instructions"""
+    try:
+        data = request.get_json() or {}
+        email = data.get('email', '').strip()
+
+        if not email:
+            return jsonify({'error': 'Email is required'}), 400
+
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            # For security, return success even if user not found to prevent user enumeration
+            return jsonify({
+                'message': 'If an account exists with this email, password reset instructions have been sent.',
+                'sent': True
+            }), 200
+
+        reset_token = secrets.token_urlsafe(32)
+        user.reset_token = reset_token
+        user.reset_token_expiry = datetime.utcnow() + timedelta(hours=1)
+        db.session.commit()
+
+        # In production, dispatch SMTP email. In dev, provide reset_token for verification
+        return jsonify({
+            'message': 'Password reset instructions sent successfully',
+            'sent': True,
+            'reset_token': reset_token
+        }), 200
+
+    except Exception as e:
+        db.session.rollback()
+        print(f'Forgot password error: {e}')
+        return jsonify({'error': 'Failed to process forgot password request'}), 500
+
+
+@auth_bp.route('/reset-password/<token>', methods=['POST'])
+def reset_password(token):
+    """Reset user password using token"""
+    try:
+        data = request.get_json() or {}
+        password = data.get('password', '')
+
+        if not password or len(password) < 6:
+            return jsonify({'error': 'Password must be at least 6 characters'}), 400
+
+        user = User.query.filter_by(reset_token=token).first()
+        if not user:
+            return jsonify({'error': 'Invalid or expired reset token'}), 400
+
+        if not user.reset_token_expiry or user.reset_token_expiry < datetime.utcnow():
+            return jsonify({'error': 'Reset token has expired. Please request a new one.'}), 400
+
+        user.set_password(password)
+        user.reset_token = None
+        user.reset_token_expiry = None
+        db.session.commit()
+
+        return jsonify({'message': 'Password has been reset successfully. You can now log in.'}), 200
+
+    except Exception as e:
+        db.session.rollback()
+        print(f'Reset password error: {e}')
+        return jsonify({'error': 'Failed to reset password'}), 500
+
+
+@auth_bp.route('/refresh', methods=['POST'])
+@jwt_required()
+def refresh_token():
+    """Issue a renewed access token for active session"""
+    try:
+        user_id = _current_user_id()
+        user = db.session.get(User, user_id)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        new_access_token = create_access_token(identity=str(user.id))
+        return jsonify({
+            'access_token': new_access_token,
+            'user': user.to_dict()
+        }), 200
+
+    except Exception as e:
+        print(f'Refresh token error: {e}')
+        return jsonify({'error': 'Failed to refresh token'}), 500
+
+
+@auth_bp.route('/logout', methods=['POST'])
+def logout():
+    """Client-side token invalidation confirmation"""
+    return jsonify({'message': 'Logged out successfully'}), 200
+
+
+@auth_bp.route('/upload-avatar', methods=['POST'])
+@jwt_required()
+def upload_avatar():
+    """Upload or update user profile picture"""
+    try:
+        user_id = _current_user_id()
+        user = db.session.get(User, user_id)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        data = request.get_json() or {}
+        profile_picture = data.get('profile_picture') or data.get('avatar_url')
+        if not profile_picture:
+            return jsonify({'error': 'Profile picture URL or data is required'}), 400
+
+        user.profile_picture = profile_picture
+        db.session.commit()
+
+        return jsonify({
+            'message': 'Avatar updated successfully',
+            'user': user.to_dict()
+        }), 200
+
+    except Exception as e:
+        db.session.rollback()
+        print(f'Upload avatar error: {e}')
+        return jsonify({'error': 'Failed to update avatar'}), 500
+
+
+@auth_bp.route('/remove-profile-picture', methods=['POST'])
+@jwt_required()
+def remove_profile_picture():
+    """Remove user profile picture"""
+    try:
+        user_id = _current_user_id()
+        user = db.session.get(User, user_id)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        user.profile_picture = None
+        db.session.commit()
+
+        return jsonify({
+            'message': 'Profile picture removed successfully',
+            'user': user.to_dict()
+        }), 200
+
+    except Exception as e:
+        db.session.rollback()
+        print(f'Remove profile picture error: {e}')
+        return jsonify({'error': 'Failed to remove profile picture'}), 500
+
+
+@auth_bp.route('/verify-token', methods=['GET'])
+@jwt_required()
+def verify_token():
+    """Verify that current JWT token is valid and return fresh user data"""
+    try:
+        user_id = _current_user_id()
+        user = db.session.get(User, user_id)
+        if not user:
+            return jsonify({'valid': False, 'error': 'User not found'}), 404
+
+        return jsonify({
+            'valid': True,
+            'user': user.to_dict()
+        }), 200
+    except Exception as e:
+        return jsonify({'valid': False, 'error': str(e)}), 401
+

@@ -15,6 +15,10 @@ class User(db.Model):
     password_hash = db.Column(db.String(255), nullable=True)  # Nullable for Google OAuth users
     google_id = db.Column(db.String(255), unique=True, nullable=True)
     profile_picture = db.Column(db.String(500), nullable=True)
+    role = db.Column(db.String(20), default='user')  # 'user' or 'admin'
+    is_verified = db.Column(db.Boolean, default=True)
+    reset_token = db.Column(db.String(100), nullable=True)
+    reset_token_expiry = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -38,6 +42,8 @@ class User(db.Model):
             'email': self.email,
             'username': self.username,
             'profile_picture': self.profile_picture,
+            'role': self.role or 'user',
+            'is_verified': self.is_verified if self.is_verified is not None else True,
             'has_password': self.password_hash is not None,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'trip_count': len(self.trips)

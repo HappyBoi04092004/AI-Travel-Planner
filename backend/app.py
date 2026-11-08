@@ -134,15 +134,21 @@ ab_testing.create_experiment(
 with app.app_context():
     try:
         db.create_all()
-        # Migration: add share_token column if it doesn't exist (safe to re-run)
-        try:
-            db.session.execute(text(
-                "ALTER TABLE saved_trips ADD COLUMN IF NOT EXISTS share_token VARCHAR(100) UNIQUE"
-            ))
-            db.session.commit()
-        except Exception:
-            db.session.rollback()
-        print('✓ Database initialized')
+        # Migration: add columns if they don't exist (safe to re-run)
+        migrations = [
+            "ALTER TABLE saved_trips ADD COLUMN share_token VARCHAR(100) UNIQUE",
+            "ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user'",
+            "ALTER TABLE users ADD COLUMN is_verified BOOLEAN DEFAULT 1",
+            "ALTER TABLE users ADD COLUMN reset_token VARCHAR(100)",
+            "ALTER TABLE users ADD COLUMN reset_token_expiry DATETIME",
+        ]
+        for mig in migrations:
+            try:
+                db.session.execute(text(mig))
+                db.session.commit()
+            except Exception:
+                db.session.rollback()
+        print('✓ Database initialized with schema migrations')
     except Exception as e:
         print(f'⚠ Database connection failed at startup: {e}')
         print('⚠ App will start without DB — routes requiring DB will fail until connection is restored')
