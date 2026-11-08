@@ -38,3 +38,4 @@ with sync_playwright() as p:
             print(f'Captured full signup modal -> {p_signup}')
 
     browser.close()
+
